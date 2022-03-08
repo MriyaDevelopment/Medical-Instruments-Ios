@@ -64,6 +64,8 @@
 		63BA0C2C27D619260025F0A5 /* KeyChainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BA0C2B27D619260025F0A5 /* KeyChainService.swift */; };
 		63BA0C3227D619FC0025F0A5 /* TabBarTransitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BA0C3127D619FC0025F0A5 /* TabBarTransitions.swift */; };
 		7FE13D8943D27939E94750CA /* Pods_MedicalInstruments.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F03B5FB9619743394A737D10 /* Pods_MedicalInstruments.framework */; };
+		8E30EBA527D75715005AE313 /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E30EBA427D75715005AE313 /* MainCollectionViewCell.swift */; };
+		8E30EBAA27D76220005AE313 /* MainDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E30EBA927D76220005AE313 /* MainDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -131,6 +133,8 @@
 		63BA0C3027D619B50025F0A5 /* SFProDisplay-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Semibold.ttf"; sourceTree = "<group>"; };
 		63BA0C3127D619FC0025F0A5 /* TabBarTransitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarTransitions.swift; sourceTree = "<group>"; };
 		7EA21EDF9699ABE43310B597 /* Pods-MedicalInstruments.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedicalInstruments.release.xcconfig"; path = "Target Support Files/Pods-MedicalInstruments/Pods-MedicalInstruments.release.xcconfig"; sourceTree = "<group>"; };
+		8E30EBA427D75715005AE313 /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
+		8E30EBA927D76220005AE313 /* MainDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDataModel.swift; sourceTree = "<group>"; };
 		F03B5FB9619743394A737D10 /* Pods_MedicalInstruments.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MedicalInstruments.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -383,6 +387,8 @@
 		639C7DAB27D643ED00A40FC2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8E30EBA627D761F9005AE313 /* DataModel */,
+				8E30EBA327D75700005AE313 /* Cell */,
 				639C7DB227D6441400A40FC2 /* MainView.swift */,
 			);
 			path = View;
@@ -672,6 +678,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8E30EBA327D75700005AE313 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8E30EBA427D75715005AE313 /* MainCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		8E30EBA627D761F9005AE313 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				8E30EBA927D76220005AE313 /* MainDataModel.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
 		DF4DB25E5B267FCC0FDBC92B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -802,6 +824,7 @@
 				639C7D8D27D620F500A40FC2 /* RouterProtocol.swift in Sources */,
 				639C7DC027D6446200A40FC2 /* ProfileView.swift in Sources */,
 				639C7D6427D61D4C00A40FC2 /* InitFromCommonInputData.swift in Sources */,
+				8E30EBA527D75715005AE313 /* MainCollectionViewCell.swift in Sources */,
 				639C7DC227D6446C00A40FC2 /* ProfileViewController.swift in Sources */,
 				639C7D9327D6214B00A40FC2 /* TabCoordinator.swift in Sources */,
 				639C7D7427D61E6500A40FC2 /* Types.swift in Sources */,
@@ -824,6 +847,7 @@
 				639C7DB327D6441400A40FC2 /* MainView.swift in Sources */,
 				639C7D5327D61B4C00A40FC2 /* UITableViewDequeue.swift in Sources */,
 				639C7DB627D6442E00A40FC2 /* MainViewController.swift in Sources */,
+				8E30EBAA27D76220005AE313 /* MainDataModel.swift in Sources */,
 				639C7DBA27D6444400A40FC2 /* ChallengesViewController.swift in Sources */,
 				63BA0BFB27D616120025F0A5 /* AppDelegate.swift in Sources */,
 				639C7D6C27D61DD700A40FC2 /* UIViewHiding.swift in Sources */,
@@ -990,7 +1014,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 837FB2P3KJ;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MedicalInstruments/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1020,7 +1044,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 837FB2P3KJ;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MedicalInstruments/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
