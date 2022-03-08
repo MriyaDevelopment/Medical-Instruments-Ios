@@ -16,17 +16,19 @@ final class TabCoordinator: BaseCoordinator {
     private let router: RouterProtocol
     private let tabBarController: UITabBarController
     
-    lazy var switchToCatalogTab = ({
-        self.tabBarController.selectedIndex = 1
-    })
-    
-    lazy var switchToServiceTab = ({
-        self.tabBarController.selectedIndex = 2
-    })
-    
-    lazy var switchToProfileTab = ({
-        self.tabBarController.selectedIndex = 3
-    })
+//MARK: Uncomment this closures when need to transfer through tabs in tabbar
+
+//    lazy var switchToChallengesTab = ({
+//        self.tabBarController.selectedIndex = 1
+//    })
+//
+//    lazy var switchToFavouritesTab = ({
+//        self.tabBarController.selectedIndex = 2
+//    })
+//
+//    lazy var switchToProfileTab = ({
+//        self.tabBarController.selectedIndex = 3
+//    })
     
     init(tabBarController: UITabBarController, router: RouterProtocol, screenFactory: ScreenFactoryProtocol ) {
         self.tabBarController = tabBarController
