@@ -51,7 +51,7 @@ final class TabCoordinator: BaseCoordinator {
         let mainBarItem = UITabBarItem(title: titlesTabBarItem.main.rawValue,
                                        image: AppIcons.getIcon(.i_main),
                                        selectedImage: AppIcons.getIcon(.i_main).setColor(BaseColor.hex_5B67CA.uiColor()))
-        mainNavigationController.tabBarItem = mainBarItem
+//        mainNavigationController.tabBarItem = mainBarItem
         let mainRouter = Router(rootController: mainNavigationController)
         let mainCoordinator = MainCoordinator(router: mainRouter, screenFactory: screenFactory)
         
@@ -63,7 +63,7 @@ final class TabCoordinator: BaseCoordinator {
         let challengesBarItem = UITabBarItem(title: titlesTabBarItem.catalog.rawValue,
                                         image: AppIcons.getIcon(.i_challenges),
                                         selectedImage: AppIcons.getIcon(.i_challenges).setColor(BaseColor.hex_5B67CA.uiColor()))
-        challengesNavigationController.tabBarItem = challengesBarItem
+//        challengesNavigationController.tabBarItem = challengesBarItem
         let challengesRouter = Router(rootController: challengesNavigationController)
         let challengesCoordinator = ChallengesCoordinator(router: challengesRouter, screenFactory: screenFactory)
         
@@ -76,7 +76,7 @@ final class TabCoordinator: BaseCoordinator {
         let favouritesBarItem = UITabBarItem(title: titlesTabBarItem.service.rawValue,
                                        image: AppIcons.getIcon(.i_favourites),
                                        selectedImage: AppIcons.getIcon(.i_favourites).setColor(BaseColor.hex_5B67CA.uiColor()))
-        favouritesNavigationController.tabBarItem = favouritesBarItem
+//        favouritesNavigationController.tabBarItem = favouritesBarItem
         let favouritesRouter = Router(rootController: favouritesNavigationController)
         let favouritesCoordinator = FavouritesCoordinator(router: favouritesRouter, screenFactory: screenFactory)
         
@@ -88,7 +88,7 @@ final class TabCoordinator: BaseCoordinator {
         let profileBarItem = UITabBarItem(title: titlesTabBarItem.profile.rawValue,
                                           image: AppIcons.getIcon(.i_profile),
                                           selectedImage: AppIcons.getIcon(.i_profile).setColor(BaseColor.hex_5B67CA.uiColor()))
-        profileNavigationController.tabBarItem = profileBarItem
+//        profileNavigationController.tabBarItem = profileBarItem
         let profileRouter = Router(rootController: profileNavigationController)
         let profileCoordinator = ProfileCoordinator(router: profileRouter, screenFactory: screenFactory)
         

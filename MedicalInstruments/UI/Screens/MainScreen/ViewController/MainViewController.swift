@@ -58,6 +58,6 @@ final class MainViewController<View: MainView>: BaseViewController<View> {
                                         titleText: "Оториноларингология",
                                         subtitleText: "Инструментарий: 40"))
 
-        rootView.configure(elements: elements)
+//        rootView.configure(elements: elements)
     }
 }
