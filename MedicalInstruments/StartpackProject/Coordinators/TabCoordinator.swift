@@ -39,19 +39,20 @@ final class TabCoordinator: BaseCoordinator {
     override func start() {
         
         let selectedItemTitle: [NSAttributedString.Key : Any] =
-            [NSAttributedString.Key.foregroundColor: BaseColor.hex_71C324.uiColor(),
-             NSAttributedString.Key.font: MainFont.semiBold(size: 12)]
+            [NSAttributedString.Key.foregroundColor: BaseColor.hex_5B67CA.uiColor(),
+             //Шрифты изменены на системные, с нашими не работает
+             NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 12)]
         
         let unselectedItemTitle: [NSAttributedString.Key : Any] =
             [NSAttributedString.Key.foregroundColor: BaseColor.hex_A5A7AD.uiColor(),
-             NSAttributedString.Key.font: MainFont.semiBold(size: 12)]
+             NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 12)]
         
         //MARK: Main
         let mainNavigationController = UINavigationController()
         let mainBarItem = UITabBarItem(title: titlesTabBarItem.main.rawValue,
                                        image: AppIcons.getIcon(.i_main),
-                                       selectedImage: AppIcons.getIcon(.i_main).setColor(BaseColor.hex_5B67CA.uiColor()))
-//        mainNavigationController.tabBarItem = mainBarItem
+                                       selectedImage: AppIcons.getIcon(.i_main_selected).setColor(BaseColor.hex_5B67CA.uiColor()))
+        mainNavigationController.tabBarItem = mainBarItem
         let mainRouter = Router(rootController: mainNavigationController)
         let mainCoordinator = MainCoordinator(router: mainRouter, screenFactory: screenFactory)
         
@@ -62,8 +63,8 @@ final class TabCoordinator: BaseCoordinator {
         let challengesNavigationController = UINavigationController()
         let challengesBarItem = UITabBarItem(title: titlesTabBarItem.catalog.rawValue,
                                         image: AppIcons.getIcon(.i_challenges),
-                                        selectedImage: AppIcons.getIcon(.i_challenges).setColor(BaseColor.hex_5B67CA.uiColor()))
-//        challengesNavigationController.tabBarItem = challengesBarItem
+                                        selectedImage: AppIcons.getIcon(.i_challenges))
+        challengesNavigationController.tabBarItem = challengesBarItem
         let challengesRouter = Router(rootController: challengesNavigationController)
         let challengesCoordinator = ChallengesCoordinator(router: challengesRouter, screenFactory: screenFactory)
         
@@ -76,7 +77,7 @@ final class TabCoordinator: BaseCoordinator {
         let favouritesBarItem = UITabBarItem(title: titlesTabBarItem.service.rawValue,
                                        image: AppIcons.getIcon(.i_favourites),
                                        selectedImage: AppIcons.getIcon(.i_favourites).setColor(BaseColor.hex_5B67CA.uiColor()))
-//        favouritesNavigationController.tabBarItem = favouritesBarItem
+        favouritesNavigationController.tabBarItem = favouritesBarItem
         let favouritesRouter = Router(rootController: favouritesNavigationController)
         let favouritesCoordinator = FavouritesCoordinator(router: favouritesRouter, screenFactory: screenFactory)
         
@@ -88,7 +89,7 @@ final class TabCoordinator: BaseCoordinator {
         let profileBarItem = UITabBarItem(title: titlesTabBarItem.profile.rawValue,
                                           image: AppIcons.getIcon(.i_profile),
                                           selectedImage: AppIcons.getIcon(.i_profile).setColor(BaseColor.hex_5B67CA.uiColor()))
-//        profileNavigationController.tabBarItem = profileBarItem
+        profileNavigationController.tabBarItem = profileBarItem
         let profileRouter = Router(rootController: profileNavigationController)
         let profileCoordinator = ProfileCoordinator(router: profileRouter, screenFactory: screenFactory)
         
@@ -102,7 +103,7 @@ final class TabCoordinator: BaseCoordinator {
             profileNavigationController
         ]
         
-        tabBarController.tabBar.tintColor = BaseColor.hex_FFFFFF.uiColor()
+        tabBarController.tabBar.tintColor = BaseColor.hex_5B67CA.uiColor()
         
         tabBarController.modalPresentationStyle = .fullScreen
         router.present(tabBarController, animated: false)

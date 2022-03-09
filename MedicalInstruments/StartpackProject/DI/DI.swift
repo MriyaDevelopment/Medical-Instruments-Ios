@@ -64,6 +64,8 @@ protocol ScreenFactoryProtocol {
     
     func makeMainScreen() -> MainViewController<MainView>
     
+    func makeSubCategoriesScreen() -> SubcategoriesViewController<SubcategoriesView>
+    
     //MARK: Challenges
     
     func makeChallengesScreen() -> ChallengesViewController<ChallengesView>
@@ -94,6 +96,10 @@ final class ScreenFactory: ScreenFactoryProtocol {
     
     func makeMainScreen() -> MainViewController<MainView> {
         MainViewController<MainView>()
+    }
+    
+    func makeSubCategoriesScreen() -> SubcategoriesViewController<SubcategoriesView> {
+        SubcategoriesViewController<SubcategoriesView>()
     }
     
     //MARK: Challenges
