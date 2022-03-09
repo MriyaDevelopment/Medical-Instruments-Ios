@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6319B52A27D88DB5007C236E /* SFProDisplay-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63BA0C2E27D619B50025F0A5 /* SFProDisplay-Bold.ttf */; };
+		6319B52B27D88DB7007C236E /* SFProDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63BA0C2F27D619B50025F0A5 /* SFProDisplay-Medium.ttf */; };
+		6319B52C27D88DBA007C236E /* SFProDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63BA0C2D27D619B50025F0A5 /* SFProDisplay-Regular.ttf */; };
+		6319B52D27D88DBD007C236E /* SFProDisplay-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63BA0C3027D619B50025F0A5 /* SFProDisplay-Semibold.ttf */; };
 		639C7D5027D61B2300A40FC2 /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639C7D4F27D61B2300A40FC2 /* Animations.swift */; };
 		639C7D5327D61B4C00A40FC2 /* UITableViewDequeue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639C7D5227D61B4C00A40FC2 /* UITableViewDequeue.swift */; };
 		639C7D5627D61BBD00A40FC2 /* UICollectionViewDequeue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639C7D5527D61BBD00A40FC2 /* UICollectionViewDequeue.swift */; };
@@ -804,7 +808,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6319B52A27D88DB5007C236E /* SFProDisplay-Bold.ttf in Resources */,
+				6319B52D27D88DBD007C236E /* SFProDisplay-Semibold.ttf in Resources */,
+				6319B52B27D88DB7007C236E /* SFProDisplay-Medium.ttf in Resources */,
 				63BA0C0727D616130025F0A5 /* LaunchScreen.storyboard in Resources */,
+				6319B52C27D88DBA007C236E /* SFProDisplay-Regular.ttf in Resources */,
 				63BA0C0427D616130025F0A5 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

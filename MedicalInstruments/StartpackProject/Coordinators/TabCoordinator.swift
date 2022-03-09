@@ -40,12 +40,11 @@ final class TabCoordinator: BaseCoordinator {
         
         let selectedItemTitle: [NSAttributedString.Key : Any] =
             [NSAttributedString.Key.foregroundColor: BaseColor.hex_5B67CA.uiColor(),
-             //Шрифты изменены на системные, с нашими не работает
-             NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 12)]
+             NSAttributedString.Key.font: MainFont.semiBold(size: 12)]
         
         let unselectedItemTitle: [NSAttributedString.Key : Any] =
             [NSAttributedString.Key.foregroundColor: BaseColor.hex_A5A7AD.uiColor(),
-             NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 12)]
+             NSAttributedString.Key.font: MainFont.semiBold(size: 12)]
         
         //MARK: Main
         let mainNavigationController = UINavigationController()
