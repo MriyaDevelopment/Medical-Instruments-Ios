@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "source_icons_gym 1.png",
+      "filename" : "Bg нейрохирургия.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "source_icons_gym 1@2x.png",
+      "filename" : "Bg нейрохирургия@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "source_icons_gym 1@3x.png",
+      "filename" : "Bg нейрохирургия@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

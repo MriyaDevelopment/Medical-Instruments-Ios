@@ -24,6 +24,14 @@ final class MainCoordinator: BaseCoordinator {
     //MARK: Main Module
     private func showMainScreen() {
         let screen = screenFactory.makeMainScreen()
+        screen.showSubcategories = { [weak self] in
+            self?.showSubcategories()
+        }
         router.setRootModule(screen, hideBar: true)
+    }
+    
+    private func showSubcategories() {
+        let screen = screenFactory.makeSubCategoriesScreen()
+        router.push(screen, animated: true)
     }
 }
