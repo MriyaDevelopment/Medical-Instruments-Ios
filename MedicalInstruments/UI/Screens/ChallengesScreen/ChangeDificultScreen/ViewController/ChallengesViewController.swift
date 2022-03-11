@@ -1,16 +1,16 @@
 //
-//  SubcategoriesViewController.swift
+//  ChallengesViewController.swift
 //  MedicalInstruments
 //
-//  Created by Mac Pro on 09.03.2022.
+//  Created by Nikita Ezhov on 07.03.2022.
 //
 
 import Foundation
 import Combine
 
-final class SubcategoriesViewController<View: SubcategoriesView>: BaseViewController<View> {
-    
-    var showInstrumentListScreen: VoidClosure?
+final class ChallengesViewController<View: ChallengesView>: BaseViewController<View> {
+        
+    var showChangeCategoriesScreen: VoidClosure?
     private var cancalables = Set<AnyCancellable>()
     
     init() {
@@ -23,24 +23,18 @@ final class SubcategoriesViewController<View: SubcategoriesView>: BaseViewContro
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        configureNavigationBar()
+        hideNavBar()
         subscribeForUpdates()
     }
 
-    private func configureNavigationBar() {
-        let titleView = NavigationBarTitle(title: "подкатегории", subTitle: "")
-        navBar.addItem(titleView, toPosition: .title)
-    }
-    
     private func subscribeForUpdates() {
         rootView.events.sink { [weak self] in self?.onViewEvents($0) }.store(in: &cancalables)
     }
     
-    private func onViewEvents(_ event: SubcategoriesViewEvents){
+    private func onViewEvents(_ event: ChalengesViewEvent){
         switch event {
-        case .cellClicked(let index):
-            showInstrumentListScreen?()
+        case .cellClicked:
+            showChangeCategoriesScreen?()
         default:
             break
         }

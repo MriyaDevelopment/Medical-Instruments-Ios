@@ -11,6 +11,7 @@ final class MainCollectionViewCell: UICollectionViewCell {
     
     private var backgroundImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.image = AppIcons.getIcon(.i_otorhinolaryngology)
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()

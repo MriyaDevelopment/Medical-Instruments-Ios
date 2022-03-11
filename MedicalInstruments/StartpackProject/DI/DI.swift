@@ -66,9 +66,13 @@ protocol ScreenFactoryProtocol {
     
     func makeSubCategoriesScreen() -> SubcategoriesViewController<SubcategoriesView>
     
+    func makeInstrumentListScreen() -> InstrumentListViewController<InstrumentListView>
+    
     //MARK: Challenges
     
     func makeChallengesScreen() -> ChallengesViewController<ChallengesView>
+    
+    func makeChangeCategoriesScreen() -> ChangeCategoriesViewController<ChangeCategoriesView>
     
     //MARK: Favourites
     
@@ -102,12 +106,20 @@ final class ScreenFactory: ScreenFactoryProtocol {
         SubcategoriesViewController<SubcategoriesView>()
     }
     
+    func makeInstrumentListScreen() -> InstrumentListViewController<InstrumentListView> {
+        InstrumentListViewController<InstrumentListView>()
+    }
+    
     //MARK: Challenges
     
     func makeChallengesScreen() -> ChallengesViewController<ChallengesView> {
         ChallengesViewController<ChallengesView>()
     }
     
+    func makeChangeCategoriesScreen() -> ChangeCategoriesViewController<ChangeCategoriesView> {
+        ChangeCategoriesViewController<ChangeCategoriesView>()
+    }
+ 
     //MARK: Favourites
     
     func makeFavouritesScreen() -> FavouritesViewController<FavouritesView> {

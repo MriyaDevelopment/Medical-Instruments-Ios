@@ -1,14 +1,13 @@
 //
-//  ChallengesViewController.swift
+//  ChangeCategoriesViewController.swift
 //  MedicalInstruments
 //
-//  Created by Nikita Ezhov on 07.03.2022.
+//  Created by Mac Pro on 10.03.2022.
 //
 
 import Foundation
 
-
-final class ChallengesViewController<View: ChallengesView>: BaseViewController<View> {
+final class ChangeCategoriesViewController<View: ChangeCategoriesView>: BaseViewController<View> {
         
     init() {
         super.init(nibName: nil, bundle: nil)

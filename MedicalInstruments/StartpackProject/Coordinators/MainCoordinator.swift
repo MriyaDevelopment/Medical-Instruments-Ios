@@ -32,6 +32,14 @@ final class MainCoordinator: BaseCoordinator {
     
     private func showSubcategories() {
         let screen = screenFactory.makeSubCategoriesScreen()
+        screen.showInstrumentListScreen = { [weak self] in
+            self?.showInstrumentListScreen()
+        }
+        router.push(screen, animated: true)
+    }
+    
+    private func showInstrumentListScreen() {
+        let screen = screenFactory.makeInstrumentListScreen()
         router.push(screen, animated: true)
     }
 }

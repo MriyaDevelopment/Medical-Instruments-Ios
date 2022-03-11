@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Property 1=Bg нейрохирургия.png",
+      "filename" : "lock.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Property 1=Bg нейрохирургия@2x.png",
+      "filename" : "lock@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Property 1=Bg нейрохирургия@3x.png",
+      "filename" : "lock@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

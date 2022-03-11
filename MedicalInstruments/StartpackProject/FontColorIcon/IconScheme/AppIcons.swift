@@ -24,6 +24,12 @@ final class AppIcons {
         case i_dentistry
         case i_neurosurgery
         case i_otorhinolaryngology
+        case i_logout
+        case i_like_enable
+        case i_like_disable
+        case i_check_on
+        case i_check_off
+        case i_locked
     }
     
     static func getIcon(_ type: iconsEnum) -> UIImage {
@@ -42,6 +48,12 @@ final class AppIcons {
         case .i_dentistry: return UIImage(named: "i_dentistry")!
         case .i_neurosurgery: return UIImage(named: "i_neurosurgery")!
         case .i_otorhinolaryngology: return UIImage(named: "i_otorhinolaryngology")!
+        case .i_logout: return UIImage(named: "i_logout")!
+        case .i_like_enable: return UIImage(named: "i_like_enable")!
+        case .i_like_disable: return UIImage(named: "i_like_disable")!
+        case .i_check_on: return UIImage(named: "i_check_on")!
+        case .i_check_off: return UIImage(named: "i_check_off")!
+        case .i_locked: return UIImage(named: "i_locked")!
         }
     }
 }

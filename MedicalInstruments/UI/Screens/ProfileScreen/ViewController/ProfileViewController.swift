@@ -9,6 +9,8 @@ import Foundation
 
 
 final class ProfileViewController<View: ProfileView>: BaseViewController<View> {
+    
+    private var items = ["Общая хирургия","Акушерство и гинекология","Стоматология"]
         
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -20,6 +22,9 @@ final class ProfileViewController<View: ProfileView>: BaseViewController<View> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideNavBar()
+        
+        rootView.configureTags(items: items)
     }
 
 }

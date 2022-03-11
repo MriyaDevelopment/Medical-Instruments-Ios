@@ -22,6 +22,14 @@ final class ChallengesCoordinator: BaseCoordinator {
     //MARK: Challenges Module
     private func showChallengesScreen() {
         let screen = screenFactory.makeChallengesScreen()
+        screen.showChangeCategoriesScreen = { [weak self] in
+            self?.showChangeCategoriesScreen()
+        }
         router.setRootModule(screen, hideBar: true)
+    }
+    
+    private func showChangeCategoriesScreen() {
+        let screen = screenFactory.makeChangeCategoriesScreen()
+        router.push(screen, animated: true)
     }
 }

@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import Combine
 
 final class SubcategoriesView: UIView {
+    
+    var events = PassthroughSubject<SubcategoriesViewEvents, Never>()
     
     private var contentView: UIView = {
         let view = UIView()
@@ -104,7 +107,7 @@ extension SubcategoriesView: UICollectionViewDelegate, UICollectionViewDataSourc
 
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        events.send(.categoryCellClicked(categoryList[indexPath.row].categoryId ?? 0))
+        events.send(.cellClicked(indexPath.row))
     }
 
 }

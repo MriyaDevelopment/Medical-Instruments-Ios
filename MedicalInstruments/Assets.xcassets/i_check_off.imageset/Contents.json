@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Property 1=Bg нейрохирургия.png",
+      "filename" : "Tick Square.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Property 1=Bg нейрохирургия@2x.png",
+      "filename" : "Tick Square@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Property 1=Bg нейрохирургия@3x.png",
+      "filename" : "Tick Square@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
