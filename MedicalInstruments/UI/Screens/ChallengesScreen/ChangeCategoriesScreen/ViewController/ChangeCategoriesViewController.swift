@@ -19,6 +19,22 @@ final class ChangeCategoriesViewController<View: ChangeCategoriesView>: BaseView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavigationBar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.hideView()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        tabBarController?.tabBar.showView()
+        super.viewWillDisappear(animated)
+    }
+
+    private func configureNavigationBar() {
+        let titleView = NavigationBarTitle(title: "Выбери категории", subTitle: "")
+        navBar.addItem(titleView, toPosition: .title)
     }
 
 }

@@ -80,6 +80,11 @@ final class InstrumentTableViewCell: UITableViewCell {
         super.layoutSubviews()
     }
     
+    func configure(data: Instruments){
+        titleLabel.text = data.title
+        instrumentImageView.loadImage(by: data.image ?? "")
+        descriptionLabel.text = data.full_text
+    }
    
     private func addElements() {
         

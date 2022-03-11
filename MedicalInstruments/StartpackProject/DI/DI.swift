@@ -18,6 +18,9 @@ final class Di {
     fileprivate let requestBuilder: RequestBuilderProtocol
     fileprivate let apiClient: ApiClient
     
+    fileprivate let catalogService: CatalogServiceProtocol
+    fileprivate let catalogProvider: CatalogProviderProtocol
+    
     init() {
         
         screenFactory = ScreenFactory()
@@ -29,6 +32,9 @@ final class Di {
         requestBuilder = RequestBuilder(configuration: configuration)
         
         apiClient = ApiClient(requestBuilder: requestBuilder, configuration: sessionConfiguration.configuration)
+        
+        catalogService = CatalogService(apiClient: apiClient)
+        catalogProvider = CatalogProviderImpl(catalogService: catalogService)
         
         screenFactory.di = self
     }
@@ -107,7 +113,7 @@ final class ScreenFactory: ScreenFactoryProtocol {
     }
     
     func makeInstrumentListScreen() -> InstrumentListViewController<InstrumentListView> {
-        InstrumentListViewController<InstrumentListView>()
+        InstrumentListViewController<InstrumentListView>(catalopProvider: di.catalogProvider)
     }
     
     //MARK: Challenges

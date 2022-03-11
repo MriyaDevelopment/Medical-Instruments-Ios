@@ -10,6 +10,8 @@ import UIKit
 
 final class InstrumentListView: UIView {
     
+    private var instruments: [Instruments] = []
+    
     private var contentView: UIView = {
         let view = UIView()
         return view
@@ -43,6 +45,12 @@ final class InstrumentListView: UIView {
         makeConstraints()
     }
     
+    func configure(instruments: [Instruments]){
+        self.instruments = instruments
+        
+        instrumentTableView.reloadData()
+    }
+    
     private func makeConstraints() {
         contentView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
@@ -60,13 +68,13 @@ final class InstrumentListView: UIView {
 
 extension InstrumentListView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return instruments.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withType: InstrumentTableViewCell.self, for: indexPath)
-//        cell.configure(pet: petList[indexPath.row], petType: petTypeList, petBreed: petBreedList)
+        cell.configure(data: instruments[indexPath.row])
        return cell
     }
     

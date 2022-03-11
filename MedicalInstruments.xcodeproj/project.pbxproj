@@ -84,6 +84,11 @@
 		8E10F68827DA6D8E00EBF12E /* ChangeCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E10F68727DA6D8E00EBF12E /* ChangeCategoriesViewController.swift */; };
 		8E10F68B27DB6F8E00EBF12E /* ChangeCategoriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E10F68A27DB6F8E00EBF12E /* ChangeCategoriesCell.swift */; };
 		8E10F68E27DB7D7700EBF12E /* ChalengesViewDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E10F68D27DB7D7700EBF12E /* ChalengesViewDataModel.swift */; };
+		8E10F69327DB929700EBF12E /* CatalogProviderRequestParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E10F69227DB929600EBF12E /* CatalogProviderRequestParam.swift */; };
+		8E10F69527DB92F300EBF12E /* getInstrumentsByTypeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E10F69427DB92F300EBF12E /* getInstrumentsByTypeResponse.swift */; };
+		8E10F69827DB93B100EBF12E /* CatalogClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E10F69727DB93B100EBF12E /* CatalogClient.swift */; };
+		8E10F69B27DB94D900EBF12E /* CatalogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E10F69A27DB94D900EBF12E /* CatalogService.swift */; };
+		8E10F69E27DB959500EBF12E /* CatalogProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E10F69D27DB959500EBF12E /* CatalogProvider.swift */; };
 		8E30EBA527D75715005AE313 /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E30EBA427D75715005AE313 /* MainCollectionViewCell.swift */; };
 		8E30EBAA27D76220005AE313 /* MainDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E30EBA927D76220005AE313 /* MainDataModel.swift */; };
 /* End PBXBuildFile section */
@@ -169,6 +174,11 @@
 		8E10F68727DA6D8E00EBF12E /* ChangeCategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCategoriesViewController.swift; sourceTree = "<group>"; };
 		8E10F68A27DB6F8E00EBF12E /* ChangeCategoriesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCategoriesCell.swift; sourceTree = "<group>"; };
 		8E10F68D27DB7D7700EBF12E /* ChalengesViewDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChalengesViewDataModel.swift; sourceTree = "<group>"; };
+		8E10F69227DB929600EBF12E /* CatalogProviderRequestParam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogProviderRequestParam.swift; sourceTree = "<group>"; };
+		8E10F69427DB92F300EBF12E /* getInstrumentsByTypeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getInstrumentsByTypeResponse.swift; sourceTree = "<group>"; };
+		8E10F69727DB93B100EBF12E /* CatalogClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogClient.swift; sourceTree = "<group>"; };
+		8E10F69A27DB94D900EBF12E /* CatalogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogService.swift; sourceTree = "<group>"; };
+		8E10F69D27DB959500EBF12E /* CatalogProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogProvider.swift; sourceTree = "<group>"; };
 		8E30EBA427D75715005AE313 /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
 		8E30EBA927D76220005AE313 /* MainDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDataModel.swift; sourceTree = "<group>"; };
 		F03B5FB9619743394A737D10 /* Pods_MedicalInstruments.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MedicalInstruments.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -557,6 +567,7 @@
 		63BA0BF927D616120025F0A5 /* MedicalInstruments */ = {
 			isa = PBXGroup;
 			children = (
+				8E10F68F27DB926000EBF12E /* ApiProviders */,
 				63BA0C1027D616D00025F0A5 /* StartpackProject */,
 				63BA0C0E27D616C00025F0A5 /* UI */,
 				63BA0C0327D616130025F0A5 /* Assets.xcassets */,
@@ -866,6 +877,58 @@
 			path = DataModel;
 			sourceTree = "<group>";
 		};
+		8E10F68F27DB926000EBF12E /* ApiProviders */ = {
+			isa = PBXGroup;
+			children = (
+				8E10F69027DB926A00EBF12E /* CatalogProvider */,
+			);
+			path = ApiProviders;
+			sourceTree = "<group>";
+		};
+		8E10F69027DB926A00EBF12E /* CatalogProvider */ = {
+			isa = PBXGroup;
+			children = (
+				8E10F69C27DB955600EBF12E /* Povider */,
+				8E10F69927DB94C400EBF12E /* Service */,
+				8E10F69627DB938400EBF12E /* ApiClient */,
+				8E10F69127DB927800EBF12E /* Entitty */,
+			);
+			path = CatalogProvider;
+			sourceTree = "<group>";
+		};
+		8E10F69127DB927800EBF12E /* Entitty */ = {
+			isa = PBXGroup;
+			children = (
+				8E10F69227DB929600EBF12E /* CatalogProviderRequestParam.swift */,
+				8E10F69427DB92F300EBF12E /* getInstrumentsByTypeResponse.swift */,
+			);
+			path = Entitty;
+			sourceTree = "<group>";
+		};
+		8E10F69627DB938400EBF12E /* ApiClient */ = {
+			isa = PBXGroup;
+			children = (
+				8E10F69727DB93B100EBF12E /* CatalogClient.swift */,
+			);
+			path = ApiClient;
+			sourceTree = "<group>";
+		};
+		8E10F69927DB94C400EBF12E /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				8E10F69A27DB94D900EBF12E /* CatalogService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		8E10F69C27DB955600EBF12E /* Povider */ = {
+			isa = PBXGroup;
+			children = (
+				8E10F69D27DB959500EBF12E /* CatalogProvider.swift */,
+			);
+			path = Povider;
+			sourceTree = "<group>";
+		};
 		8E30EBA327D75700005AE313 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1020,9 +1083,11 @@
 				639C7D6427D61D4C00A40FC2 /* InitFromCommonInputData.swift in Sources */,
 				8E10F66527D87B5B00EBF12E /* SubcategoriesViewController.swift in Sources */,
 				8E30EBA527D75715005AE313 /* MainCollectionViewCell.swift in Sources */,
+				8E10F69827DB93B100EBF12E /* CatalogClient.swift in Sources */,
 				639C7DC227D6446C00A40FC2 /* ProfileViewController.swift in Sources */,
 				639C7D9327D6214B00A40FC2 /* TabCoordinator.swift in Sources */,
 				639C7D7427D61E6500A40FC2 /* Types.swift in Sources */,
+				8E10F69B27DB94D900EBF12E /* CatalogService.swift in Sources */,
 				63BA0C1527D617580025F0A5 /* TabBarController.swift in Sources */,
 				8E10F68E27DB7D7700EBF12E /* ChalengesViewDataModel.swift in Sources */,
 				8E10F67D27D9D0E700EBF12E /* SubcategoriesDataModel.swift in Sources */,
@@ -1030,6 +1095,7 @@
 				639C7D5927D61C0600A40FC2 /* UIImageView.swift in Sources */,
 				63BA0C1B27D617A60025F0A5 /* RequestBuilderImpl.swift in Sources */,
 				8E10F67027D9BB6200EBF12E /* TagsCollectionViewCell.swift in Sources */,
+				8E10F69E27DB959500EBF12E /* CatalogProvider.swift in Sources */,
 				639C7D8227D61F8B00A40FC2 /* BaseFont.swift in Sources */,
 				8E10F66D27D9BA3000EBF12E /* TagsCollectionView.swift in Sources */,
 				639C7D8827D6203100A40FC2 /* DI.swift in Sources */,
@@ -1066,6 +1132,7 @@
 				8E10F68827DA6D8E00EBF12E /* ChangeCategoriesViewController.swift in Sources */,
 				63BA0C3227D619FC0025F0A5 /* TabBarTransitions.swift in Sources */,
 				8E10F67A27D9C5FF00EBF12E /* InstrumentTableViewCell.swift in Sources */,
+				8E10F69527DB92F300EBF12E /* getInstrumentsByTypeResponse.swift in Sources */,
 				639C7D8B27D620EA00A40FC2 /* Coordinator.swift in Sources */,
 				639C7DB827D6443900A40FC2 /* ChallengesView.swift in Sources */,
 				639C7DBE27D6445900A40FC2 /* FavouritesViewController.swift in Sources */,
@@ -1075,6 +1142,7 @@
 				639C7D7127D61E2000A40FC2 /* UIImage.swift in Sources */,
 				639C7DA527D6409500A40FC2 /* MainCoordinator.swift in Sources */,
 				639C7D6E27D61DED00A40FC2 /* UIViewAnimation.swift in Sources */,
+				8E10F69327DB929700EBF12E /* CatalogProviderRequestParam.swift in Sources */,
 				639C7D5027D61B2300A40FC2 /* Animations.swift in Sources */,
 				639C7D8527D61FC900A40FC2 /* AppIcons.swift in Sources */,
 				63BA0C2427D618970025F0A5 /* SessionConfigurationProtocol.swift in Sources */,

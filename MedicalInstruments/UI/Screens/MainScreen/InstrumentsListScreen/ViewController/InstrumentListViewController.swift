@@ -6,11 +6,15 @@
 //
 
 import Foundation
-
+import Combine
 
 final class InstrumentListViewController<View: InstrumentListView>: BaseViewController<View> {
         
-    init() {
+    private var catalopProvider: CatalogProviderProtocol
+    private var cancalables = Set<AnyCancellable>()
+    
+    init(catalopProvider: CatalogProviderProtocol) {
+        self.catalopProvider = catalopProvider
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -21,11 +25,37 @@ final class InstrumentListViewController<View: InstrumentListView>: BaseViewCont
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar()
+        subscribeForUpdates()
+        catalopProvider.getInstrumentsByType(param: getInstrumentsByTypeRequestParams(type: "gynecology"))
+        showLoader()
     }
     
     private func configureNavigationBar() {
         let titleView = NavigationBarTitle(title: "Тема: Общая хирургия", subTitle: "Раздел: Соединяющие")
         navBar.addItem(titleView, toPosition: .title)
+    }
+    
+    private func subscribeForUpdates() {
+        catalopProvider.events.sink { [weak self] in self?.onViewEvents($0) }.store(in: &cancalables)
+    }
+    
+    private func onViewEvents(_ event: CatalogProviderEvent){
+        switch event {
+        case .error(let error):
+            dismissLoader()
+            showErrorWithMessage?(error.errorDescription)
+        case .errorMessage(let errorMessage):
+            dismissLoader()
+            guard let message = errorMessage else { return }
+            showErrorWithMessage?(message)
+        case .dataLoaded(let response):
+            dismissLoader()
+            guard let data = response.instruments else { return }
+            rootView.configure(instruments: data)
+        default:
+            break
+        }
+        
     }
     
 }

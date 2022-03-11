@@ -34,6 +34,6 @@ struct Configuration: ConfigurationProtocol {
 }
 
 struct ConfigurationTest: ConfigurationProtocol {
-    let scheme: String = "https"
-    let host = "unizoo-studiofact.t-dir.com"
+    let scheme: String = "http"
+    let host = "ovz2.j04713753.pqr7m.vps.myjino.ru"
 }

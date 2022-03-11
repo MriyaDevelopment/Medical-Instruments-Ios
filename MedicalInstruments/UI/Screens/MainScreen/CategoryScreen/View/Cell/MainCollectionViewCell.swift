@@ -95,7 +95,7 @@ final class MainCollectionViewCell: UICollectionViewCell {
         titleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(imageView.snp.bottom).offset(5)
             make.left.equalToSuperview().inset(12)
-            make.right.equalToSuperview()
+            make.right.equalToSuperview().offset(-10)
         }
         
         subtitleLabel.snp.makeConstraints { (make) in
