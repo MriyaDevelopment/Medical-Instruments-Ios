@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import Combine
 
 final class ChangeCategoriesView: UIView {
     
+    var event = PassthroughSubject<ChangeCategoriesViewEvent, Never>()
     
     lazy private var tableView: UITableView = {
         let tableView = UITableView()
@@ -27,9 +29,7 @@ final class ChangeCategoriesView: UIView {
         button.titleLabel?.font = MainFont.medium(size: 16)
         button.setTitleColor(BaseColor.hex_5B67CA.uiColor(), for: .normal)
         button.titleLabel?.textAlignment = .left
-        button.sizeToFit()
-        button.setImage(AppIcons.getIcon(.i_back_button), for: .normal)
-        button.imageEdgeInsets.left = 165
+        button.isUserInteractionEnabled = true
         return button
     }()
     
@@ -48,12 +48,13 @@ final class ChangeCategoriesView: UIView {
         
         addSubview(nextButton)
         makeConstraints()
+        addTarget()
     }
     
     private func makeConstraints() {
         
         nextButton.snp.makeConstraints{ (make) in
-            make.bottom.right.equalTo(safeAreaLayoutGuide)
+            make.bottom.right.equalTo(safeAreaLayoutGuide).inset(16)
         }
         
         tableView.snp.makeConstraints{ (make) in
@@ -61,6 +62,15 @@ final class ChangeCategoriesView: UIView {
             make.bottom.equalTo(nextButton.snp.top).inset(10)
         }
         
+    }
+    
+    private func addTarget(){
+        nextButton.addTarget(self, action: #selector(nextAction), for: .touchUpInside)
+    }
+    
+    @objc func nextAction(){
+        print(123)
+        event.send(.nextClicked)
     }
 }
 

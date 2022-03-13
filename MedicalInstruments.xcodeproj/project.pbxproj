@@ -89,6 +89,9 @@
 		8E10F69827DB93B100EBF12E /* CatalogClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E10F69727DB93B100EBF12E /* CatalogClient.swift */; };
 		8E10F69B27DB94D900EBF12E /* CatalogService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E10F69A27DB94D900EBF12E /* CatalogService.swift */; };
 		8E10F69E27DB959500EBF12E /* CatalogProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E10F69D27DB959500EBF12E /* CatalogProvider.swift */; };
+		8E10F6A327DE1F0900EBF12E /* QuizVeiw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E10F6A227DE1F0800EBF12E /* QuizVeiw.swift */; };
+		8E10F6A527DE1F2500EBF12E /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E10F6A427DE1F2500EBF12E /* QuizViewController.swift */; };
+		8E10F6A827DE2B9D00EBF12E /* ChangeCategoriesDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E10F6A727DE2B9D00EBF12E /* ChangeCategoriesDataModel.swift */; };
 		8E30EBA527D75715005AE313 /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E30EBA427D75715005AE313 /* MainCollectionViewCell.swift */; };
 		8E30EBAA27D76220005AE313 /* MainDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E30EBA927D76220005AE313 /* MainDataModel.swift */; };
 /* End PBXBuildFile section */
@@ -179,6 +182,9 @@
 		8E10F69727DB93B100EBF12E /* CatalogClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogClient.swift; sourceTree = "<group>"; };
 		8E10F69A27DB94D900EBF12E /* CatalogService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogService.swift; sourceTree = "<group>"; };
 		8E10F69D27DB959500EBF12E /* CatalogProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogProvider.swift; sourceTree = "<group>"; };
+		8E10F6A227DE1F0800EBF12E /* QuizVeiw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizVeiw.swift; sourceTree = "<group>"; };
+		8E10F6A427DE1F2500EBF12E /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
+		8E10F6A727DE2B9D00EBF12E /* ChangeCategoriesDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCategoriesDataModel.swift; sourceTree = "<group>"; };
 		8E30EBA427D75715005AE313 /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
 		8E30EBA927D76220005AE313 /* MainDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDataModel.swift; sourceTree = "<group>"; };
 		F03B5FB9619743394A737D10 /* Pods_MedicalInstruments.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MedicalInstruments.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -407,6 +413,7 @@
 		639C7DA827D642B300A40FC2 /* ChallengesScreen */ = {
 			isa = PBXGroup;
 			children = (
+				8E10F69F27DE1EB300EBF12E /* QuizScreen */,
 				8E10F68227DA6CAB00EBF12E /* ChangeCategoriesScreen */,
 				8E10F68127DA6C8000EBF12E /* ChangeDificultScreen */,
 			);
@@ -838,6 +845,7 @@
 		8E10F68227DA6CAB00EBF12E /* ChangeCategoriesScreen */ = {
 			isa = PBXGroup;
 			children = (
+				8E10F6A627DE2B8100EBF12E /* DataModel */,
 				8E10F68427DA6CC800EBF12E /* ViewController */,
 				8E10F68327DA6CC200EBF12E /* View */,
 			);
@@ -927,6 +935,39 @@
 				8E10F69D27DB959500EBF12E /* CatalogProvider.swift */,
 			);
 			path = Povider;
+			sourceTree = "<group>";
+		};
+		8E10F69F27DE1EB300EBF12E /* QuizScreen */ = {
+			isa = PBXGroup;
+			children = (
+				8E10F6A127DE1EF200EBF12E /* ViewController */,
+				8E10F6A027DE1EED00EBF12E /* View */,
+			);
+			path = QuizScreen;
+			sourceTree = "<group>";
+		};
+		8E10F6A027DE1EED00EBF12E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8E10F6A227DE1F0800EBF12E /* QuizVeiw.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8E10F6A127DE1EF200EBF12E /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8E10F6A427DE1F2500EBF12E /* QuizViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		8E10F6A627DE2B8100EBF12E /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				8E10F6A727DE2B9D00EBF12E /* ChangeCategoriesDataModel.swift */,
+			);
+			path = DataModel;
 			sourceTree = "<group>";
 		};
 		8E30EBA327D75700005AE313 /* Cell */ = {
@@ -1073,6 +1114,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E10F68627DA6D4600EBF12E /* ChangeCategoriesView.swift in Sources */,
+				8E10F6A827DE2B9D00EBF12E /* ChangeCategoriesDataModel.swift in Sources */,
 				639C7D9D27D63FA600A40FC2 /* LaunchScreenViewController.swift in Sources */,
 				639C7D6A27D61DB200A40FC2 /* UIView.swift in Sources */,
 				639C7DD427D6543300A40FC2 /* FloatingPanel.swift in Sources */,
@@ -1081,6 +1123,7 @@
 				8E10F68027DA53AA00EBF12E /* DificultCell.swift in Sources */,
 				639C7DC027D6446200A40FC2 /* ProfileView.swift in Sources */,
 				639C7D6427D61D4C00A40FC2 /* InitFromCommonInputData.swift in Sources */,
+				8E10F6A327DE1F0900EBF12E /* QuizVeiw.swift in Sources */,
 				8E10F66527D87B5B00EBF12E /* SubcategoriesViewController.swift in Sources */,
 				8E30EBA527D75715005AE313 /* MainCollectionViewCell.swift in Sources */,
 				8E10F69827DB93B100EBF12E /* CatalogClient.swift in Sources */,
@@ -1105,6 +1148,7 @@
 				639C7DD227D6541600A40FC2 /* ImagePreloaderView.swift in Sources */,
 				8E10F68B27DB6F8E00EBF12E /* ChangeCategoriesCell.swift in Sources */,
 				639C7D6727D61D9100A40FC2 /* UILabel.swift in Sources */,
+				8E10F6A527DE1F2500EBF12E /* QuizViewController.swift in Sources */,
 				8E10F66327D87B4A00EBF12E /* SubcategoriesView.swift in Sources */,
 				639C7DCA27D6535100A40FC2 /* PrettyAlertView.swift in Sources */,
 				639C7DCC27D6535F00A40FC2 /* PrettyAlertController.swift in Sources */,

@@ -30,6 +30,9 @@ final class AppIcons {
         case i_check_on
         case i_check_off
         case i_locked
+        case i_backgroundImage
+        case i_timerImage
+        case i_challenges_eneble
     }
     
     static func getIcon(_ type: iconsEnum) -> UIImage {
@@ -54,6 +57,9 @@ final class AppIcons {
         case .i_check_on: return UIImage(named: "i_check_on")!
         case .i_check_off: return UIImage(named: "i_check_off")!
         case .i_locked: return UIImage(named: "i_locked")!
+        case .i_backgroundImage: return UIImage(named: "i_backgroundImage")!
+        case .i_timerImage: return UIImage(named: "i_timerImage")!
+        case .i_challenges_eneble: return UIImage(named: "i_challenges_eneble")!
         }
     }
 }

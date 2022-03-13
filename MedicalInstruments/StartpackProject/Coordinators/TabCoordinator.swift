@@ -62,7 +62,7 @@ final class TabCoordinator: BaseCoordinator {
         let challengesNavigationController = UINavigationController()
         let challengesBarItem = UITabBarItem(title: titlesTabBarItem.catalog.rawValue,
                                         image: AppIcons.getIcon(.i_challenges),
-                                        selectedImage: AppIcons.getIcon(.i_challenges))
+                                        selectedImage: AppIcons.getIcon(.i_challenges_eneble))
         challengesNavigationController.tabBarItem = challengesBarItem
         let challengesRouter = Router(rootController: challengesNavigationController)
         let challengesCoordinator = ChallengesCoordinator(router: challengesRouter, screenFactory: screenFactory)

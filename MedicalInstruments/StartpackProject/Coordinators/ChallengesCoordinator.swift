@@ -30,6 +30,14 @@ final class ChallengesCoordinator: BaseCoordinator {
     
     private func showChangeCategoriesScreen() {
         let screen = screenFactory.makeChangeCategoriesScreen()
+        screen.showQuizScreen = { [weak self] in
+            self?.showQuizScreen()
+        }
+        router.push(screen, animated: true)
+    }
+    
+    private func showQuizScreen() {
+        let screen = screenFactory.makeQuizScreen()
         router.push(screen, animated: true)
     }
 }

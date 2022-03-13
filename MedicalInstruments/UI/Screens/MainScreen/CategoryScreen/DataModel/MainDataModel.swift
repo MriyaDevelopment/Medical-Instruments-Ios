@@ -9,13 +9,15 @@ import Foundation
 import UIKit
 
 enum MainViewEvent {
-    case cellClicked(Int)
+    case cellClicked(String)
+    case firstCellClicked
 }
 
 struct MainStruct {
     var id: Int
     var backgroundImage: UIImage
     var iconImage: UIImage
+    var type: String
     var titleText: String
     var subtitleText: String
 }

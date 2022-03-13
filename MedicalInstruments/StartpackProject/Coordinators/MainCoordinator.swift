@@ -27,19 +27,22 @@ final class MainCoordinator: BaseCoordinator {
         screen.showSubcategories = { [weak self] in
             self?.showSubcategories()
         }
+        screen.showInstrumentList = { [weak self] type, isMain in
+            self?.showInstrumentListScreen(type: type, isMain: isMain)
+        }
         router.setRootModule(screen, hideBar: true)
     }
     
     private func showSubcategories() {
         let screen = screenFactory.makeSubCategoriesScreen()
-        screen.showInstrumentListScreen = { [weak self] in
-            self?.showInstrumentListScreen()
+        screen.showInstrumentListScreen = { [weak self] type, isMain in
+            self?.showInstrumentListScreen(type: type, isMain: isMain)
         }
         router.push(screen, animated: true)
     }
     
-    private func showInstrumentListScreen() {
-        let screen = screenFactory.makeInstrumentListScreen()
+    private func showInstrumentListScreen(type: String, isMain: Bool) {
+        let screen = screenFactory.makeInstrumentListScreen(type: type, isMainCategory: isMain)
         router.push(screen, animated: true)
     }
 }

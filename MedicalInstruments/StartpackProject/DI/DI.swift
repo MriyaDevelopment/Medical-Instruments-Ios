@@ -72,13 +72,15 @@ protocol ScreenFactoryProtocol {
     
     func makeSubCategoriesScreen() -> SubcategoriesViewController<SubcategoriesView>
     
-    func makeInstrumentListScreen() -> InstrumentListViewController<InstrumentListView>
+    func makeInstrumentListScreen(type: String, isMainCategory: Bool) -> InstrumentListViewController<InstrumentListView>
     
     //MARK: Challenges
     
     func makeChallengesScreen() -> ChallengesViewController<ChallengesView>
     
     func makeChangeCategoriesScreen() -> ChangeCategoriesViewController<ChangeCategoriesView>
+    
+    func makeQuizScreen() -> QuizViewController<QuizView>
     
     //MARK: Favourites
     
@@ -105,15 +107,15 @@ final class ScreenFactory: ScreenFactoryProtocol {
     //MARK: Main
     
     func makeMainScreen() -> MainViewController<MainView> {
-        MainViewController<MainView>()
+        MainViewController<MainView>(catalogProvider: di.catalogProvider)
     }
     
     func makeSubCategoriesScreen() -> SubcategoriesViewController<SubcategoriesView> {
-        SubcategoriesViewController<SubcategoriesView>()
+        SubcategoriesViewController<SubcategoriesView>(catalogProvider: di.catalogProvider)
     }
     
-    func makeInstrumentListScreen() -> InstrumentListViewController<InstrumentListView> {
-        InstrumentListViewController<InstrumentListView>(catalopProvider: di.catalogProvider)
+    func makeInstrumentListScreen(type: String, isMainCategory: Bool) -> InstrumentListViewController<InstrumentListView> {
+        InstrumentListViewController<InstrumentListView>(catalopProvider: di.catalogProvider, type: type, isMainCategory: isMainCategory)
     }
     
     //MARK: Challenges
@@ -125,7 +127,11 @@ final class ScreenFactory: ScreenFactoryProtocol {
     func makeChangeCategoriesScreen() -> ChangeCategoriesViewController<ChangeCategoriesView> {
         ChangeCategoriesViewController<ChangeCategoriesView>()
     }
- 
+    
+    func makeQuizScreen() -> QuizViewController<QuizView> {
+        QuizViewController<QuizView>()
+    }
+    
     //MARK: Favourites
     
     func makeFavouritesScreen() -> FavouritesViewController<FavouritesView> {

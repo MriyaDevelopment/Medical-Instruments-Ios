@@ -8,5 +8,5 @@
 import Foundation
 
 enum SubcategoriesViewEvents {
-    case cellClicked(Int)
+    case cellClicked(String)
 }

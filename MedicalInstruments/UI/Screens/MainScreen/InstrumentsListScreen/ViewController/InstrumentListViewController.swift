@@ -12,8 +12,12 @@ final class InstrumentListViewController<View: InstrumentListView>: BaseViewCont
         
     private var catalopProvider: CatalogProviderProtocol
     private var cancalables = Set<AnyCancellable>()
+    private var type: String
+    private var isMainCategory: Bool
     
-    init(catalopProvider: CatalogProviderProtocol) {
+    init(catalopProvider: CatalogProviderProtocol, type: String, isMainCategory: Bool) {
+        self.isMainCategory = isMainCategory
+        self.type = type
         self.catalopProvider = catalopProvider
         super.init(nibName: nil, bundle: nil)
     }
@@ -26,7 +30,12 @@ final class InstrumentListViewController<View: InstrumentListView>: BaseViewCont
         super.viewDidLoad()
         configureNavigationBar()
         subscribeForUpdates()
-        catalopProvider.getInstrumentsByType(param: getInstrumentsByTypeRequestParams(type: "gynecology"))
+        
+        if isMainCategory == true {
+            catalopProvider.getInstrumentsByType(param: getInstrumentsByTypeRequestParams(type: type))
+        } else {
+            catalopProvider.getSurgeryInstrumentsByType(param: getInstrumentsByTypeRequestParams(type: type))
+        }
         showLoader()
     }
     
