@@ -10,7 +10,7 @@ import Combine
 
 final class ChallengesViewController<View: ChallengesView>: BaseViewController<View> {
         
-    var showChangeCategoriesScreen: VoidClosure?
+    var showChangeCategoriesScreen: IntClosure?
     private var cancalables = Set<AnyCancellable>()
     
     init() {
@@ -33,8 +33,8 @@ final class ChallengesViewController<View: ChallengesView>: BaseViewController<V
     
     private func onViewEvents(_ event: ChalengesViewEvent){
         switch event {
-        case .cellClicked:
-            showChangeCategoriesScreen?()
+        case .cellClicked(let id):
+            showChangeCategoriesScreen?(id)
         default:
             break
         }

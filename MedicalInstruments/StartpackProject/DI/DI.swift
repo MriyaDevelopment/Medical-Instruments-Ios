@@ -78,9 +78,9 @@ protocol ScreenFactoryProtocol {
     
     func makeChallengesScreen() -> ChallengesViewController<ChallengesView>
     
-    func makeChangeCategoriesScreen() -> ChangeCategoriesViewController<ChangeCategoriesView>
+    func makeChangeCategoriesScreen(dificultId: Int) -> ChangeCategoriesViewController<ChangeCategoriesView>
     
-    func makeQuizScreen() -> QuizViewController<QuizView>
+    func makeQuizScreen(id: Int, types: String) -> QuizViewController<QuizView>
     
     //MARK: Favourites
     
@@ -89,6 +89,12 @@ protocol ScreenFactoryProtocol {
     //MARK: Profile
     
     func makeProfileScreen() -> ProfileViewController<ProfileView>
+    
+    func makeFirstScreen() -> FirstViewController<FirstView>
+    
+    func makeAuthScreen() -> AuthViewController<AuthView>
+    
+    func makeRegisterScreen() -> RegistrationViewController<RegistrationView>
 
 }
 
@@ -124,12 +130,12 @@ final class ScreenFactory: ScreenFactoryProtocol {
         ChallengesViewController<ChallengesView>()
     }
     
-    func makeChangeCategoriesScreen() -> ChangeCategoriesViewController<ChangeCategoriesView> {
-        ChangeCategoriesViewController<ChangeCategoriesView>()
+    func makeChangeCategoriesScreen(dificultId: Int) -> ChangeCategoriesViewController<ChangeCategoriesView> {
+        ChangeCategoriesViewController<ChangeCategoriesView>(dificultId: dificultId, catalogProvider: di.catalogProvider)
     }
     
-    func makeQuizScreen() -> QuizViewController<QuizView> {
-        QuizViewController<QuizView>()
+    func makeQuizScreen(id: Int, types: String) -> QuizViewController<QuizView> {
+        QuizViewController<QuizView>(id: id, types: types, catalogProvider: di.catalogProvider)
     }
     
     //MARK: Favourites
@@ -141,7 +147,19 @@ final class ScreenFactory: ScreenFactoryProtocol {
     //MARK: Profile
         
     func makeProfileScreen() -> ProfileViewController<ProfileView> {
-        ProfileViewController<ProfileView>()
+        ProfileViewController<ProfileView>(catalogProvider: di.catalogProvider)
+    }
+    
+    func makeFirstScreen() -> FirstViewController<FirstView> {
+        FirstViewController<FirstView>()
+    }
+    
+    func makeAuthScreen() -> AuthViewController<AuthView> {
+        AuthViewController<AuthView>(catalogProvider: di.catalogProvider)
+    }
+    
+    func makeRegisterScreen() -> RegistrationViewController<RegistrationView> {
+        RegistrationViewController<RegistrationView>(catalogProvider: di.catalogProvider)
     }
   
 }

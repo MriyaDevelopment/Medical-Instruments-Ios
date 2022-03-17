@@ -10,6 +10,8 @@ import UIKit
 typealias VoidClosure = () -> Void
 typealias BoolClosure = (Bool) -> Void
 typealias StringClosure = (String) -> Void
+typealias TwoStringClosure = (String, String) -> Void
+typealias IntAndStringClosure = (Int, String) -> Void
 typealias StringAndBoolClosure = (String, Bool) -> Void
 typealias IntClosure = (Int) -> Void
 typealias DoubleClosure = (Double) -> Void

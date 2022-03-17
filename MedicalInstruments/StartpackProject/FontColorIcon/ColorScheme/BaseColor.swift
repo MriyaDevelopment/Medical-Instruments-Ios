@@ -99,6 +99,7 @@ enum BaseColor {
     static let hex_D2D3D6 = SchemeColor(dark: Dark.hex_D2D3D6, light: Light.hex_D2D3D6)
     static let hex_7FC9E7 = SchemeColor(dark: Dark.hex_7FC9E7, light: Light.hex_7FC9E7)
     static let hex_E77D7D = SchemeColor(dark: Dark.hex_E77D7D, light: Light.hex_E77D7D)
+    static let hex_81E89E = SchemeColor(dark: Dark.hex_81E89E, light: Light.hex_81E89E)
     
         
     static func setGradientLayer(_ view: UIView) {
@@ -122,6 +123,7 @@ enum BaseColor {
         static let hex_5B67CA = UIColor(red: 0.356, green: 0.403, blue: 0.792, alpha: 1)
         static let hex_7FC9E7 = UIColor(red: 0.5, green: 0.79, blue: 0.91, alpha: 1)
         static let hex_E77D7D = UIColor(red: 0.91, green: 0.49, blue: 0.49, alpha: 1)
+        static let hex_81E89E = UIColor(red: 0.505, green: 0.909, blue: 0.619, alpha: 1)
         
         
         static let hex_3FAC3B = UIColor(red: 0.247, green: 0.675, blue: 0.231, alpha: 1)
@@ -216,6 +218,8 @@ enum BaseColor {
         static let hex_5B67CA = UIColor(red: 0.356, green: 0.403, blue: 0.792, alpha: 1)
         static let hex_E77D7D = UIColor(red: 0.91, green: 0.49, blue: 0.49, alpha: 1)
         static let hex_7FC9E7 = UIColor(red: 0.5, green: 0.79, blue: 0.91, alpha: 1)
+        static let hex_81E89E = UIColor(red: 0.505, green: 0.909, blue: 0.619, alpha: 1)
+        
         
         static let hex_3FAC3B = UIColor(red: 0.247, green: 0.675, blue: 0.231, alpha: 1)
         static let hex_151515 = UIColor(red: 0.083, green: 0.083, blue: 0.083, alpha: 1)

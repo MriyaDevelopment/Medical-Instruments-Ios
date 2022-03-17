@@ -106,6 +106,6 @@ extension ChallengesView: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        events.send(.cellClicked)
+        events.send(.cellClicked(indexPath.row + 1))
     }
 }

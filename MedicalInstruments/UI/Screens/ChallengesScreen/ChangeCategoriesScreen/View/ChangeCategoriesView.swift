@@ -11,6 +11,8 @@ import Combine
 final class ChangeCategoriesView: UIView {
     
     var event = PassthroughSubject<ChangeCategoriesViewEvent, Never>()
+    private var types: [Types] = []
+    private var currentTypes: [String : String] = [:]
     
     lazy private var tableView: UITableView = {
         let tableView = UITableView()
@@ -61,7 +63,12 @@ final class ChangeCategoriesView: UIView {
             make.left.right.top.equalTo(safeAreaLayoutGuide)
             make.bottom.equalTo(nextButton.snp.top).inset(10)
         }
+    }
+    
+    func configure(types: [Types]) {
+        self.types = types
         
+        tableView.reloadData()
     }
     
     private func addTarget(){
@@ -69,28 +76,44 @@ final class ChangeCategoriesView: UIView {
     }
     
     @objc func nextAction(){
-        print(123)
-        event.send(.nextClicked)
+        
+        let typesDictionary = currentTypes.keys
+        var typeString = ""
+        for item in typesDictionary {
+            typeString.append("\(item),")
+        }
+        if typesDictionary.isEmpty {
+            nextButton.shake()
+        } else {
+            event.send(.nextClicked(String(typeString.dropLast())))
+        }
     }
+    
+    private func removeType(name: String) {
+        currentTypes.removeValue(forKey: name)
+    }
+    
+    private func addType(name: String) {
+        currentTypes[name] = name
+    }
+    
 }
 
 extension ChangeCategoriesView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return types.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withType: ChangeCategoriesCell.self, for: indexPath)
-//        cell.configure(index: indexPath.row)
+        cell.configure(type: types[indexPath.row])
+        cell.removeType = { [weak self] name in self?.removeType(name: name)}
+        cell.addType = { [weak self] name in self?.addType(name: name)}
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return  UITableView.automaticDimension
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
     }
 }

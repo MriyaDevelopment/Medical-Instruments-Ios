@@ -8,5 +8,5 @@
 import Foundation
 
 enum ChangeCategoriesViewEvent{
-    case nextClicked
+    case nextClicked(String)
 }

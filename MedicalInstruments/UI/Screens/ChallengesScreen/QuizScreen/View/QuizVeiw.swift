@@ -9,6 +9,11 @@ import UIKit
 
 final class QuizView: UIView {
     
+    private var questions: [Questions] = []
+    private var currentQuestion = 0
+    private var correctAnswer = ""
+    private var firstQuestion = true
+    
     private var contentView: UIView = {
         let view = UIView()
         return view
@@ -46,20 +51,25 @@ final class QuizView: UIView {
         let view = UIProgressView()
         view.progressTintColor = BaseColor.hex_FFFFFF.uiColor()
         view.trackTintColor = BaseColor.hex_FFFFFF.uiColor().withAlphaComponent(0.25)
-        view.setProgress((10/35), animated: true)
+        view.setProgress(1, animated: true)
+        return view
+    }()
+    
+    private var imageContainer: UIView = {
+        let view = UIView()
+        view.layer.shadowRadius = 10
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
+        view.layer.cornerRadius = 20
+        view.backgroundColor = .white
+        view.clipsToBounds = false
         return view
     }()
     
     private var instrumentImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.layer.shadowRadius = 10
-        imageView.layer.shadowOpacity = 0.5
-        imageView.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
-        imageView.layer.cornerRadius = 20
         imageView.image = AppIcons.getIcon(.i_default_image)
-        imageView.contentMode = .center
-        imageView.backgroundColor = .white
-        imageView.clipsToBounds = false
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
@@ -85,6 +95,7 @@ final class QuizView: UIView {
         button.layer.cornerRadius = 8
         button.layer.borderWidth = 1
         button.layer.borderColor = BaseColor.hex_5B67CA.cgColor()
+        button.titleLabel?.numberOfLines = 0
         return button
     }()
     
@@ -96,6 +107,7 @@ final class QuizView: UIView {
         button.layer.cornerRadius = 8
         button.layer.borderWidth = 1
         button.layer.borderColor = BaseColor.hex_5B67CA.cgColor()
+        button.titleLabel?.numberOfLines = 0
         return button
     }()
     
@@ -107,6 +119,7 @@ final class QuizView: UIView {
         button.layer.cornerRadius = 8
         button.layer.borderWidth = 1
         button.layer.borderColor = BaseColor.hex_5B67CA.cgColor()
+        button.titleLabel?.numberOfLines = 0
         return button
     }()
     
@@ -118,6 +131,7 @@ final class QuizView: UIView {
         button.layer.cornerRadius = 8
         button.layer.borderWidth = 1
         button.layer.borderColor = BaseColor.hex_5B67CA.cgColor()
+        button.titleLabel?.numberOfLines = 0
         return button
     }()
     
@@ -137,10 +151,30 @@ final class QuizView: UIView {
         super.init(frame: frame)
         backgroundColor = .white
         addElements()
+        addTarget()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure(questions: [Questions]) {
+        self.questions = questions
+        configureQuestion(question: questions[currentQuestion])
+    }
+    
+    func configureQuestion(question: Questions) {
+        countChalengesLabel.text = ("\(currentQuestion + 1) / \(questions.count)")
+        
+        progressBar.setProgress(( Float(currentQuestion + 1) / Float(questions.count)), animated: true)
+        instrumentImageView.loadImage(by: question.question ?? "")
+        
+        firstAnswerButton.setTitle(question.answer_one, for: .normal)
+        secondAnswerButton.setTitle(question.answer_two, for: .normal)
+        thirdAnswerButton.setTitle(question.answer_three, for: .normal)
+        fourthAnswerButton.setTitle(question.answer_four, for: .normal)
+        
+        correctAnswer = question.true_answer ?? ""
     }
     
     private func addElements() {
@@ -151,7 +185,8 @@ final class QuizView: UIView {
         contentView.addSubview(timerImage)
         contentView.addSubview(timerLabel)
         contentView.addSubview(progressBar)
-        contentView.addSubview(instrumentImageView)
+        contentView.addSubview(imageContainer)
+        imageContainer.addSubview(instrumentImageView)
         contentView.addSubview(firstStackView)
         firstStackView.addArrangedSubview(firstAnswerButton)
         firstStackView.addArrangedSubview(secondAnswerButton)
@@ -194,14 +229,18 @@ final class QuizView: UIView {
             make.right.left.equalToSuperview().inset(16)
         }
         
-        instrumentImageView.snp.makeConstraints{ (make) in
+        imageContainer.snp.makeConstraints{ (make) in
             make.top.equalTo(progressBar.snp.bottom).offset(20)
             make.height.equalTo(300)
             make.right.left.equalToSuperview().inset(16)
         }
         
+        instrumentImageView.snp.makeConstraints{ (make) in
+            make.edges.equalToSuperview().inset(9)
+        }
+        
         firstStackView.snp.makeConstraints{ (make) in
-            make.top.equalTo(instrumentImageView.snp.bottom).offset(20)
+            make.top.equalTo(instrumentImageView.snp.bottom).offset(30)
             make.right.left.equalToSuperview().inset(16)
             make.height.equalTo(51)
         }
@@ -231,5 +270,120 @@ final class QuizView: UIView {
         nextButton.snp.makeConstraints{ (make) in
             make.right.bottom.equalToSuperview().inset(16)
         }
+    }
+    
+    private func addTarget() {
+        firstAnswerButton.addTarget(self, action: #selector(firstClicked), for: .touchUpInside)
+        secondAnswerButton.addTarget(self, action: #selector(secondClicked), for: .touchUpInside)
+        thirdAnswerButton.addTarget(self, action: #selector(thirdClicked), for: .touchUpInside)
+        fourthAnswerButton.addTarget(self, action: #selector(fourthClicked), for: .touchUpInside)
+        
+        nextButton.addTarget(self, action: #selector(nextAction), for: .touchUpInside)
+    }
+    
+    @objc func nextAction() {
+        setDefaultButton()
+        if firstQuestion {
+            firstQuestion = false
+            currentQuestion += 1
+            configureQuestion(question: questions[currentQuestion])
+            currentQuestion += 1
+        } else if currentQuestion < questions.count {
+            configureQuestion(question: questions[currentQuestion])
+            currentQuestion += 1
+            if currentQuestion == questions.count {
+                nextButton.setTitle("Завершить тестирование", for: .normal)
+            }
+        }
+    }
+    
+    @objc func firstClicked () {
+        disableButton()
+        if firstAnswerButton.titleLabel?.text == correctAnswer {
+            firstAnswerButton.flash()
+            firstAnswerButton.backgroundColor = BaseColor.hex_81E89E.uiColor().withAlphaComponent(0.25)
+            firstAnswerButton.layer.borderColor = BaseColor.hex_81E89E.cgColor()
+            firstAnswerButton.layer.borderWidth = 2
+        } else {
+            firstAnswerButton.shake()
+            firstAnswerButton.backgroundColor = BaseColor.hex_E77D7D.uiColor().withAlphaComponent(0.25)
+            firstAnswerButton.layer.borderColor = BaseColor.hex_E77D7D.cgColor()
+            firstAnswerButton.layer.borderWidth = 2
+        }
+    }
+    
+    @objc func secondClicked () {
+        disableButton()
+        if secondAnswerButton.titleLabel?.text == correctAnswer {
+            secondAnswerButton.flash()
+            secondAnswerButton.backgroundColor = BaseColor.hex_81E89E.uiColor().withAlphaComponent(0.25)
+            secondAnswerButton.layer.borderColor = BaseColor.hex_81E89E.cgColor()
+            secondAnswerButton.layer.borderWidth = 2
+        } else {
+            secondAnswerButton.shake()
+            secondAnswerButton.backgroundColor = BaseColor.hex_E77D7D.uiColor().withAlphaComponent(0.25)
+            secondAnswerButton.layer.borderColor = BaseColor.hex_E77D7D.cgColor()
+            secondAnswerButton.layer.borderWidth = 2
+        }
+    }
+    
+    @objc func thirdClicked () {
+        disableButton()
+        if thirdAnswerButton.titleLabel?.text == correctAnswer {
+            thirdAnswerButton.flash()
+            thirdAnswerButton.backgroundColor = BaseColor.hex_81E89E.uiColor().withAlphaComponent(0.25)
+            thirdAnswerButton.layer.borderColor = BaseColor.hex_81E89E.cgColor()
+            thirdAnswerButton.layer.borderWidth = 2
+        } else {
+            thirdAnswerButton.shake()
+            thirdAnswerButton.backgroundColor = BaseColor.hex_E77D7D.uiColor().withAlphaComponent(0.25)
+            thirdAnswerButton.layer.borderColor = BaseColor.hex_E77D7D.cgColor()
+            thirdAnswerButton.layer.borderWidth = 2
+        }
+    }
+    
+    @objc func fourthClicked () {
+        disableButton()
+        if fourthAnswerButton.titleLabel?.text == correctAnswer {
+            fourthAnswerButton.flash()
+            fourthAnswerButton.backgroundColor = BaseColor.hex_81E89E.uiColor().withAlphaComponent(0.25)
+            fourthAnswerButton.layer.borderColor = BaseColor.hex_81E89E.cgColor()
+            fourthAnswerButton.layer.borderWidth = 2
+        } else {
+            fourthAnswerButton.shake()
+            fourthAnswerButton.backgroundColor = BaseColor.hex_E77D7D.uiColor().withAlphaComponent(0.25)
+            fourthAnswerButton.layer.borderColor = BaseColor.hex_E77D7D.cgColor()
+            fourthAnswerButton.layer.borderWidth = 2
+        }
+    }
+    
+    private func setDefaultButton() {
+        firstAnswerButton.layer.borderWidth = 1
+        firstAnswerButton.layer.borderColor = BaseColor.hex_5B67CA.cgColor()
+        firstAnswerButton.backgroundColor = .white
+        
+        secondAnswerButton.layer.borderWidth = 1
+        secondAnswerButton.layer.borderColor = BaseColor.hex_5B67CA.cgColor()
+        secondAnswerButton.backgroundColor = .white
+        
+        thirdAnswerButton.layer.borderWidth = 1
+        thirdAnswerButton.layer.borderColor = BaseColor.hex_5B67CA.cgColor()
+        thirdAnswerButton.backgroundColor = .white
+        
+        fourthAnswerButton.layer.borderWidth = 1
+        fourthAnswerButton.layer.borderColor = BaseColor.hex_5B67CA.cgColor()
+        fourthAnswerButton.backgroundColor = .white
+        
+        firstAnswerButton.isUserInteractionEnabled = true
+        secondAnswerButton.isUserInteractionEnabled = true
+        thirdAnswerButton.isUserInteractionEnabled = true
+        fourthAnswerButton.isUserInteractionEnabled = true
+    }
+    
+    private func disableButton() {
+        firstAnswerButton.isUserInteractionEnabled = false
+        secondAnswerButton.isUserInteractionEnabled = false
+        thirdAnswerButton.isUserInteractionEnabled = false
+        fourthAnswerButton.isUserInteractionEnabled = false
     }
 }

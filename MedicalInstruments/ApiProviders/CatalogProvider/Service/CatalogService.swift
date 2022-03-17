@@ -13,6 +13,12 @@ protocol CatalogServiceProtocol {
     func getSurgeryInstrumentsByType(with params: getInstrumentsByTypeRequestParams) -> AnyPublisher<getInstrumentsByTypeResponse, ApiError>
     func getCategories() -> AnyPublisher<GetCategoriesResponse, ApiError>
     func getSubCategories() -> AnyPublisher<GetSubCategoriesResponse, ApiError>
+    func login(with params: LoginRequestParams) -> AnyPublisher<LoginResponse, ApiError>
+    func getProfileData() -> AnyPublisher<GetProfileDataResponse, ApiError>
+    func register(with params: RegisterRequestParams) -> AnyPublisher<RegisterResponse, ApiError>
+    func getTypes() -> AnyPublisher<GetTypesResponse, ApiError>
+    func getQuestionByTypeAndLevel(with params: getQuestionByTypeAndLevelRequestParams) -> AnyPublisher<GetQuestionByTypeAndLevelResponse, ApiError>
+
 }
 
 class CatalogService: CatalogServiceProtocol {
@@ -68,6 +74,71 @@ class CatalogService: CatalogServiceProtocol {
         request?.cancel()
         
         return apiClient.getSubCategories()
+            .mapError { error in
+                if let error = error as? ApiError {
+                    return error
+                }
+                return ApiError.unknown
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func login(with params: LoginRequestParams) -> AnyPublisher<LoginResponse, ApiError> {
+        request?.cancel()
+        
+        return apiClient.login(with: params)
+            .mapError { error in
+                if let error = error as? ApiError {
+                    return error
+                }
+                return ApiError.unknown
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func getProfileData() -> AnyPublisher<GetProfileDataResponse, ApiError> {
+        request?.cancel()
+        
+        return apiClient.getProfileData()
+            .mapError { error in
+                if let error = error as? ApiError {
+                    return error
+                }
+                return ApiError.unknown
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func register(with params: RegisterRequestParams) -> AnyPublisher<RegisterResponse, ApiError> {
+        request?.cancel()
+        
+        return apiClient.register(with: params)
+            .mapError { error in
+                if let error = error as? ApiError {
+                    return error
+                }
+                return ApiError.unknown
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func getTypes() -> AnyPublisher<GetTypesResponse, ApiError> {
+        request?.cancel()
+        
+        return apiClient.getTypes()
+            .mapError { error in
+                if let error = error as? ApiError {
+                    return error
+                }
+                return ApiError.unknown
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func getQuestionByTypeAndLevel(with params: getQuestionByTypeAndLevelRequestParams) -> AnyPublisher<GetQuestionByTypeAndLevelResponse, ApiError> {
+        request?.cancel()
+        
+        return apiClient.getQuestionByTypeAndLevel(with: params)
             .mapError { error in
                 if let error = error as? ApiError {
                     return error

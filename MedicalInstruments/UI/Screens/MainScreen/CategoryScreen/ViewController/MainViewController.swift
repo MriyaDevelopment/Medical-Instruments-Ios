@@ -31,7 +31,10 @@ final class MainViewController<View: MainView>: BaseViewController<View> {
         showPreloader()
         subscribeForUpdates()
         hideNavBar()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         catalogProvider.getCategories()
     }
     
@@ -72,7 +75,7 @@ final class MainViewController<View: MainView>: BaseViewController<View> {
     private func configureCollectionView(data: [MainCategory]){
         
         let backImages = [AppIcons.getIcon(.i_surgery_back), AppIcons.getIcon(.i_dentistry), AppIcons.getIcon(.i_AiG),  AppIcons.getIcon(.i_neurosurgery), AppIcons.getIcon(.i_ophthalmology),AppIcons.getIcon(.i_otorhinolaryngology),AppIcons.getIcon(.i_otorhinolaryngology),AppIcons.getIcon(.i_otorhinolaryngology),AppIcons.getIcon(.i_otorhinolaryngology),AppIcons.getIcon(.i_otorhinolaryngology)]
-        
+        elements.removeAll()
         for (index, item) in data.enumerated() {
             elements.append(MainStruct.init(id: item.id ?? 0,
                                             backgroundImage: backImages[index],

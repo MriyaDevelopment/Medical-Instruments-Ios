@@ -74,17 +74,22 @@ final class DuficultTableViewCell: UITableViewCell {
     
     func configure(index: Int){
         var color = UIColor()
+        var image = UIImage()
         switch index {
         case 0:
             color = BaseColor.hex_5B67CA.uiColor()
+            image = AppIcons.getIcon(.i_default_image)
         case 1:
             color = BaseColor.hex_7FC9E7.uiColor()
+            image = AppIcons.getIcon(.i_midDificult)
         case 2:
             color = BaseColor.hex_E77D7D.uiColor()
+            image = AppIcons.getIcon(.i_hardDificult)
         default:
             break
         }
         configureColor(color: color)
+        instrumentImageView.image = image
     }
     
     private func configureColor(color: UIColor){

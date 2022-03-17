@@ -8,5 +8,5 @@
 import Foundation
 
 enum ChalengesViewEvent{
-    case cellClicked
+    case cellClicked(Int)
 }

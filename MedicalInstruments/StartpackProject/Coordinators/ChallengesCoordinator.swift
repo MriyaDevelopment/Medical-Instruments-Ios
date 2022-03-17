@@ -22,22 +22,22 @@ final class ChallengesCoordinator: BaseCoordinator {
     //MARK: Challenges Module
     private func showChallengesScreen() {
         let screen = screenFactory.makeChallengesScreen()
-        screen.showChangeCategoriesScreen = { [weak self] in
-            self?.showChangeCategoriesScreen()
+        screen.showChangeCategoriesScreen = { [weak self] dificultId in
+            self?.showChangeCategoriesScreen(dificultId: dificultId)
         }
         router.setRootModule(screen, hideBar: true)
     }
     
-    private func showChangeCategoriesScreen() {
-        let screen = screenFactory.makeChangeCategoriesScreen()
-        screen.showQuizScreen = { [weak self] in
-            self?.showQuizScreen()
+    private func showChangeCategoriesScreen(dificultId: Int) {
+        let screen = screenFactory.makeChangeCategoriesScreen(dificultId: dificultId)
+        screen.showQuizScreen = { [weak self] (id, types) in
+            self?.showQuizScreen(id: id, types: types)
         }
         router.push(screen, animated: true)
     }
     
-    private func showQuizScreen() {
-        let screen = screenFactory.makeQuizScreen()
+    private func showQuizScreen(id: Int, types: String) {
+        let screen = screenFactory.makeQuizScreen(id: id, types: types)
         router.push(screen, animated: true)
     }
 }

@@ -94,6 +94,24 @@
 		8E10F6A827DE2B9D00EBF12E /* ChangeCategoriesDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E10F6A727DE2B9D00EBF12E /* ChangeCategoriesDataModel.swift */; };
 		8E30EBA527D75715005AE313 /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E30EBA427D75715005AE313 /* MainCollectionViewCell.swift */; };
 		8E30EBAA27D76220005AE313 /* MainDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E30EBA927D76220005AE313 /* MainDataModel.swift */; };
+		8EC568E527E09C310065E845 /* FirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC568E427E09C310065E845 /* FirstView.swift */; };
+		8EC568E727E09C570065E845 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC568E627E09C570065E845 /* FirstViewController.swift */; };
+		8EC568EC27E0A81C0065E845 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC568EB27E0A81C0065E845 /* AuthView.swift */; };
+		8EC568EE27E0A86C0065E845 /* AuhtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC568ED27E0A86C0065E845 /* AuhtViewController.swift */; };
+		8EC568F127E0AEEF0065E845 /* InputForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC568F027E0AEEF0065E845 /* InputForm.swift */; };
+		8EC568F327E0AF2C0065E845 /* InputForm + constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC568F227E0AF2C0065E845 /* InputForm + constraints.swift */; };
+		8EC568F527E0AF5A0065E845 /* SuggestionsListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC568F427E0AF5A0065E845 /* SuggestionsListItem.swift */; };
+		8EC568F727E0AF700065E845 /* InputForm + animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC568F627E0AF700065E845 /* InputForm + animations.swift */; };
+		8EC568F927E0AF9A0065E845 /* InputForm + UITextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC568F827E0AF9A0065E845 /* InputForm + UITextFieldDelegate.swift */; };
+		8EC568FB27E0AFB30065E845 /* InputFormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC568FA27E0AFB30065E845 /* InputFormModel.swift */; };
+		8EC568FF27E0C9FC0065E845 /* FirstViewDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC568FE27E0C9FC0065E845 /* FirstViewDataModel.swift */; };
+		8EC5690227E0E5350065E845 /* AuthDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC5690127E0E5350065E845 /* AuthDataModel.swift */; };
+		8EC5690527E102A50065E845 /* MainPageDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC5690427E102A50065E845 /* MainPageDataModel.swift */; };
+		8EC5690B27E111200065E845 /* AlertDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC5690A27E111200065E845 /* AlertDialogView.swift */; };
+		8EC5690F27E115880065E845 /* AlertDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC5690E27E115880065E845 /* AlertDialogViewController.swift */; };
+		8EC5691527E152090065E845 /* RegistrationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC5691427E152090065E845 /* RegistrationScreen.swift */; };
+		8EC5691727E152310065E845 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC5691627E152310065E845 /* RegistrationViewController.swift */; };
+		8EC5691927E152640065E845 /* RegistrationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC5691827E152640065E845 /* RegistrationDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -187,6 +205,24 @@
 		8E10F6A727DE2B9D00EBF12E /* ChangeCategoriesDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCategoriesDataModel.swift; sourceTree = "<group>"; };
 		8E30EBA427D75715005AE313 /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
 		8E30EBA927D76220005AE313 /* MainDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDataModel.swift; sourceTree = "<group>"; };
+		8EC568E427E09C310065E845 /* FirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstView.swift; sourceTree = "<group>"; };
+		8EC568E627E09C570065E845 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		8EC568EB27E0A81C0065E845 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		8EC568ED27E0A86C0065E845 /* AuhtViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuhtViewController.swift; sourceTree = "<group>"; };
+		8EC568F027E0AEEF0065E845 /* InputForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputForm.swift; sourceTree = "<group>"; };
+		8EC568F227E0AF2C0065E845 /* InputForm + constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputForm + constraints.swift"; sourceTree = "<group>"; };
+		8EC568F427E0AF5A0065E845 /* SuggestionsListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsListItem.swift; sourceTree = "<group>"; };
+		8EC568F627E0AF700065E845 /* InputForm + animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputForm + animations.swift"; sourceTree = "<group>"; };
+		8EC568F827E0AF9A0065E845 /* InputForm + UITextFieldDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InputForm + UITextFieldDelegate.swift"; sourceTree = "<group>"; };
+		8EC568FA27E0AFB30065E845 /* InputFormModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFormModel.swift; sourceTree = "<group>"; };
+		8EC568FE27E0C9FC0065E845 /* FirstViewDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewDataModel.swift; sourceTree = "<group>"; };
+		8EC5690127E0E5350065E845 /* AuthDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDataModel.swift; sourceTree = "<group>"; };
+		8EC5690427E102A50065E845 /* MainPageDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageDataModel.swift; sourceTree = "<group>"; };
+		8EC5690A27E111200065E845 /* AlertDialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDialogView.swift; sourceTree = "<group>"; };
+		8EC5690E27E115880065E845 /* AlertDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDialogViewController.swift; sourceTree = "<group>"; };
+		8EC5691427E152090065E845 /* RegistrationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationScreen.swift; sourceTree = "<group>"; };
+		8EC5691627E152310065E845 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		8EC5691827E152640065E845 /* RegistrationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationDataModel.swift; sourceTree = "<group>"; };
 		F03B5FB9619743394A737D10 /* Pods_MedicalInstruments.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MedicalInstruments.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -395,8 +431,10 @@
 		639C7DA627D642A300A40FC2 /* ProfileScreen */ = {
 			isa = PBXGroup;
 			children = (
-				639C7DB127D6440900A40FC2 /* View */,
-				639C7DB027D6440400A40FC2 /* ViewController */,
+				8EC5691027E151CF0065E845 /* RegistrationScreen */,
+				8EC568E827E0A7E90065E845 /* AuthScreen */,
+				8EC568E127E09BFC0065E845 /* FirstScreen */,
+				8EC568E027E09BE20065E845 /* MainPageProfile */,
 			);
 			path = ProfileScreen;
 			sourceTree = "<group>";
@@ -503,6 +541,7 @@
 		639C7DC327D6531400A40FC2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8EC5690627E110B20065E845 /* AllertDialogController */,
 				639C7DC527D6532800A40FC2 /* PrettyAlertController */,
 			);
 			path = Controllers;
@@ -511,6 +550,7 @@
 		639C7DC427D6531900A40FC2 /* Elements */ = {
 			isa = PBXGroup;
 			children = (
+				8EC568EF27E0AEDA0065E845 /* InputForm */,
 				639C7DCF27D653DD00A40FC2 /* NavigationBar.swift */,
 				639C7DD127D6541600A40FC2 /* ImagePreloaderView.swift */,
 				639C7DD327D6543300A40FC2 /* FloatingPanel.swift */,
@@ -986,6 +1026,164 @@
 			path = DataModel;
 			sourceTree = "<group>";
 		};
+		8EC568E027E09BE20065E845 /* MainPageProfile */ = {
+			isa = PBXGroup;
+			children = (
+				8EC5690327E102890065E845 /* DataModel */,
+				639C7DB127D6440900A40FC2 /* View */,
+				639C7DB027D6440400A40FC2 /* ViewController */,
+			);
+			path = MainPageProfile;
+			sourceTree = "<group>";
+		};
+		8EC568E127E09BFC0065E845 /* FirstScreen */ = {
+			isa = PBXGroup;
+			children = (
+				8EC568FD27E0C9E70065E845 /* DataModel */,
+				8EC568E327E09C120065E845 /* ViewController */,
+				8EC568E227E09C0D0065E845 /* View */,
+			);
+			path = FirstScreen;
+			sourceTree = "<group>";
+		};
+		8EC568E227E09C0D0065E845 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8EC568E427E09C310065E845 /* FirstView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8EC568E327E09C120065E845 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8EC568E627E09C570065E845 /* FirstViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		8EC568E827E0A7E90065E845 /* AuthScreen */ = {
+			isa = PBXGroup;
+			children = (
+				8EC5690027E0E5230065E845 /* DataModel */,
+				8EC568EA27E0A7FA0065E845 /* ViewController */,
+				8EC568E927E0A7F50065E845 /* View */,
+			);
+			path = AuthScreen;
+			sourceTree = "<group>";
+		};
+		8EC568E927E0A7F50065E845 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8EC568EB27E0A81C0065E845 /* AuthView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8EC568EA27E0A7FA0065E845 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8EC568ED27E0A86C0065E845 /* AuhtViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		8EC568EF27E0AEDA0065E845 /* InputForm */ = {
+			isa = PBXGroup;
+			children = (
+				8EC568F027E0AEEF0065E845 /* InputForm.swift */,
+				8EC568F227E0AF2C0065E845 /* InputForm + constraints.swift */,
+				8EC568F427E0AF5A0065E845 /* SuggestionsListItem.swift */,
+				8EC568F627E0AF700065E845 /* InputForm + animations.swift */,
+				8EC568F827E0AF9A0065E845 /* InputForm + UITextFieldDelegate.swift */,
+				8EC568FA27E0AFB30065E845 /* InputFormModel.swift */,
+			);
+			path = InputForm;
+			sourceTree = "<group>";
+		};
+		8EC568FD27E0C9E70065E845 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				8EC568FE27E0C9FC0065E845 /* FirstViewDataModel.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		8EC5690027E0E5230065E845 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				8EC5690127E0E5350065E845 /* AuthDataModel.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		8EC5690327E102890065E845 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				8EC5690427E102A50065E845 /* MainPageDataModel.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		8EC5690627E110B20065E845 /* AllertDialogController */ = {
+			isa = PBXGroup;
+			children = (
+				8EC5690827E110E30065E845 /* ViewController */,
+				8EC5690727E110DF0065E845 /* View */,
+			);
+			path = AllertDialogController;
+			sourceTree = "<group>";
+		};
+		8EC5690727E110DF0065E845 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8EC5690A27E111200065E845 /* AlertDialogView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8EC5690827E110E30065E845 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8EC5690E27E115880065E845 /* AlertDialogViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		8EC5691027E151CF0065E845 /* RegistrationScreen */ = {
+			isa = PBXGroup;
+			children = (
+				8EC5691327E151EA0065E845 /* DataModel */,
+				8EC5691227E151E00065E845 /* ViewController */,
+				8EC5691127E151DB0065E845 /* View */,
+			);
+			path = RegistrationScreen;
+			sourceTree = "<group>";
+		};
+		8EC5691127E151DB0065E845 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8EC5691427E152090065E845 /* RegistrationScreen.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8EC5691227E151E00065E845 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8EC5691627E152310065E845 /* RegistrationViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		8EC5691327E151EA0065E845 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				8EC5691827E152640065E845 /* RegistrationDataModel.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
 		DF4DB25E5B267FCC0FDBC92B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1114,8 +1312,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E10F68627DA6D4600EBF12E /* ChangeCategoriesView.swift in Sources */,
+				8EC568F727E0AF700065E845 /* InputForm + animations.swift in Sources */,
 				8E10F6A827DE2B9D00EBF12E /* ChangeCategoriesDataModel.swift in Sources */,
 				639C7D9D27D63FA600A40FC2 /* LaunchScreenViewController.swift in Sources */,
+				8EC568F127E0AEEF0065E845 /* InputForm.swift in Sources */,
+				8EC568FF27E0C9FC0065E845 /* FirstViewDataModel.swift in Sources */,
 				639C7D6A27D61DB200A40FC2 /* UIView.swift in Sources */,
 				639C7DD427D6543300A40FC2 /* FloatingPanel.swift in Sources */,
 				639C7D5627D61BBD00A40FC2 /* UICollectionViewDequeue.swift in Sources */,
@@ -1125,48 +1326,59 @@
 				639C7D6427D61D4C00A40FC2 /* InitFromCommonInputData.swift in Sources */,
 				8E10F6A327DE1F0900EBF12E /* QuizVeiw.swift in Sources */,
 				8E10F66527D87B5B00EBF12E /* SubcategoriesViewController.swift in Sources */,
+				8EC5690227E0E5350065E845 /* AuthDataModel.swift in Sources */,
 				8E30EBA527D75715005AE313 /* MainCollectionViewCell.swift in Sources */,
 				8E10F69827DB93B100EBF12E /* CatalogClient.swift in Sources */,
 				639C7DC227D6446C00A40FC2 /* ProfileViewController.swift in Sources */,
 				639C7D9327D6214B00A40FC2 /* TabCoordinator.swift in Sources */,
 				639C7D7427D61E6500A40FC2 /* Types.swift in Sources */,
 				8E10F69B27DB94D900EBF12E /* CatalogService.swift in Sources */,
+				8EC568F327E0AF2C0065E845 /* InputForm + constraints.swift in Sources */,
 				63BA0C1527D617580025F0A5 /* TabBarController.swift in Sources */,
 				8E10F68E27DB7D7700EBF12E /* ChalengesViewDataModel.swift in Sources */,
 				8E10F67D27D9D0E700EBF12E /* SubcategoriesDataModel.swift in Sources */,
 				8E10F66927D8E51200EBF12E /* LastResultView.swift in Sources */,
 				639C7D5927D61C0600A40FC2 /* UIImageView.swift in Sources */,
 				63BA0C1B27D617A60025F0A5 /* RequestBuilderImpl.swift in Sources */,
+				8EC5690527E102A50065E845 /* MainPageDataModel.swift in Sources */,
 				8E10F67027D9BB6200EBF12E /* TagsCollectionViewCell.swift in Sources */,
 				8E10F69E27DB959500EBF12E /* CatalogProvider.swift in Sources */,
 				639C7D8227D61F8B00A40FC2 /* BaseFont.swift in Sources */,
+				8EC5690F27E115880065E845 /* AlertDialogViewController.swift in Sources */,
 				8E10F66D27D9BA3000EBF12E /* TagsCollectionView.swift in Sources */,
+				8EC568EE27E0A86C0065E845 /* AuhtViewController.swift in Sources */,
 				639C7D8827D6203100A40FC2 /* DI.swift in Sources */,
 				639C7D9527D6215D00A40FC2 /* StartCoordinator.swift in Sources */,
 				63BA0C2C27D619260025F0A5 /* KeyChainService.swift in Sources */,
 				639C7DCE27D6536F00A40FC2 /* PrettyAlertDataModel.swift in Sources */,
 				639C7DD227D6541600A40FC2 /* ImagePreloaderView.swift in Sources */,
 				8E10F68B27DB6F8E00EBF12E /* ChangeCategoriesCell.swift in Sources */,
+				8EC568E527E09C310065E845 /* FirstView.swift in Sources */,
 				639C7D6727D61D9100A40FC2 /* UILabel.swift in Sources */,
+				8EC568EC27E0A81C0065E845 /* AuthView.swift in Sources */,
 				8E10F6A527DE1F2500EBF12E /* QuizViewController.swift in Sources */,
 				8E10F66327D87B4A00EBF12E /* SubcategoriesView.swift in Sources */,
 				639C7DCA27D6535100A40FC2 /* PrettyAlertView.swift in Sources */,
 				639C7DCC27D6535F00A40FC2 /* PrettyAlertController.swift in Sources */,
 				639C7DA327D6407C00A40FC2 /* ChallengesCoordinator.swift in Sources */,
 				63BA0C2227D6188A0025F0A5 /* ConfigurationProtocol.swift in Sources */,
+				8EC568E727E09C570065E845 /* FirstViewController.swift in Sources */,
 				63BA0C1D27D617B50025F0A5 /* APIClient.swift in Sources */,
 				639C7D7D27D61F3D00A40FC2 /* SchemeColor.swift in Sources */,
 				639C7DB327D6441400A40FC2 /* MainView.swift in Sources */,
 				639C7D5327D61B4C00A40FC2 /* UITableViewDequeue.swift in Sources */,
 				639C7DB627D6442E00A40FC2 /* MainViewController.swift in Sources */,
 				8E10F67527D9C57800EBF12E /* InstrumentListView.swift in Sources */,
+				8EC5691927E152640065E845 /* RegistrationDataModel.swift in Sources */,
 				8E30EBAA27D76220005AE313 /* MainDataModel.swift in Sources */,
 				639C7DBA27D6444400A40FC2 /* ChallengesViewController.swift in Sources */,
 				63BA0BFB27D616120025F0A5 /* AppDelegate.swift in Sources */,
 				639C7D6C27D61DD700A40FC2 /* UIViewHiding.swift in Sources */,
 				8E10F66B27D8E8D700EBF12E /* CircularProgressBar.swift in Sources */,
+				8EC568F927E0AF9A0065E845 /* InputForm + UITextFieldDelegate.swift in Sources */,
 				639C7D5C27D61C9700A40FC2 /* CustomUISegmentedControl.swift in Sources */,
 				639C7D9F27D6403E00A40FC2 /* ProfileCoordinator.swift in Sources */,
+				8EC5691727E152310065E845 /* RegistrationViewController.swift in Sources */,
 				639C7D5F27D61CD300A40FC2 /* UIStackView.swift in Sources */,
 				639C7DBC27D6444E00A40FC2 /* FavouritesView.swift in Sources */,
 				639C7DA127D6405C00A40FC2 /* FavouritesCoordinator.swift in Sources */,
@@ -1179,17 +1391,21 @@
 				8E10F69527DB92F300EBF12E /* getInstrumentsByTypeResponse.swift in Sources */,
 				639C7D8B27D620EA00A40FC2 /* Coordinator.swift in Sources */,
 				639C7DB827D6443900A40FC2 /* ChallengesView.swift in Sources */,
+				8EC5691527E152090065E845 /* RegistrationScreen.swift in Sources */,
 				639C7DBE27D6445900A40FC2 /* FavouritesViewController.swift in Sources */,
 				639C7D7727D61E8F00A40FC2 /* BaseViewController.swift in Sources */,
 				639C7DD027D653DD00A40FC2 /* NavigationBar.swift in Sources */,
+				8EC568F527E0AF5A0065E845 /* SuggestionsListItem.swift in Sources */,
 				8E10F67727D9C59700EBF12E /* InstrumentListViewController.swift in Sources */,
 				639C7D7127D61E2000A40FC2 /* UIImage.swift in Sources */,
 				639C7DA527D6409500A40FC2 /* MainCoordinator.swift in Sources */,
 				639C7D6E27D61DED00A40FC2 /* UIViewAnimation.swift in Sources */,
 				8E10F69327DB929700EBF12E /* CatalogProviderRequestParam.swift in Sources */,
 				639C7D5027D61B2300A40FC2 /* Animations.swift in Sources */,
+				8EC5690B27E111200065E845 /* AlertDialogView.swift in Sources */,
 				639C7D8527D61FC900A40FC2 /* AppIcons.swift in Sources */,
 				63BA0C2427D618970025F0A5 /* SessionConfigurationProtocol.swift in Sources */,
+				8EC568FB27E0AFB30065E845 /* InputFormModel.swift in Sources */,
 				639C7D9027D6213800A40FC2 /* ApplicationCoordinator.swift in Sources */,
 				8E10F66727D87DC000EBF12E /* NavigationBartitle.swift in Sources */,
 				639C7D9B27D63F9B00A40FC2 /* LaunchScreenView.swift in Sources */,

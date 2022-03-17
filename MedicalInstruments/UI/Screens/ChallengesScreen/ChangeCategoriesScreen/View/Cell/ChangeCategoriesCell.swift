@@ -10,6 +10,9 @@ import UIKit
 final class ChangeCategoriesCell: UITableViewCell {
     
     private var check = false
+    var addType: StringClosure?
+    var removeType: StringClosure?
+    private var name = ""
     
     private let backView: UIView = {
         let view = UIView()
@@ -66,6 +69,10 @@ final class ChangeCategoriesCell: UITableViewCell {
         super.layoutSubviews()
     }
     
+    func configure(type: Types) {
+        self.name = type.name ?? ""
+        titleLabel.text = type.name ?? ""
+    }
    
     private func addElements() {
         
@@ -119,9 +126,11 @@ final class ChangeCategoriesCell: UITableViewCell {
     @objc private func clicked() {
         if check == false {
             checkButton.setImage(AppIcons.getIcon(.i_check_on), for: .normal)
+            addType?(name)
             check = true
         } else {
             checkButton.setImage(AppIcons.getIcon(.i_check_off), for: .normal)
+            removeType?(name)
             check = false
         }
     }

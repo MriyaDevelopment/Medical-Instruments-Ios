@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import Combine
 
 final class ProfileView: UIView {
+    
+    var event = PassthroughSubject<MainPageViewEvent, Never>()
     
     private var contentView: UIView = {
         let view = UIView()
@@ -69,6 +72,7 @@ final class ProfileView: UIView {
         super.init(frame: frame)
         backgroundColor = .white
         addElements()
+        addTarget()
     }
     
     required init?(coder: NSCoder) {
@@ -77,6 +81,16 @@ final class ProfileView: UIView {
     
     func configureTags(items: [String]){
         lastResultView.configureTags(items: items)
+    }
+    
+    func configureProfile(data: User){
+        
+        if data.is_subscribed == false {
+            subscribesLabel.hideView()
+        }
+        
+        userNameLabel.text = data.name
+        userEmailLabel.text = data.email
     }
     
     private func addElements() {
@@ -128,5 +142,13 @@ final class ProfileView: UIView {
             make.top.equalTo(userEmailLabel.snp.bottom).offset(15)
             make.height.equalTo(215)
         }
+    }
+    
+    private func addTarget(){
+        exitButton.addTarget(self, action: #selector(exitAction), for: .touchUpInside)
+    }
+    
+    @objc func exitAction(){
+        event.send(.exitClicked)
     }
 }
