@@ -18,17 +18,17 @@ final class TabCoordinator: BaseCoordinator {
     
 //MARK: Uncomment this closures when need to transfer through tabs in tabbar
 
-//    lazy var switchToChallengesTab = ({
-//        self.tabBarController.selectedIndex = 1
-//    })
+    lazy var switchToChallengesTab = ({
+        self.tabBarController.selectedIndex = 1
+    })
 //
 //    lazy var switchToFavouritesTab = ({
 //        self.tabBarController.selectedIndex = 2
 //    })
 //
-//    lazy var switchToProfileTab = ({
-//        self.tabBarController.selectedIndex = 3
-//    })
+    lazy var switchToProfileTab = ({
+        self.tabBarController.selectedIndex = 3
+    })
     
     init(tabBarController: UITabBarController, router: RouterProtocol, screenFactory: ScreenFactoryProtocol ) {
         self.tabBarController = tabBarController
@@ -53,7 +53,7 @@ final class TabCoordinator: BaseCoordinator {
                                        selectedImage: AppIcons.getIcon(.i_main_selected).setColor(BaseColor.hex_5B67CA.uiColor()))
         mainNavigationController.tabBarItem = mainBarItem
         let mainRouter = Router(rootController: mainNavigationController)
-        let mainCoordinator = MainCoordinator(router: mainRouter, screenFactory: screenFactory)
+        let mainCoordinator = MainCoordinator(router: mainRouter, screenFactory: screenFactory, switchToProfileTab: switchToProfileTab)
         
         mainBarItem.setTitleTextAttributes(unselectedItemTitle, for: .normal)
         mainBarItem.setTitleTextAttributes(selectedItemTitle, for: .selected)
@@ -65,7 +65,7 @@ final class TabCoordinator: BaseCoordinator {
                                         selectedImage: AppIcons.getIcon(.i_challenges_eneble))
         challengesNavigationController.tabBarItem = challengesBarItem
         let challengesRouter = Router(rootController: challengesNavigationController)
-        let challengesCoordinator = ChallengesCoordinator(router: challengesRouter, screenFactory: screenFactory)
+        let challengesCoordinator = ChallengesCoordinator(router: challengesRouter, screenFactory: screenFactory, switchToProfileTab: switchToProfileTab)
         
         challengesBarItem.setTitleTextAttributes(unselectedItemTitle, for: .normal)
         challengesBarItem.setTitleTextAttributes(selectedItemTitle, for: .selected)
@@ -87,10 +87,10 @@ final class TabCoordinator: BaseCoordinator {
         let profileNavigationController = UINavigationController()
         let profileBarItem = UITabBarItem(title: titlesTabBarItem.profile.rawValue,
                                           image: AppIcons.getIcon(.i_profile),
-                                          selectedImage: AppIcons.getIcon(.i_profile).setColor(BaseColor.hex_5B67CA.uiColor()))
+                                          selectedImage: AppIcons.getIcon(.i_profile))
         profileNavigationController.tabBarItem = profileBarItem
         let profileRouter = Router(rootController: profileNavigationController)
-        let profileCoordinator = ProfileCoordinator(router: profileRouter, screenFactory: screenFactory)
+        let profileCoordinator = ProfileCoordinator(router: profileRouter, screenFactory: screenFactory, switchToChallengesTab: switchToChallengesTab)
         
         profileBarItem.setTitleTextAttributes(unselectedItemTitle, for: .normal)
         profileBarItem.setTitleTextAttributes(selectedItemTitle, for: .selected)

@@ -9,10 +9,12 @@ final class ProfileCoordinator: BaseCoordinator {
     
     private let screenFactory: ScreenFactoryProtocol
     private let router: RouterProtocol
+    private let switchToChallengesTab: VoidClosure
     
-    init(router: RouterProtocol, screenFactory: ScreenFactoryProtocol) {
+    init(router: RouterProtocol, screenFactory: ScreenFactoryProtocol, switchToChallengesTab: @escaping VoidClosure) {
         self.screenFactory = screenFactory
         self.router = router
+        self.switchToChallengesTab = switchToChallengesTab
     }
     
     override func start() {
@@ -27,6 +29,7 @@ final class ProfileCoordinator: BaseCoordinator {
     private func showProfileScreen() {
         let screen = screenFactory.makeProfileScreen()
         screen.showFirstProfileScreen = { [weak self] in self?.showFirstScreen() }
+        screen.showChallengesScreen = { [weak self] in self?.switchToChallengesTab() }
         router.setRootModule(screen, hideBar: true)
     }
     

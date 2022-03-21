@@ -11,6 +11,7 @@ import Combine
 final class ChallengesViewController<View: ChallengesView>: BaseViewController<View> {
         
     var showChangeCategoriesScreen: IntClosure?
+    var showRegistrScreen: VoidClosure?
     private var cancalables = Set<AnyCancellable>()
     
     init() {
@@ -26,7 +27,12 @@ final class ChallengesViewController<View: ChallengesView>: BaseViewController<V
         hideNavBar()
         subscribeForUpdates()
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tabBarController?.tabBar.showView()
+    }
+    
     private func subscribeForUpdates() {
         rootView.events.sink { [weak self] in self?.onViewEvents($0) }.store(in: &cancalables)
     }
@@ -34,9 +40,9 @@ final class ChallengesViewController<View: ChallengesView>: BaseViewController<V
     private func onViewEvents(_ event: ChalengesViewEvent){
         switch event {
         case .cellClicked(let id):
-            showChangeCategoriesScreen?(id)
-        default:
-            break
+            if Keychain.shared.getUserToken() != nil {
+                showChangeCategoriesScreen?(id)
+            } else { showRegistrScreen?() }
         }
         
     }

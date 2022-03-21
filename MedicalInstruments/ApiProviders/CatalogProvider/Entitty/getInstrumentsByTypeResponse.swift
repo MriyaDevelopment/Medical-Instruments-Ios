@@ -83,6 +83,7 @@ struct GetTypesResponse: Codable {
 
 struct Types: Codable {
     let name: String?
+    let title: String?
     let id: Int?
 }
 
@@ -102,4 +103,32 @@ struct Questions: Codable {
     let answer_three: String?
     let answer_four: String?
     let true_answer: String?
+}
+
+struct SetResultResponse: Codable {
+    let error: String?
+    let result: String?
+    let data: ResultData?
+}
+
+struct ResultData: Codable {
+    let level: String?
+    let categories: String?
+    let number_of_correct_answers: String?
+    let number_of_questions: String?
+    let questions: String?
+}
+
+struct GetResultResponse: Codable {
+    let error: String?
+    let result: String?
+    let levels: [GetResultData]?
+}
+
+struct GetResultData: Codable {
+    let level: Int?
+    let categories: String?
+    let number_of_correct_answers: Int?
+    let number_of_questions: Int?
+    let questions: String?
 }

@@ -68,8 +68,23 @@ final class LastresultView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureTags(items: [String]){
-        categoriesChips.configure(title: items)
+    func configure(data: GetResultData) {
+        circularProgressBar.setProgress(to: Double(data.number_of_correct_answers ?? 1)/Double(data.number_of_questions ?? 2))
+        
+        switch data.level {
+        case 1:
+            difficultyLabel.text = "Уровень: Легкий"
+        case 2:
+            difficultyLabel.text = "Уровень: Средний"
+        case 3:
+            difficultyLabel.text = "Уровень: Сложный"
+        default:
+            break
+        }
+        
+        let categories = data.categories?.components(separatedBy: ",") ?? []
+       
+        categoriesChips.configure(title: categories)
     }
     
     private func addElements() {

@@ -52,7 +52,7 @@ final class TagsCollectionView: UIView {
         items.removeAll()
         
         items = title
-        
+        tagsCollectionView.reloadData()
     }
     
     func getHeight(height: CGFloat) -> CGFloat {

@@ -10,13 +10,14 @@ import Combine
 
 final class ProfileViewController<View: ProfileView>: BaseViewController<View> {
     
-    private var items = ["Общая хирургия","Акушерство и гинекология","Стоматология"]
+    private var items = ["gynecology","ophthalmology","stomatology"]
     
     private var catalogProvider: CatalogProviderProtocol
     private var cancalables = Set<AnyCancellable>()
     
     var showFirstProfileScreen: VoidClosure?
     var showAlertDialogScreen: VoidClosure?
+    var showChallengesScreen: VoidClosure?
         
     init(catalogProvider: CatalogProviderProtocol) {
         self.catalogProvider = catalogProvider
@@ -30,9 +31,14 @@ final class ProfileViewController<View: ProfileView>: BaseViewController<View> {
     override func viewDidLoad() {
         super.viewDidLoad()
         hideNavBar()
-        catalogProvider.getProfileData()
-        rootView.configureTags(items: items)
+//        rootView.configureTags(items: items)
         subscribeForUpdates()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        catalogProvider.getProfileData()
+        catalogProvider.getResult()
     }
     
     private func subscribeForUpdates() {
@@ -53,6 +59,8 @@ final class ProfileViewController<View: ProfileView>: BaseViewController<View> {
             dismissLoader()
             guard let data = response.user?.first else { return }
             rootView.configureProfile(data: data)
+        case .getResultLoaded(let response):
+            rootView.configureBanner(data: response)
         default:
             break
         }
@@ -62,6 +70,8 @@ final class ProfileViewController<View: ProfileView>: BaseViewController<View> {
         switch event {
         case .exitClicked:
             showAlertDialog()
+        case .switchToTestClicked:
+            showChallengesScreen?()
         default:
             break
         }

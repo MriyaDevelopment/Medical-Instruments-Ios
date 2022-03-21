@@ -13,6 +13,15 @@ final class QuizViewController<View: QuizView>: BaseViewController<View> {
     private var types: String
     private var id: Int
     
+    private var numberOfQuest = 0
+    private var questionsString = ""
+    
+    var minutes = 0
+    var seconds = 0
+    var timer = Timer()
+    
+    var showRootScreen: VoidClosure?
+    
     private var cancalables = Set<AnyCancellable>()
     private let catalogProvider: CatalogProviderProtocol
     
@@ -33,10 +42,14 @@ final class QuizViewController<View: QuizView>: BaseViewController<View> {
         showLoader(background: .white, alfa: 1)
         catalogProvider.getQuestionByTypeAndLevel(with: getQuestionByTypeAndLevelRequestParams(type: types, level: String(id)))
         subscribeForUpdates()
+        startTimer()
+        
+        print("****\(types)")
     }
     
     private func subscribeForUpdates() {
         catalogProvider.events.sink { [weak self] in self?.onProviderEvents($0) }.store(in: &cancalables)
+        rootView.events.sink { [weak self] in self?.onViewEvents($0) }.store(in: &cancalables)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,6 +58,7 @@ final class QuizViewController<View: QuizView>: BaseViewController<View> {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        stopTimer()
         tabBarController?.tabBar.showView()
         super.viewWillDisappear(animated)
     }
@@ -83,10 +97,67 @@ final class QuizViewController<View: QuizView>: BaseViewController<View> {
             guard let questions = response.questions else { return }
             if !questions.isEmpty {
                 rootView.configure(questions: questions)
+                self.numberOfQuest = questions.count
+                for item in questions {
+                    questionsString += "\(item.id ?? 0),"
+                }
+//                print("****\(questionsString)")
             }
+        case .setResultDone(let response):
+            
+            guard let result = response.data else { return }
+            
+            let quizResult = QuizResult.init(time: ("\(minutes):\(seconds)"),
+                                             level: result.level ?? "",
+                                             categories: result.categories ?? "",
+                                             number_of_correct_answers: result.number_of_correct_answers ?? "",
+                                             number_of_questions: result.number_of_questions ?? "")
+            showResultScreen(quizResult: quizResult)
+            
+            stopTimer()
         default:
             break
         }
-        
     }
+    
+    private func onViewEvents(_ event: QuizViewEvents) {
+        switch event {
+        case .finishQuiz:
+            catalogProvider.setResult(with: SetResultRequestParams(level: String(id),
+                                                                   categories: types,
+                                                                   number_of_correct_answers: String(rootView.correctCount),
+                                                                   number_of_questions: String(numberOfQuest),
+                                                                   questions: questionsString))
+        }
+    }
+    
+    
+    private func startTimer(){
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+    }
+    
+    private func stopTimer() {
+        timer.invalidate()
+    }
+    
+    @objc func timerAction() {
+        if seconds < 59 {
+            seconds += 1
+            rootView.setTimer(min: minutes, sec: seconds)
+        }
+        else {
+            seconds = 0
+            minutes += 1
+            rootView.setTimer(min: minutes, sec: seconds)
+        }
+    }
+    
+    private func showResultScreen(quizResult: QuizResult) {
+        let controller = QuizResultViewController(quizResult: quizResult)
+        controller.modalPresentationStyle = .overFullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        controller.okClicked = { [weak self] in self?.showRootScreen?() }
+        present(controller, animated: true, completion: nil)
+    }
+    
 }

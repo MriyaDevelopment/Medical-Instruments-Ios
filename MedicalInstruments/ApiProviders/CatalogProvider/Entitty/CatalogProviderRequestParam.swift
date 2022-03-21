@@ -49,3 +49,20 @@ struct getQuestionByTypeAndLevelRequestParams {
         self.level = level
     }
 }
+
+struct SetResultRequestParams {
+    
+    let level: String
+    let categories: String
+    let number_of_correct_answers: String
+    let number_of_questions: String
+    let questions: String
+
+    init(level: String, categories: String, number_of_correct_answers: String, number_of_questions: String, questions: String) {
+        self.level = level
+        self.categories = categories
+        self.number_of_correct_answers = number_of_correct_answers
+        self.number_of_questions = number_of_questions
+        self.questions = questions
+    }
+}

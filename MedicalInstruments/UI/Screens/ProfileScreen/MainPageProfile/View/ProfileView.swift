@@ -68,6 +68,12 @@ final class ProfileView: UIView {
     
     private var lastResultView = LastresultView()
     
+    lazy private var firstBanner: FirsBannerView = {
+        let view = FirsBannerView()
+        view.startTestButttonClicked = { [weak self] in self?.event.send(.switchToTestClicked) }
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
@@ -79,8 +85,26 @@ final class ProfileView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureTags(items: [String]){
-        lastResultView.configureTags(items: items)
+//    func configureTags(items: [String]){
+//        lastResultView.configureTags(items: items)
+//    }
+    
+    func configureBanner(data: GetResultResponse) {
+        guard let levels = data.levels else {return}
+        
+        if levels.isEmpty {
+            lastResultView.hideView()
+            firstBanner.showView()
+        } else {
+            firstBanner.hideView()
+            lastResultView.showView()
+            guard let lastData = data.levels?.first else {return}
+            configureLastResult(data: lastData)
+        }
+    }
+    
+    func configureLastResult(data: GetResultData){
+        lastResultView.configure(data: data)
     }
     
     func configureProfile(data: User){
@@ -102,6 +126,7 @@ final class ProfileView: UIView {
         contentView.addSubview(userNameLabel)
         contentView.addSubview(userEmailLabel)
         contentView.addSubview(lastResultView)
+        contentView.addSubview(firstBanner)
         
         makeConstraints()
     }
@@ -141,6 +166,11 @@ final class ProfileView: UIView {
             make.left.right.equalToSuperview().inset(16)
             make.top.equalTo(userEmailLabel.snp.bottom).offset(15)
             make.height.equalTo(215)
+        }
+        
+        firstBanner.snp.makeConstraints { (make) in
+            make.left.right.equalToSuperview().inset(16)
+            make.top.equalTo(userEmailLabel.snp.bottom).offset(15)
         }
     }
     

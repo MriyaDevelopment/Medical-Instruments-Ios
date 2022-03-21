@@ -11,10 +11,12 @@ final class MainCoordinator: BaseCoordinator {
     
     private let screenFactory: ScreenFactoryProtocol
     private let router: RouterProtocol
+    private let switchToProfileTab: VoidClosure
     
-    init(router: RouterProtocol, screenFactory: ScreenFactoryProtocol) {
+    init(router: RouterProtocol, screenFactory: ScreenFactoryProtocol, switchToProfileTab: @escaping VoidClosure) {
         self.screenFactory = screenFactory
         self.router = router
+        self.switchToProfileTab = switchToProfileTab
     }
     
     override func start() {
@@ -30,6 +32,7 @@ final class MainCoordinator: BaseCoordinator {
         screen.showInstrumentList = { [weak self] type, isMain in
             self?.showInstrumentListScreen(type: type, isMain: isMain)
         }
+        screen.showRegistrScreen = { [weak self] in self?.switchToProfileTab() }
         router.setRootModule(screen, hideBar: true)
     }
     

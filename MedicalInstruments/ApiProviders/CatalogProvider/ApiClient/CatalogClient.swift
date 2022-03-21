@@ -18,6 +18,8 @@ protocol CatalogApiClientProtocol {
     func register(with params: RegisterRequestParams) -> AnyPublisher<RegisterResponse, Error>
     func getTypes() -> AnyPublisher<GetTypesResponse, Error>
     func getQuestionByTypeAndLevel(with params: getQuestionByTypeAndLevelRequestParams) -> AnyPublisher<GetQuestionByTypeAndLevelResponse, Error>
+    func setResult(with params: SetResultRequestParams) -> AnyPublisher<SetResultResponse, Error>
+    func getResult() -> AnyPublisher<GetResultResponse, Error>
 }
 
 private func getPath(for method: String) -> String {
@@ -108,5 +110,27 @@ extension ApiClient: CatalogApiClientProtocol {
         return performRequest(request)
     }
    
+    func setResult(with params: SetResultRequestParams) -> AnyPublisher<SetResultResponse, Error> {
+        let request = requestBuilder.postBuild(
+            path: getPath(for: "setResult"),
+            urlParametrs: [
+                "user_token": Keychain.shared.getUserToken() ?? "",
+                "level": params.level,
+                "categories": params.categories,
+                "number_of_correct_answers": params.number_of_correct_answers,
+                "number_of_questions": params.number_of_questions,
+                "questions": params.questions
+            ])
+        return performRequest(request)
+    }
     
+    func getResult() -> AnyPublisher<GetResultResponse, Error> {
+        let request = requestBuilder.postBuild(
+            path: getPath(for: "getResult"),
+            urlParametrs: [
+                "user_token": Keychain.shared.getUserToken() ?? ""
+            ])
+        return performRequest(request)
+    }
+
 }

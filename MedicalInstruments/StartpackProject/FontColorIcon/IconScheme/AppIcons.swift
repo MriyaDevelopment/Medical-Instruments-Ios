@@ -36,6 +36,9 @@ final class AppIcons {
         case i_authImage
         case i_midDificult
         case i_hardDificult
+        case i_backgroundProfileBanner
+        case i_instruments
+        case i_arrow_right
     }
     
     static func getIcon(_ type: iconsEnum) -> UIImage {
@@ -66,6 +69,9 @@ final class AppIcons {
         case .i_authImage: return UIImage(named: "i_authImage")!
         case .i_midDificult: return UIImage(named: "i_midDificult")!
         case .i_hardDificult: return UIImage(named: "i_hardDificult")!
+        case .i_backgroundProfileBanner: return UIImage(named: "i_backgroundProfileBanner")!
+        case .i_instruments: return UIImage(named: "i_instruments")!
+        case .i_arrow_right: return UIImage(named: "i_arrow_right")!
         }
     }
 }

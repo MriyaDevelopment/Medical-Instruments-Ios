@@ -6,9 +6,13 @@
 //
 
 import UIKit
+import Combine
 
 final class QuizView: UIView {
     
+    var events = PassthroughSubject<QuizViewEvents, Never>()
+    
+    var correctCount = 0
     private var questions: [Questions] = []
     private var currentQuestion = 0
     private var correctAnswer = ""
@@ -42,7 +46,7 @@ final class QuizView: UIView {
     private var timerLabel: UILabel = {
         let label = UILabel()
         label.font = MainFont.medium(size: 16)
-        label.text = "10:06"
+        label.text = "00:00"
         label.textColor = BaseColor.hex_FFFFFF.uiColor()
         return label
     }()
@@ -142,8 +146,8 @@ final class QuizView: UIView {
         button.setTitleColor(BaseColor.hex_5B67CA.uiColor(), for: .normal)
         button.titleLabel?.textAlignment = .left
         button.sizeToFit()
-        button.setImage(AppIcons.getIcon(.i_back_button), for: .normal)
-        button.imageEdgeInsets.left = -9
+        button.setImage(AppIcons.getIcon(.i_arrow_right), for: .normal)
+        button.semanticContentAttribute = .forceRightToLeft
         return button
     }()
     
@@ -175,6 +179,25 @@ final class QuizView: UIView {
         fourthAnswerButton.setTitle(question.answer_four, for: .normal)
         
         correctAnswer = question.true_answer ?? ""
+    }
+    
+    func setTimer(min: Int, sec: Int) {
+        var minuts = ""
+        var seconds = ""
+        
+        if min < 10 {
+            minuts = "0" + "\(min)"
+        } else {
+            minuts = String(min)
+        }
+        
+        if sec < 10 {
+            seconds = "0" + "\(sec)"
+        } else {
+            seconds = String(sec)
+        }
+        
+        timerLabel.text = "\(minuts):\(seconds)"
     }
     
     private func addElements() {
@@ -294,90 +317,57 @@ final class QuizView: UIView {
             if currentQuestion == questions.count {
                 nextButton.setTitle("Завершить тестирование", for: .normal)
             }
+        } else {
+            events.send(.finishQuiz)
         }
     }
     
     @objc func firstClicked () {
         disableButton()
-        if firstAnswerButton.titleLabel?.text == correctAnswer {
-            firstAnswerButton.flash()
-            firstAnswerButton.backgroundColor = BaseColor.hex_81E89E.uiColor().withAlphaComponent(0.25)
-            firstAnswerButton.layer.borderColor = BaseColor.hex_81E89E.cgColor()
-            firstAnswerButton.layer.borderWidth = 2
-        } else {
-            firstAnswerButton.shake()
-            firstAnswerButton.backgroundColor = BaseColor.hex_E77D7D.uiColor().withAlphaComponent(0.25)
-            firstAnswerButton.layer.borderColor = BaseColor.hex_E77D7D.cgColor()
-            firstAnswerButton.layer.borderWidth = 2
-        }
+        buttonClicked(button: firstAnswerButton)
     }
     
     @objc func secondClicked () {
         disableButton()
-        if secondAnswerButton.titleLabel?.text == correctAnswer {
-            secondAnswerButton.flash()
-            secondAnswerButton.backgroundColor = BaseColor.hex_81E89E.uiColor().withAlphaComponent(0.25)
-            secondAnswerButton.layer.borderColor = BaseColor.hex_81E89E.cgColor()
-            secondAnswerButton.layer.borderWidth = 2
-        } else {
-            secondAnswerButton.shake()
-            secondAnswerButton.backgroundColor = BaseColor.hex_E77D7D.uiColor().withAlphaComponent(0.25)
-            secondAnswerButton.layer.borderColor = BaseColor.hex_E77D7D.cgColor()
-            secondAnswerButton.layer.borderWidth = 2
-        }
+        buttonClicked(button: secondAnswerButton)
     }
     
     @objc func thirdClicked () {
         disableButton()
-        if thirdAnswerButton.titleLabel?.text == correctAnswer {
-            thirdAnswerButton.flash()
-            thirdAnswerButton.backgroundColor = BaseColor.hex_81E89E.uiColor().withAlphaComponent(0.25)
-            thirdAnswerButton.layer.borderColor = BaseColor.hex_81E89E.cgColor()
-            thirdAnswerButton.layer.borderWidth = 2
-        } else {
-            thirdAnswerButton.shake()
-            thirdAnswerButton.backgroundColor = BaseColor.hex_E77D7D.uiColor().withAlphaComponent(0.25)
-            thirdAnswerButton.layer.borderColor = BaseColor.hex_E77D7D.cgColor()
-            thirdAnswerButton.layer.borderWidth = 2
-        }
+        buttonClicked(button: thirdAnswerButton)
     }
     
     @objc func fourthClicked () {
         disableButton()
-        if fourthAnswerButton.titleLabel?.text == correctAnswer {
-            fourthAnswerButton.flash()
-            fourthAnswerButton.backgroundColor = BaseColor.hex_81E89E.uiColor().withAlphaComponent(0.25)
-            fourthAnswerButton.layer.borderColor = BaseColor.hex_81E89E.cgColor()
-            fourthAnswerButton.layer.borderWidth = 2
+        buttonClicked(button: fourthAnswerButton)
+    }
+    
+    private func buttonClicked(button: UIButton) {
+        disableButton()
+        if button.titleLabel?.text == correctAnswer {
+            button.flash()
+            button.backgroundColor = BaseColor.hex_81E89E.uiColor().withAlphaComponent(0.25)
+            button.layer.borderColor = BaseColor.hex_81E89E.cgColor()
+            button.layer.borderWidth = 2
+            correctCount += 1
         } else {
-            fourthAnswerButton.shake()
-            fourthAnswerButton.backgroundColor = BaseColor.hex_E77D7D.uiColor().withAlphaComponent(0.25)
-            fourthAnswerButton.layer.borderColor = BaseColor.hex_E77D7D.cgColor()
-            fourthAnswerButton.layer.borderWidth = 2
+            button.shake()
+            button.backgroundColor = BaseColor.hex_E77D7D.uiColor().withAlphaComponent(0.25)
+            button.layer.borderColor = BaseColor.hex_E77D7D.cgColor()
+            button.layer.borderWidth = 2
         }
     }
     
     private func setDefaultButton() {
-        firstAnswerButton.layer.borderWidth = 1
-        firstAnswerButton.layer.borderColor = BaseColor.hex_5B67CA.cgColor()
-        firstAnswerButton.backgroundColor = .white
         
-        secondAnswerButton.layer.borderWidth = 1
-        secondAnswerButton.layer.borderColor = BaseColor.hex_5B67CA.cgColor()
-        secondAnswerButton.backgroundColor = .white
+        let buttons = [firstAnswerButton, secondAnswerButton, thirdAnswerButton, fourthAnswerButton]
         
-        thirdAnswerButton.layer.borderWidth = 1
-        thirdAnswerButton.layer.borderColor = BaseColor.hex_5B67CA.cgColor()
-        thirdAnswerButton.backgroundColor = .white
-        
-        fourthAnswerButton.layer.borderWidth = 1
-        fourthAnswerButton.layer.borderColor = BaseColor.hex_5B67CA.cgColor()
-        fourthAnswerButton.backgroundColor = .white
-        
-        firstAnswerButton.isUserInteractionEnabled = true
-        secondAnswerButton.isUserInteractionEnabled = true
-        thirdAnswerButton.isUserInteractionEnabled = true
-        fourthAnswerButton.isUserInteractionEnabled = true
+        for button in buttons {
+            button.layer.borderWidth = 1
+            button.layer.borderColor = BaseColor.hex_5B67CA.cgColor()
+            button.backgroundColor = .white
+            button.isUserInteractionEnabled = true
+        }
     }
     
     private func disableButton() {

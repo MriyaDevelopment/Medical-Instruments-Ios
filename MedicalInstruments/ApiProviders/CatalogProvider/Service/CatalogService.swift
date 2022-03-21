@@ -18,13 +18,16 @@ protocol CatalogServiceProtocol {
     func register(with params: RegisterRequestParams) -> AnyPublisher<RegisterResponse, ApiError>
     func getTypes() -> AnyPublisher<GetTypesResponse, ApiError>
     func getQuestionByTypeAndLevel(with params: getQuestionByTypeAndLevelRequestParams) -> AnyPublisher<GetQuestionByTypeAndLevelResponse, ApiError>
-
+    func setResult(with params: SetResultRequestParams) -> AnyPublisher<SetResultResponse, ApiError>
+    func getResult() -> AnyPublisher<GetResultResponse, ApiError>
 }
 
 class CatalogService: CatalogServiceProtocol {
     
     private let apiClient: CatalogApiClientProtocol
     private var request: AnyCancellable?
+    private var userDataRequest: AnyCancellable?
+    private var resultRequest: AnyCancellable?
     
     init(apiClient: CatalogApiClientProtocol) {
         self.apiClient = apiClient
@@ -97,7 +100,7 @@ class CatalogService: CatalogServiceProtocol {
     }
     
     func getProfileData() -> AnyPublisher<GetProfileDataResponse, ApiError> {
-        request?.cancel()
+        userDataRequest?.cancel()
         
         return apiClient.getProfileData()
             .mapError { error in
@@ -147,5 +150,33 @@ class CatalogService: CatalogServiceProtocol {
             }
             .eraseToAnyPublisher()
     }
+    
+    func setResult(with params: SetResultRequestParams) -> AnyPublisher<SetResultResponse, ApiError> {
+        request?.cancel()
+        
+        return apiClient.setResult(with: params)
+            .mapError { error in
+                if let error = error as? ApiError {
+                    return error
+                }
+                return ApiError.unknown
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func getResult() -> AnyPublisher<GetResultResponse, ApiError> {
+        resultRequest?.cancel()
+        
+        return apiClient.getResult()
+            .mapError { error in
+                if let error = error as? ApiError {
+                    return error
+                }
+                return ApiError.unknown
+            }
+            .eraseToAnyPublisher()
+    }
+    
+ 
     
 }

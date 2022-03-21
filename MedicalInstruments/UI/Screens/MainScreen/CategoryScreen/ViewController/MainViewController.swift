@@ -13,6 +13,7 @@ final class MainViewController<View: MainView>: BaseViewController<View> {
     private var cancalables = Set<AnyCancellable>()
     var showSubcategories: VoidClosure?
     var showInstrumentList: StringAndBoolClosure?
+    var showRegistrScreen: VoidClosure?
     private var catalogProvider: CatalogProviderProtocol
     private var elements: [MainStruct] = []
     
@@ -46,9 +47,13 @@ final class MainViewController<View: MainView>: BaseViewController<View> {
     private func onViewEvents(_ event: MainViewEvent){
         switch event {
         case .cellClicked(let type):
-            showInstrumentList?(type, true)
+            if Keychain.shared.getUserToken() != nil {
+                showInstrumentList?(type, true)
+            } else { showRegistrScreen?() }
         case .firstCellClicked:
-            showSubcategories?()
+            if Keychain.shared.getUserToken() != nil {
+                showSubcategories?()
+            } else { showRegistrScreen?() }
         default:
             break
         }

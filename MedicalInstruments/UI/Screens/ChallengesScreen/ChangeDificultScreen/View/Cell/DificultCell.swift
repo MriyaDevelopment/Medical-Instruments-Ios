@@ -51,8 +51,8 @@ final class DuficultTableViewCell: UITableViewCell {
         button.setTitleColor(BaseColor.hex_5B67CA.uiColor(), for: .normal)
         button.titleLabel?.textAlignment = .left
         button.sizeToFit()
-        button.setImage(AppIcons.getIcon(.i_back_button), for: .normal)
-        button.imageEdgeInsets.left = 165
+        button.setImage(AppIcons.getIcon(.i_arrow_right), for: .normal)
+        button.semanticContentAttribute = .forceRightToLeft
         return button
     }()
     

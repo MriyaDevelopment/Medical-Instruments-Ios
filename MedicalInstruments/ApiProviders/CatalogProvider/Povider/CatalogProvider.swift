@@ -19,6 +19,8 @@ protocol CatalogProviderProtocol {
     func register(with params: RegisterRequestParams)
     func getTypes()
     func getQuestionByTypeAndLevel(with params: getQuestionByTypeAndLevelRequestParams)
+    func setResult(with params: SetResultRequestParams)
+    func getResult()
 }
 
 final class CatalogProviderImpl: CatalogProviderProtocol {
@@ -27,7 +29,8 @@ final class CatalogProviderImpl: CatalogProviderProtocol {
     private let catalogService: CatalogServiceProtocol
     private var request: AnyCancellable?
     private var mainRequest: AnyCancellable?
-    private var userData: AnyCancellable?
+    private var userDataRequest: AnyCancellable?
+    private var resultRequest: AnyCancellable?
 
     init(catalogService: CatalogServiceProtocol) {
         self.catalogService = catalogService
@@ -149,7 +152,7 @@ final class CatalogProviderImpl: CatalogProviderProtocol {
     }
    
     func getProfileData() {
-        userData?.cancel()
+        userDataRequest?.cancel()
         
         request = catalogService.getProfileData()
             .receive(on: RunLoop.main)
@@ -239,7 +242,53 @@ final class CatalogProviderImpl: CatalogProviderProtocol {
                 }
             })
     }
-  
+    
+    func setResult(with params: SetResultRequestParams) {
+        request?.cancel()
+        
+        request = catalogService.setResult(with: params)
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { [weak self] result in
+                guard let self = self, case .failure(let error) = result else { return }
+                self.events.send(.error(error))
+                
+            }, receiveValue: { [weak self] result in
+                guard let self = self else { return }
+                
+                switch result.result {
+                case "error":
+                    self.events.send(.errorMessage(result.error))
+                case "success":
+                    self.events.send(.setResultDone(result))
+                default:
+                    break
+                }
+            })
+    }
+    
+    func getResult() {
+        resultRequest?.cancel()
+        
+        resultRequest = catalogService.getResult()
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { [weak self] result in
+                guard let self = self, case .failure(let error) = result else { return }
+                self.events.send(.error(error))
+                
+            }, receiveValue: { [weak self] result in
+                guard let self = self else { return }
+                
+                switch result.result {
+                case "error":
+                    self.events.send(.errorMessage(result.error))
+                case "success":
+                    self.events.send(.getResultLoaded(result))
+                default:
+                    break
+                }
+            })
+    }
+
     
 }
 
@@ -255,4 +304,6 @@ enum CatalogProviderEvent {
     case registerSuccess(_ response: RegisterResponse)
     case typesLoaded(_ response: GetTypesResponse)
     case questionsLoaded(_ response: GetQuestionByTypeAndLevelResponse)
+    case setResultDone(_ response: SetResultResponse)
+    case getResultLoaded(_ response: GetResultResponse)
 }

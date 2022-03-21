@@ -11,4 +11,5 @@ enum MainPageViewEvent {
     case exitClicked
     case yesButtonClicked
     case noButtonClicked
+    case switchToTestClicked
 }
