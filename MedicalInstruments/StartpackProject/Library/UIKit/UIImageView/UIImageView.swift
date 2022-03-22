@@ -15,7 +15,7 @@ extension UIImageView {
             return
         }
         
-        let path = "\(Configuration.shared.baseUrl)\(imageURL)"
+        let path = "http://ovz2.j04713753.pqr7m.vps.myjino.ru/image/\(imageURL)"
         guard let url = URL(string: path) else {
             self.image = AppIcons.getIcon(.i_default_image)
             return }

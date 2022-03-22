@@ -18,17 +18,17 @@ final class TabCoordinator: BaseCoordinator {
     
 //MARK: Uncomment this closures when need to transfer through tabs in tabbar
 
-//    lazy var switchToChallengesTab = ({
-//        self.tabBarController.selectedIndex = 1
-//    })
+    lazy var switchToChallengesTab = ({
+        self.tabBarController.selectedIndex = 1
+    })
 //
 //    lazy var switchToFavouritesTab = ({
 //        self.tabBarController.selectedIndex = 2
 //    })
 //
-//    lazy var switchToProfileTab = ({
-//        self.tabBarController.selectedIndex = 3
-//    })
+    lazy var switchToProfileTab = ({
+        self.tabBarController.selectedIndex = 3
+    })
     
     init(tabBarController: UITabBarController, router: RouterProtocol, screenFactory: ScreenFactoryProtocol ) {
         self.tabBarController = tabBarController
@@ -39,7 +39,7 @@ final class TabCoordinator: BaseCoordinator {
     override func start() {
         
         let selectedItemTitle: [NSAttributedString.Key : Any] =
-            [NSAttributedString.Key.foregroundColor: BaseColor.hex_71C324.uiColor(),
+            [NSAttributedString.Key.foregroundColor: BaseColor.hex_5B67CA.uiColor(),
              NSAttributedString.Key.font: MainFont.semiBold(size: 12)]
         
         let unselectedItemTitle: [NSAttributedString.Key : Any] =
@@ -50,10 +50,10 @@ final class TabCoordinator: BaseCoordinator {
         let mainNavigationController = UINavigationController()
         let mainBarItem = UITabBarItem(title: titlesTabBarItem.main.rawValue,
                                        image: AppIcons.getIcon(.i_main),
-                                       selectedImage: AppIcons.getIcon(.i_main).setColor(BaseColor.hex_5B67CA.uiColor()))
+                                       selectedImage: AppIcons.getIcon(.i_main_selected).setColor(BaseColor.hex_5B67CA.uiColor()))
         mainNavigationController.tabBarItem = mainBarItem
         let mainRouter = Router(rootController: mainNavigationController)
-        let mainCoordinator = MainCoordinator(router: mainRouter, screenFactory: screenFactory)
+        let mainCoordinator = MainCoordinator(router: mainRouter, screenFactory: screenFactory, switchToProfileTab: switchToProfileTab)
         
         mainBarItem.setTitleTextAttributes(unselectedItemTitle, for: .normal)
         mainBarItem.setTitleTextAttributes(selectedItemTitle, for: .selected)
@@ -62,10 +62,10 @@ final class TabCoordinator: BaseCoordinator {
         let challengesNavigationController = UINavigationController()
         let challengesBarItem = UITabBarItem(title: titlesTabBarItem.catalog.rawValue,
                                         image: AppIcons.getIcon(.i_challenges),
-                                        selectedImage: AppIcons.getIcon(.i_challenges).setColor(BaseColor.hex_5B67CA.uiColor()))
+                                        selectedImage: AppIcons.getIcon(.i_challenges_eneble))
         challengesNavigationController.tabBarItem = challengesBarItem
         let challengesRouter = Router(rootController: challengesNavigationController)
-        let challengesCoordinator = ChallengesCoordinator(router: challengesRouter, screenFactory: screenFactory)
+        let challengesCoordinator = ChallengesCoordinator(router: challengesRouter, screenFactory: screenFactory, switchToProfileTab: switchToProfileTab)
         
         challengesBarItem.setTitleTextAttributes(unselectedItemTitle, for: .normal)
         challengesBarItem.setTitleTextAttributes(selectedItemTitle, for: .selected)
@@ -87,10 +87,10 @@ final class TabCoordinator: BaseCoordinator {
         let profileNavigationController = UINavigationController()
         let profileBarItem = UITabBarItem(title: titlesTabBarItem.profile.rawValue,
                                           image: AppIcons.getIcon(.i_profile),
-                                          selectedImage: AppIcons.getIcon(.i_profile).setColor(BaseColor.hex_5B67CA.uiColor()))
+                                          selectedImage: AppIcons.getIcon(.i_profile))
         profileNavigationController.tabBarItem = profileBarItem
         let profileRouter = Router(rootController: profileNavigationController)
-        let profileCoordinator = ProfileCoordinator(router: profileRouter, screenFactory: screenFactory)
+        let profileCoordinator = ProfileCoordinator(router: profileRouter, screenFactory: screenFactory, switchToChallengesTab: switchToChallengesTab)
         
         profileBarItem.setTitleTextAttributes(unselectedItemTitle, for: .normal)
         profileBarItem.setTitleTextAttributes(selectedItemTitle, for: .selected)
@@ -102,7 +102,7 @@ final class TabCoordinator: BaseCoordinator {
             profileNavigationController
         ]
         
-        tabBarController.tabBar.tintColor = BaseColor.hex_FFFFFF.uiColor()
+        tabBarController.tabBar.tintColor = BaseColor.hex_5B67CA.uiColor()
         
         tabBarController.modalPresentationStyle = .fullScreen
         router.present(tabBarController, animated: false)
