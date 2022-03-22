@@ -12,8 +12,13 @@ final class MainViewController<View: MainView>: BaseViewController<View> {
     
     private var cancalables = Set<AnyCancellable>()
     var showSubcategories: VoidClosure?
+    var showInstrumentList: StringAndBoolClosure?
+    var showRegistrScreen: VoidClosure?
+    private var catalogProvider: CatalogProviderProtocol
+    private var elements: [MainStruct] = []
     
-    init() {
+    init(catalogProvider: CatalogProviderProtocol) {
+        self.catalogProvider = catalogProvider
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -24,58 +29,67 @@ final class MainViewController<View: MainView>: BaseViewController<View> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureCollectionView()
+        showPreloader()
         subscribeForUpdates()
         hideNavBar()
     }
-
-    private func configureCollectionView(){
-        var elements: [MainStruct] = []
-        elements.append(MainStruct.init(id: 1,
-                                        backgroundImage: AppIcons.getIcon(.i_surgery_back),
-                                        iconImage: AppIcons.getIcon(.i_default_image),
-                                        titleText: "Общая хирургия",
-                                        subtitleText: "Инструментарий: 40"))
-        elements.append(MainStruct.init(id: 2,
-                                        backgroundImage: AppIcons.getIcon(.i_dentistry),
-                                        iconImage: AppIcons.getIcon(.i_default_image),
-                                        titleText: "Стоматология",
-                                        subtitleText: "Инструментарий: 40"))
-        elements.append(MainStruct.init(id: 3,
-                                        backgroundImage: AppIcons.getIcon(.i_AiG),
-                                        iconImage: AppIcons.getIcon(.i_default_image),
-                                        titleText: "Акушерство и гинекология",
-                                        subtitleText: "Инструментарий: 40"))
-        elements.append(MainStruct.init(id: 4,
-                                        backgroundImage: AppIcons.getIcon(.i_neurosurgery),
-                                        iconImage: AppIcons.getIcon(.i_default_image),
-                                        titleText: "Нейрохирургия",
-                                        subtitleText: "Инструментарий: 40"))
-        elements.append(MainStruct.init(id: 5,
-                                        backgroundImage: AppIcons.getIcon(.i_ophthalmology),
-                                        iconImage: AppIcons.getIcon(.i_default_image),
-                                        titleText: "Офтальмология",
-                                        subtitleText: "Инструментарий: 40"))
-        elements.append(MainStruct.init(id: 6,
-                                        backgroundImage: AppIcons.getIcon(.i_otorhinolaryngology),
-                                        iconImage: AppIcons.getIcon(.i_default_image),
-                                        titleText: "Оториноларингология",
-                                        subtitleText: "Инструментарий: 40"))
-
-        rootView.configure(elements: elements)
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        catalogProvider.getCategories()
     }
     
     private func subscribeForUpdates() {
         rootView.events.sink { [weak self] in self?.onViewEvents($0) }.store(in: &cancalables)
+        catalogProvider.events.sink { [weak self] in self?.onProviderEvents($0) }.store(in: &cancalables)
     }
     
     private func onViewEvents(_ event: MainViewEvent){
         switch event {
-        case .cellClicked(let index):
-            showSubcategories?()
+        case .cellClicked(let type):
+            if Keychain.shared.getUserToken() != nil {
+                showInstrumentList?(type, true)
+            } else { showRegistrScreen?() }
+        case .firstCellClicked:
+            if Keychain.shared.getUserToken() != nil {
+                showSubcategories?()
+            } else { showRegistrScreen?() }
         default:
             break
         }
+    }
+    
+    private func onProviderEvents(_ event: CatalogProviderEvent){
+        switch event {
+        case .error(let error):
+            dismissPreloader()
+            showErrorWithMessage?(error.errorDescription)
+        case .errorMessage(let errorMessage):
+            dismissPreloader()
+            guard let message = errorMessage else { return }
+            showErrorWithMessage?(message)
+        case .categoriesLoaded(let response):
+            dismissPreloader()
+            guard let data = response.category else { return }
+            configureCollectionView(data: data)
+        default:
+            break
+        }
+    }
+    
+    private func configureCollectionView(data: [MainCategory]){
         
+        let backImages = [AppIcons.getIcon(.i_surgery_back), AppIcons.getIcon(.i_dentistry), AppIcons.getIcon(.i_AiG),  AppIcons.getIcon(.i_neurosurgery), AppIcons.getIcon(.i_ophthalmology),AppIcons.getIcon(.i_otorhinolaryngology),AppIcons.getIcon(.i_otorhinolaryngology),AppIcons.getIcon(.i_otorhinolaryngology),AppIcons.getIcon(.i_otorhinolaryngology),AppIcons.getIcon(.i_otorhinolaryngology)]
+        elements.removeAll()
+        for (index, item) in data.enumerated() {
+            elements.append(MainStruct.init(id: item.id ?? 0,
+                                            backgroundImage: backImages[index],
+                                            iconImage: AppIcons.getIcon(.i_default_image),
+                                            type: item.type ?? "",
+                                            titleText: item.name ?? "",
+                                            subtitleText: "Инструментарий: \(String(item.number_of_questions ?? 0))"))
+        }
+        
+        rootView.configure(elements: elements)
     }
 }

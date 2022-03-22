@@ -35,7 +35,7 @@ class ApiClient {
         
         return URLSession.DataTaskPublisher(request: request, session: session)
             .tryMap { (data, response) in
-//                print(request)
+                print(request)
                 let responseData = String(data: data, encoding: String.Encoding.utf8)
 //                print(responseData)
                 guard let httpResponse = response as? HTTPURLResponse else {

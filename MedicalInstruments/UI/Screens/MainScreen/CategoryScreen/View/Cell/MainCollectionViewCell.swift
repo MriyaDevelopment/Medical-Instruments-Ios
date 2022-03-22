@@ -11,6 +11,7 @@ final class MainCollectionViewCell: UICollectionViewCell {
     
     private var backgroundImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.image = AppIcons.getIcon(.i_otorhinolaryngology)
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
@@ -94,7 +95,7 @@ final class MainCollectionViewCell: UICollectionViewCell {
         titleLabel.snp.makeConstraints { (make) in
             make.top.equalTo(imageView.snp.bottom).offset(5)
             make.left.equalToSuperview().inset(12)
-            make.right.equalToSuperview()
+            make.right.equalToSuperview().offset(-10)
         }
         
         subtitleLabel.snp.makeConstraints { (make) in

@@ -81,7 +81,7 @@ final class MainView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = BaseColor.hex_E5E5E5.uiColor()
+        backgroundColor = BaseColor.hex_FFFFFF.uiColor()
         addElements()
     }
     
@@ -105,7 +105,6 @@ final class MainView: UIView {
         contentView.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(safeAreaLayoutGuide)
             make.left.right.equalToSuperview()
-            make.width.height.equalToSuperview()
         }
         
         titleLabel.snp.makeConstraints { (make) in
@@ -162,7 +161,11 @@ extension MainView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
 
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        events.send(.cellClicked(indexPath.row))
+        if indexPath.row == 0 {
+            events.send(.firstCellClicked)
+        } else {
+            events.send(.cellClicked(elements[indexPath.row].type))
+        }
     }
 
 }

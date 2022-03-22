@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import Combine
 
 final class SubcategoriesView: UIView {
+    
+    var events = PassthroughSubject<SubcategoriesViewEvents, Never>()
+    private var elements: [MainStruct] = []
     
     private var contentView: UIView = {
         let view = UIView()
@@ -49,7 +53,7 @@ final class SubcategoriesView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = BaseColor.hex_E5E5E5.uiColor()
+        backgroundColor = BaseColor.hex_FFFFFF.uiColor()
         addElements()
     }
     
@@ -78,18 +82,24 @@ final class SubcategoriesView: UIView {
         }
 
     }
+    
+    func configure(elements: [MainStruct]) {
+        self.elements = elements
+
+        mainCollectionView.reloadData()
+    }
 
 }
 
 extension SubcategoriesView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return elements.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueCollectionReusableCell(withType: MainCollectionViewCell.self, for: indexPath)
-//        cell.configure(item: elements[indexPath.row])
+        cell.configure(item: elements[indexPath.row])
 
         return cell
     }
@@ -104,7 +114,7 @@ extension SubcategoriesView: UICollectionViewDelegate, UICollectionViewDataSourc
 
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        events.send(.categoryCellClicked(categoryList[indexPath.row].categoryId ?? 0))
+        events.send(.cellClicked(elements[indexPath.row].type))
     }
 
 }

@@ -24,7 +24,7 @@ final class NavigationBarTitle: UIView {
         return view
     }()
     
-    private var titleLabel: UILabel = {
+    var titleLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
         label.textColor = BaseColor.hex_232324.uiColor()
@@ -34,7 +34,7 @@ final class NavigationBarTitle: UIView {
         return label
     }()
     
-    private var subTitleLabel: UILabel = {
+    var subTitleLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
         label.textColor = BaseColor.hex_65676B.uiColor()

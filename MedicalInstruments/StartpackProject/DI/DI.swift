@@ -18,6 +18,9 @@ final class Di {
     fileprivate let requestBuilder: RequestBuilderProtocol
     fileprivate let apiClient: ApiClient
     
+    fileprivate let catalogService: CatalogServiceProtocol
+    fileprivate let catalogProvider: CatalogProviderProtocol
+    
     init() {
         
         screenFactory = ScreenFactory()
@@ -29,6 +32,9 @@ final class Di {
         requestBuilder = RequestBuilder(configuration: configuration)
         
         apiClient = ApiClient(requestBuilder: requestBuilder, configuration: sessionConfiguration.configuration)
+        
+        catalogService = CatalogService(apiClient: apiClient)
+        catalogProvider = CatalogProviderImpl(catalogService: catalogService)
         
         screenFactory.di = self
     }
@@ -66,9 +72,15 @@ protocol ScreenFactoryProtocol {
     
     func makeSubCategoriesScreen() -> SubcategoriesViewController<SubcategoriesView>
     
+    func makeInstrumentListScreen(type: String, isMainCategory: Bool) -> InstrumentListViewController<InstrumentListView>
+    
     //MARK: Challenges
     
     func makeChallengesScreen() -> ChallengesViewController<ChallengesView>
+    
+    func makeChangeCategoriesScreen(dificultId: Int) -> ChangeCategoriesViewController<ChangeCategoriesView>
+    
+    func makeQuizScreen(id: Int, types: String) -> QuizViewController<QuizView>
     
     //MARK: Favourites
     
@@ -77,6 +89,12 @@ protocol ScreenFactoryProtocol {
     //MARK: Profile
     
     func makeProfileScreen() -> ProfileViewController<ProfileView>
+    
+    func makeFirstScreen() -> FirstViewController<FirstView>
+    
+    func makeAuthScreen() -> AuthViewController<AuthView>
+    
+    func makeRegisterScreen() -> RegistrationViewController<RegistrationView>
 
 }
 
@@ -95,17 +113,29 @@ final class ScreenFactory: ScreenFactoryProtocol {
     //MARK: Main
     
     func makeMainScreen() -> MainViewController<MainView> {
-        MainViewController<MainView>()
+        MainViewController<MainView>(catalogProvider: di.catalogProvider)
     }
     
     func makeSubCategoriesScreen() -> SubcategoriesViewController<SubcategoriesView> {
-        SubcategoriesViewController<SubcategoriesView>()
+        SubcategoriesViewController<SubcategoriesView>(catalogProvider: di.catalogProvider)
+    }
+    
+    func makeInstrumentListScreen(type: String, isMainCategory: Bool) -> InstrumentListViewController<InstrumentListView> {
+        InstrumentListViewController<InstrumentListView>(catalopProvider: di.catalogProvider, type: type, isMainCategory: isMainCategory)
     }
     
     //MARK: Challenges
     
     func makeChallengesScreen() -> ChallengesViewController<ChallengesView> {
         ChallengesViewController<ChallengesView>()
+    }
+    
+    func makeChangeCategoriesScreen(dificultId: Int) -> ChangeCategoriesViewController<ChangeCategoriesView> {
+        ChangeCategoriesViewController<ChangeCategoriesView>(dificultId: dificultId, catalogProvider: di.catalogProvider)
+    }
+    
+    func makeQuizScreen(id: Int, types: String) -> QuizViewController<QuizView> {
+        QuizViewController<QuizView>(id: id, types: types, catalogProvider: di.catalogProvider)
     }
     
     //MARK: Favourites
@@ -117,7 +147,19 @@ final class ScreenFactory: ScreenFactoryProtocol {
     //MARK: Profile
         
     func makeProfileScreen() -> ProfileViewController<ProfileView> {
-        ProfileViewController<ProfileView>()
+        ProfileViewController<ProfileView>(catalogProvider: di.catalogProvider)
+    }
+    
+    func makeFirstScreen() -> FirstViewController<FirstView> {
+        FirstViewController<FirstView>()
+    }
+    
+    func makeAuthScreen() -> AuthViewController<AuthView> {
+        AuthViewController<AuthView>(catalogProvider: di.catalogProvider)
+    }
+    
+    func makeRegisterScreen() -> RegistrationViewController<RegistrationView> {
+        RegistrationViewController<RegistrationView>(catalogProvider: di.catalogProvider)
     }
   
 }
