@@ -20,6 +20,10 @@ protocol CatalogApiClientProtocol {
     func getQuestionByTypeAndLevel(with params: getQuestionByTypeAndLevelRequestParams) -> AnyPublisher<GetQuestionByTypeAndLevelResponse, Error>
     func setResult(with params: SetResultRequestParams) -> AnyPublisher<SetResultResponse, Error>
     func getResult() -> AnyPublisher<GetResultResponse, Error>
+    func setLike(with params: SetLikeRequestParams) -> AnyPublisher<SetRemoveLikeResponse, Error>
+    func removeLike(with params: RemoveLikeRequestParams) -> AnyPublisher<SetRemoveLikeResponse, Error>
+    func getFavourites() -> AnyPublisher<GetFavouritesResponse, Error>
+    func getLastTest() -> AnyPublisher<GetLastTestResponse, Error>
 }
 
 private func getPath(for method: String) -> String {
@@ -127,6 +131,46 @@ extension ApiClient: CatalogApiClientProtocol {
     func getResult() -> AnyPublisher<GetResultResponse, Error> {
         let request = requestBuilder.postBuild(
             path: getPath(for: "getResult"),
+            urlParametrs: [
+                "user_token": Keychain.shared.getUserToken() ?? ""
+            ])
+        return performRequest(request)
+    }
+    
+    func setLike(with params: SetLikeRequestParams) -> AnyPublisher<SetRemoveLikeResponse, Error> {
+        let request = requestBuilder.postBuild(
+            path: getPath(for: "setLike"),
+            urlParametrs: [
+                "user_token": Keychain.shared.getUserToken() ?? "",
+                "instrument_id": params.instrument_id,
+                "is_surgery": params.is_surgery
+            ])
+        return performRequest(request)
+    }
+    
+    func removeLike(with params: RemoveLikeRequestParams) -> AnyPublisher<SetRemoveLikeResponse, Error> {
+        let request = requestBuilder.postBuild(
+            path: getPath(for: "removeLike"),
+            urlParametrs: [
+                "user_token": Keychain.shared.getUserToken() ?? "",
+                "instrument_id": params.instrument_id,
+                "is_surgery": params.is_surgery
+            ])
+        return performRequest(request)
+    }
+    
+    func getFavourites() -> AnyPublisher<GetFavouritesResponse, Error> {
+        let request = requestBuilder.postBuild(
+            path: getPath(for: "getFavourites"),
+            urlParametrs: [
+                "user_token": Keychain.shared.getUserToken() ?? " "
+            ])
+        return performRequest(request)
+    }
+    
+    func getLastTest() -> AnyPublisher<GetLastTestResponse, Error> {
+        let request = requestBuilder.postBuild(
+            path: getPath(for: "getLastTest"),
             urlParametrs: [
                 "user_token": Keychain.shared.getUserToken() ?? ""
             ])

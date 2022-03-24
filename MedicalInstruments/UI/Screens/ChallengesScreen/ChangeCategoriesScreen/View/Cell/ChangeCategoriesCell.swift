@@ -71,7 +71,7 @@ final class ChangeCategoriesCell: UITableViewCell {
     
     func configure(type: Types) {
         self.name = type.name ?? ""
-        titleLabel.text = type.name ?? ""
+        titleLabel.text = type.title ?? ""
     }
    
     private func addElements() {

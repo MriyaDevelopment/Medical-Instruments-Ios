@@ -19,7 +19,8 @@ struct Instruments: Codable {
     let type: String?
     let image: String?
     let full_text: String?
-//    let is_liked: Bool?
+    let is_liked: Bool?
+    let is_surgery: Bool?
 }
 
 struct GetCategoriesResponse: Codable {
@@ -131,4 +132,21 @@ struct GetResultData: Codable {
     let number_of_correct_answers: Int?
     let number_of_questions: Int?
     let questions: String?
+}
+
+struct SetRemoveLikeResponse: Codable {
+    let result: String?
+    let error: String?
+}
+
+struct GetFavouritesResponse: Codable {
+    let result: String?
+    let error: String?
+    let instruments: [Instruments]?
+}
+
+struct GetLastTestResponse: Codable {
+    let result: String?
+    let error: String?
+    let questions: [Questions]?
 }

@@ -10,6 +10,10 @@ import Combine
 
 final class InstrumentTableViewCell: UITableViewCell {
     
+    var likeEnableClicked: VoidClosure?
+    var likeDisableClicked: VoidClosure?
+    private var isLiked = false
+    
     private let backView: UIView = {
         let view = UIView()
         view.backgroundColor = BaseColor.hex_FFFFFF.uiColor()
@@ -17,7 +21,6 @@ final class InstrumentTableViewCell: UITableViewCell {
         view.layer.shadowOpacity = 0.1
         view.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
         view.layer.cornerRadius = 10
-        view.clipsToBounds = false
         return view
     }()
     
@@ -41,6 +44,7 @@ final class InstrumentTableViewCell: UITableViewCell {
     private var likeButton: UIButton = {
         let button = UIButton()
         button.setImage(AppIcons.getIcon(.i_like_disable), for: .normal)
+        button.isUserInteractionEnabled = true
         button.backgroundColor = .white
         button.layer.shadowRadius = 10
         button.layer.shadowOpacity = 0.1
@@ -67,9 +71,9 @@ final class InstrumentTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
-        backgroundColor = BaseColor.hex_FFFFFF.uiColor()
-        clipsToBounds = false
+        backgroundColor = .clear
         addElements()
+        addTarget()
     }
     
     required init?(coder: NSCoder) {
@@ -84,6 +88,17 @@ final class InstrumentTableViewCell: UITableViewCell {
         titleLabel.text = data.title
         instrumentImageView.loadImage(by: data.image ?? "")
         descriptionLabel.text = data.full_text
+        isLiked = data.is_liked ?? false
+        
+        if Keychain.shared.getUserToken() == nil {
+            likeButton.removeFromSuperview()
+        }
+        
+        if isLiked == true {
+            likeButton.setImage(AppIcons.getIcon(.i_like_enable), for: .normal)
+        } else {
+            likeButton.setImage(AppIcons.getIcon(.i_like_disable), for: .normal)
+        }
     }
    
     private func addElements() {
@@ -138,5 +153,23 @@ final class InstrumentTableViewCell: UITableViewCell {
             make.bottom.equalTo(lineView.snp.bottom)
         }
         
+    }
+    
+    func addTarget() {
+//        likeButton.addTarget(self, action: #selector(likeAction), for: .touchUpInside)
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(likeAction)))
+    }
+    
+    @objc private func likeAction() {
+        if isLiked == true {
+            likeButton.setImage(AppIcons.getIcon(.i_like_disable), for: .normal)
+            isLiked = false
+            likeDisableClicked?()
+        } else {
+            likeButton.setImage(AppIcons.getIcon(.i_like_enable), for: .normal)
+            isLiked = true
+            likeEnableClicked?()
+        }
+       
     }
 }

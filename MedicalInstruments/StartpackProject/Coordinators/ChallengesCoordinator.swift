@@ -40,7 +40,7 @@ final class ChallengesCoordinator: BaseCoordinator {
     }
     
     private func showQuizScreen(id: Int, types: String) {
-        let screen = screenFactory.makeQuizScreen(id: id, types: types)
+        let screen = screenFactory.makeQuizScreen(id: id, types: types, isLastTest: false)
         screen.showRootScreen = { [weak self] in self?.showChallengesScreen()}
         router.push(screen, animated: true)
     }

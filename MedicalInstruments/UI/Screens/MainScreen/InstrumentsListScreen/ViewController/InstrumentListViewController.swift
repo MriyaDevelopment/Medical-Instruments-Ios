@@ -13,10 +13,10 @@ final class InstrumentListViewController<View: InstrumentListView>: BaseViewCont
     private var catalopProvider: CatalogProviderProtocol
     private var cancalables = Set<AnyCancellable>()
     private var type: String
-    private var isMainCategory: Bool
+    private var isSurgery: Bool
     
     init(catalopProvider: CatalogProviderProtocol, type: String, isMainCategory: Bool) {
-        self.isMainCategory = isMainCategory
+        self.isSurgery = isMainCategory
         self.type = type
         self.catalopProvider = catalopProvider
         super.init(nibName: nil, bundle: nil)
@@ -31,10 +31,10 @@ final class InstrumentListViewController<View: InstrumentListView>: BaseViewCont
         configureNavigationBar()
         subscribeForUpdates()
         
-        if isMainCategory == true {
-            catalopProvider.getInstrumentsByType(param: getInstrumentsByTypeRequestParams(type: type))
-        } else {
+        if isSurgery == true {
             catalopProvider.getSurgeryInstrumentsByType(param: getInstrumentsByTypeRequestParams(type: type))
+        } else {
+            catalopProvider.getInstrumentsByType(param: getInstrumentsByTypeRequestParams(type: type))
         }
         showLoader()
     }
@@ -46,6 +46,7 @@ final class InstrumentListViewController<View: InstrumentListView>: BaseViewCont
     
     private func subscribeForUpdates() {
         catalopProvider.events.sink { [weak self] in self?.onViewEvents($0) }.store(in: &cancalables)
+        rootView.events.sink { [weak self] in self?.onViewEvents($0) }.store(in: &cancalables)
     }
     
     private func onViewEvents(_ event: CatalogProviderEvent){
@@ -61,10 +62,21 @@ final class InstrumentListViewController<View: InstrumentListView>: BaseViewCont
             dismissLoader()
             guard let data = response.instruments else { return }
             rootView.configure(instruments: data)
+        case .success:
+            print("****LikeLoaded")
         default:
             break
         }
         
+    }
+    
+    private func onViewEvents(_ Event: InstrumentListViewEvent) {
+        switch Event {
+        case .setLike(let id):
+            catalopProvider.setLike(with: SetLikeRequestParams(instrument_id: String(id), is_surgery: String(isSurgery)))
+        case .removeLike(let id):
+            catalopProvider.removeLike(with: RemoveLikeRequestParams(instrument_id: String(id), is_surgery: String(isSurgery)))
+        }
     }
     
 }

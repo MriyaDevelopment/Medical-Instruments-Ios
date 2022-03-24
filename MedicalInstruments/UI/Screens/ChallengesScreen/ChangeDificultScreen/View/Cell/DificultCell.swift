@@ -47,7 +47,7 @@ final class DuficultTableViewCell: UITableViewCell {
     private var nextButton: UIButton = {
         let button = UIButton()
         button.setTitle("Выбрать категории и начать", for: .normal)
-        button.titleLabel?.font = MainFont.medium(size: 10)
+        button.titleLabel?.font = MainFont.medium(size: 12)
         button.setTitleColor(BaseColor.hex_5B67CA.uiColor(), for: .normal)
         button.titleLabel?.textAlignment = .left
         button.sizeToFit()
@@ -75,21 +75,26 @@ final class DuficultTableViewCell: UITableViewCell {
     func configure(index: Int){
         var color = UIColor()
         var image = UIImage()
+        var title = String()
         switch index {
         case 0:
             color = BaseColor.hex_5B67CA.uiColor()
             image = AppIcons.getIcon(.i_default_image)
+            title = "Легккий уровень"
         case 1:
             color = BaseColor.hex_7FC9E7.uiColor()
             image = AppIcons.getIcon(.i_midDificult)
+            title = "Средний уровень"
         case 2:
             color = BaseColor.hex_E77D7D.uiColor()
             image = AppIcons.getIcon(.i_hardDificult)
+            title = "Сложный уровень"
         default:
             break
         }
         configureColor(color: color)
         instrumentImageView.image = image
+        titleLabel.text = title
     }
     
     private func configureColor(color: UIColor){

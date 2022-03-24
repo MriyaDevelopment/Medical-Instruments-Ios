@@ -7,10 +7,12 @@
 
 
 import UIKit
+import Combine
 
 final class InstrumentListView: UIView {
     
     private var instruments: [Instruments] = []
+    var events = PassthroughSubject<InstrumentListViewEvent, Never>()
     
     private var contentView: UIView = {
         let view = UIView()
@@ -75,15 +77,13 @@ extension InstrumentListView: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withType: InstrumentTableViewCell.self, for: indexPath)
         cell.configure(data: instruments[indexPath.row])
+        cell.likeDisableClicked = { [weak self] in self?.events.send(.removeLike(self?.instruments[indexPath.row].id ?? 0))}
+        cell.likeEnableClicked = { [weak self] in self?.events.send(.setLike(self?.instruments[indexPath.row].id ?? 0))}
        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return  UITableView.automaticDimension
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
     }
 }
 

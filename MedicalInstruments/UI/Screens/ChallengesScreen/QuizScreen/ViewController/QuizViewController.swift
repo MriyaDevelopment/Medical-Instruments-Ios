@@ -12,6 +12,7 @@ final class QuizViewController<View: QuizView>: BaseViewController<View> {
         
     private var types: String
     private var id: Int
+    private var isLastTest: Bool
     
     private var numberOfQuest = 0
     private var questionsString = ""
@@ -25,10 +26,11 @@ final class QuizViewController<View: QuizView>: BaseViewController<View> {
     private var cancalables = Set<AnyCancellable>()
     private let catalogProvider: CatalogProviderProtocol
     
-    init(id: Int, types: String, catalogProvider: CatalogProviderProtocol) {
+    init(id: Int = 0, types: String = "", catalogProvider: CatalogProviderProtocol, isLastTest: Bool = false) {
         self.types = types
         self.id = id
         self.catalogProvider = catalogProvider
+        self.isLastTest = isLastTest
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -40,7 +42,11 @@ final class QuizViewController<View: QuizView>: BaseViewController<View> {
         super.viewDidLoad()
         configureNavigationBar()
         showLoader(background: .white, alfa: 1)
-        catalogProvider.getQuestionByTypeAndLevel(with: getQuestionByTypeAndLevelRequestParams(type: types, level: String(id)))
+        if isLastTest == false {
+            catalogProvider.getQuestionByTypeAndLevel(with: getQuestionByTypeAndLevelRequestParams(type: types, level: String(id)))
+        } else {
+            catalogProvider.getLastTest()
+        }
         subscribeForUpdates()
         startTimer()
         
@@ -101,7 +107,6 @@ final class QuizViewController<View: QuizView>: BaseViewController<View> {
                 for item in questions {
                     questionsString += "\(item.id ?? 0),"
                 }
-//                print("****\(questionsString)")
             }
         case .setResultDone(let response):
             
@@ -115,6 +120,17 @@ final class QuizViewController<View: QuizView>: BaseViewController<View> {
             showResultScreen(quizResult: quizResult)
             
             stopTimer()
+        case .lastTestLoaded(let response):
+            dismissLoader()
+            guard let questions = response.questions else { return }
+            if !questions.isEmpty {
+                rootView.configure(questions: questions)
+                self.numberOfQuest = questions.count
+                questionsString = ""
+                for item in questions {
+                    questionsString += "\(item.id ?? 0),"
+                }
+            }
         default:
             break
         }

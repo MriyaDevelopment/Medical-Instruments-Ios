@@ -39,6 +39,17 @@ final class AppIcons {
         case i_backgroundProfileBanner
         case i_instruments
         case i_arrow_right
+        case i_icon_surgery
+        case i_icon_dentisty
+        case i_icon_aig
+        case i_icon_neuro
+        case i_icon_oftalm
+        case i_icon_otorin
+        case i_icon_syringe
+        case i_icon_urology
+        case i_syringe_back
+        case i_urology_back
+        case i_empty_fav
     }
     
     static func getIcon(_ type: iconsEnum) -> UIImage {
@@ -72,6 +83,17 @@ final class AppIcons {
         case .i_backgroundProfileBanner: return UIImage(named: "i_backgroundProfileBanner")!
         case .i_instruments: return UIImage(named: "i_instruments")!
         case .i_arrow_right: return UIImage(named: "i_arrow_right")!
+        case .i_icon_surgery: return UIImage(named: "i_icon_surgery")!
+        case .i_icon_dentisty: return UIImage(named: "i_icon_dentisty")!
+        case .i_icon_aig: return UIImage(named: "i_icon_aig")!
+        case .i_icon_neuro: return UIImage(named: "i_icon_neuro")!
+        case .i_icon_oftalm: return UIImage(named: "i_icon_oftalm")!
+        case .i_icon_otorin: return UIImage(named: "i_icon_otorin")!
+        case .i_icon_syringe: return UIImage(named: "i_icon_syringe")!
+        case .i_icon_urology: return UIImage(named: "i_icon_urology")!
+        case .i_syringe_back: return UIImage(named: "i_syringe_back")!
+        case .i_urology_back: return UIImage(named: "i_urology_back")!
+        case .i_empty_fav: return UIImage(named: "i_empty_fav")!
         }
     }
 }

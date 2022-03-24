@@ -21,6 +21,10 @@ protocol CatalogProviderProtocol {
     func getQuestionByTypeAndLevel(with params: getQuestionByTypeAndLevelRequestParams)
     func setResult(with params: SetResultRequestParams)
     func getResult()
+    func setLike(with params: SetLikeRequestParams)
+    func removeLike(with params: RemoveLikeRequestParams)
+    func getFavourites()
+    func getLastTest()
 }
 
 final class CatalogProviderImpl: CatalogProviderProtocol {
@@ -31,6 +35,7 @@ final class CatalogProviderImpl: CatalogProviderProtocol {
     private var mainRequest: AnyCancellable?
     private var userDataRequest: AnyCancellable?
     private var resultRequest: AnyCancellable?
+    private var favRequest: AnyCancellable?
 
     init(catalogService: CatalogServiceProtocol) {
         self.catalogService = catalogService
@@ -154,7 +159,7 @@ final class CatalogProviderImpl: CatalogProviderProtocol {
     func getProfileData() {
         userDataRequest?.cancel()
         
-        request = catalogService.getProfileData()
+        userDataRequest = catalogService.getProfileData()
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { [weak self] result in
                 guard let self = self, case .failure(let error) = result else { return }
@@ -288,7 +293,99 @@ final class CatalogProviderImpl: CatalogProviderProtocol {
                 }
             })
     }
+    
+    func setLike(with params: SetLikeRequestParams) {
+        request?.cancel()
+        
+        request = catalogService.setLike(with: params)
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { [weak self] result in
+                guard let self = self, case .failure(let error) = result else { return }
+                self.events.send(.error(error))
+                
+            }, receiveValue: { [weak self] result in
+                guard let self = self else { return }
+                
+                switch result.result {
+                case "error":
+                    self.events.send(.errorMessage(result.error))
+                case "success":
+                    self.events.send(.success)
+                default:
+                    break
+                }
+            })
+    }
+    
+    func removeLike(with params: RemoveLikeRequestParams) {
+        request?.cancel()
+        
+        request = catalogService.removeLike(with: params)
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { [weak self] result in
+                guard let self = self, case .failure(let error) = result else { return }
+                self.events.send(.error(error))
+                
+            }, receiveValue: { [weak self] result in
+                guard let self = self else { return }
+                
+                switch result.result {
+                case "error":
+                    self.events.send(.errorMessage(result.error))
+                case "success":
+                    self.events.send(.success)
+                default:
+                    break
+                }
+            })
+    }
 
+    func getFavourites() {
+        favRequest?.cancel()
+        
+        favRequest = catalogService.getFavourites()
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { [weak self] result in
+                guard let self = self, case .failure(let error) = result else { return }
+                self.events.send(.error(error))
+                
+            }, receiveValue: { [weak self] result in
+                guard let self = self else { return }
+                
+                switch result.result {
+                case "error":
+                    self.events.send(.errorMessage(result.error))
+                case "success":
+                    self.events.send(.favouritesLoaded(result))
+                default:
+                    break
+                }
+            })
+    }
+    
+    func getLastTest() {
+        favRequest?.cancel()
+        
+        favRequest = catalogService.getLastTest()
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { [weak self] result in
+                guard let self = self, case .failure(let error) = result else { return }
+                self.events.send(.error(error))
+                
+            }, receiveValue: { [weak self] result in
+                guard let self = self else { return }
+                
+                switch result.result {
+                case "error":
+                    self.events.send(.errorMessage(result.error))
+                case "success":
+                    self.events.send(.lastTestLoaded(result))
+                default:
+                    break
+                }
+            })
+    }
+  
     
 }
 
@@ -306,4 +403,6 @@ enum CatalogProviderEvent {
     case questionsLoaded(_ response: GetQuestionByTypeAndLevelResponse)
     case setResultDone(_ response: SetResultResponse)
     case getResultLoaded(_ response: GetResultResponse)
+    case favouritesLoaded(_ response: GetFavouritesResponse)
+    case lastTestLoaded(_ response: GetLastTestResponse)
 }
