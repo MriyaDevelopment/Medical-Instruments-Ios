@@ -20,6 +20,10 @@ protocol CatalogServiceProtocol {
     func getQuestionByTypeAndLevel(with params: getQuestionByTypeAndLevelRequestParams) -> AnyPublisher<GetQuestionByTypeAndLevelResponse, ApiError>
     func setResult(with params: SetResultRequestParams) -> AnyPublisher<SetResultResponse, ApiError>
     func getResult() -> AnyPublisher<GetResultResponse, ApiError>
+    func setLike(with params: SetLikeRequestParams) -> AnyPublisher<SetRemoveLikeResponse, ApiError>
+    func removeLike(with params: RemoveLikeRequestParams) -> AnyPublisher<SetRemoveLikeResponse, ApiError>
+    func getFavourites() -> AnyPublisher<GetFavouritesResponse, ApiError>
+    func getLastTest() -> AnyPublisher<GetLastTestResponse, ApiError>
 }
 
 class CatalogService: CatalogServiceProtocol {
@@ -28,6 +32,7 @@ class CatalogService: CatalogServiceProtocol {
     private var request: AnyCancellable?
     private var userDataRequest: AnyCancellable?
     private var resultRequest: AnyCancellable?
+    private var favRequest: AnyCancellable?
     
     init(apiClient: CatalogApiClientProtocol) {
         self.apiClient = apiClient
@@ -177,6 +182,55 @@ class CatalogService: CatalogServiceProtocol {
             .eraseToAnyPublisher()
     }
     
- 
+    func setLike(with params: SetLikeRequestParams) -> AnyPublisher<SetRemoveLikeResponse, ApiError> {
+        request?.cancel()
+        
+        return apiClient.setLike(with: params)
+            .mapError { error in
+                if let error = error as? ApiError {
+                    return error
+                }
+                return ApiError.unknown
+            }
+            .eraseToAnyPublisher()
+    }
     
+    func removeLike(with params: RemoveLikeRequestParams) -> AnyPublisher<SetRemoveLikeResponse, ApiError> {
+        request?.cancel()
+        
+        return apiClient.removeLike(with: params)
+            .mapError { error in
+                if let error = error as? ApiError {
+                    return error
+                }
+                return ApiError.unknown
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func getFavourites() -> AnyPublisher<GetFavouritesResponse, ApiError> {
+        favRequest?.cancel()
+        
+        return apiClient.getFavourites()
+            .mapError { error in
+                if let error = error as? ApiError {
+                    return error
+                }
+                return ApiError.unknown
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func getLastTest() -> AnyPublisher<GetLastTestResponse, ApiError> {
+        favRequest?.cancel()
+        
+        return apiClient.getLastTest()
+            .mapError { error in
+                if let error = error as? ApiError {
+                    return error
+                }
+                return ApiError.unknown
+            }
+            .eraseToAnyPublisher()
+    }
 }

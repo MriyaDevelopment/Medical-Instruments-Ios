@@ -51,7 +51,9 @@ final class TagsCollectionView: UIView {
     func configure(title: [String]) {
         items.removeAll()
         
-        items = title
+        for item in title {
+            items.append(getTitle(title: item))
+        }
         tagsCollectionView.reloadData()
     }
     
@@ -84,6 +86,29 @@ final class TagsCollectionView: UIView {
         
         tagsCollectionView.snp.makeConstraints { (make) in
             make.height.equalTo(100)
+        }
+    }
+    
+    func getTitle(title: String) -> String {
+        switch title {
+        case "surgery":
+            return "Общая хирургия"
+        case "stomatology":
+            return "Стоматология"
+        case "gynecology":
+            return "Гинекология"
+        case "neuro":
+            return "Нейрохирургия"
+        case "lor":
+            return "Отоларингология"
+        case "urology":
+            return "Урология"
+        case "ophthalmology":
+            return "Офтальмология"
+        case "anesthesiology":
+            return "Анестезиология"
+        default:
+            return ""
         }
     }
 }

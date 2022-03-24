@@ -66,3 +66,23 @@ struct SetResultRequestParams {
         self.questions = questions
     }
 }
+
+struct SetLikeRequestParams {
+    let instrument_id: String
+    let is_surgery: String
+
+    init(instrument_id: String, is_surgery: String) {
+        self.instrument_id = instrument_id
+        self.is_surgery = is_surgery
+    }
+}
+
+struct RemoveLikeRequestParams {
+    let instrument_id: String
+    let is_surgery: String
+
+    init(instrument_id: String, is_surgery: String) {
+        self.instrument_id = instrument_id
+        self.is_surgery = is_surgery
+    }
+}

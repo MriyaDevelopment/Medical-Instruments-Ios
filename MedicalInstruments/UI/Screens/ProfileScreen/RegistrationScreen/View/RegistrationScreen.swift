@@ -125,16 +125,16 @@ final class RegistrationView: UIView {
             make.height.equalTo(50)
         }
         
-        lineView.snp.makeConstraints { (make) in
-            make.top.equalTo(regButton.snp.bottom).offset(60)
-            make.height.equalTo(1)
-            make.left.right.equalToSuperview().inset(16)
-        }
-        
-        orLabel.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
-            make.width.equalTo(100)
-        }
+//        lineView.snp.makeConstraints { (make) in
+//            make.top.equalTo(regButton.snp.bottom).offset(60)
+//            make.height.equalTo(1)
+//            make.left.right.equalToSuperview().inset(16)
+//        }
+//
+//        orLabel.snp.makeConstraints { (make) in
+//            make.center.equalToSuperview()
+//            make.width.equalTo(100)
+//        }
         
     }
     
@@ -143,7 +143,10 @@ final class RegistrationView: UIView {
     }
     
     @objc func regAction() {
-        events.send(.registrationButtonClicked)
+        if nameInputForm.getValue() != "" && emailInputForm.getValue() != "" && passwordInputForm.getValue() != ""
+                                                                            && passwordRepeatInputForm.getValue() != "" {
+            events.send(.registrationButtonClicked)
+        }
     }
 
 }

@@ -42,6 +42,7 @@ final class AlertDialogViewController<View: AlertDialogView>: BaseViewController
             closeAlert()
         case .yesButtonClicked:
             Keychain.shared.deleteUserToken()
+            Keychain.shared.deleteUserName()
             closeAlert()
             yesClicked?()
         default:

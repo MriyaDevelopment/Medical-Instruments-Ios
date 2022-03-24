@@ -33,40 +33,31 @@ final class TagCollectionViewCell: UICollectionViewCell {
     func configure(title: String) {
         
         var color = UIColor()
-        var text = String()
         
         switch title {
-        case "gynecology":
+        case "Гинекология":
             color = BaseColor.hex_E77D7D.uiColor()
-            text = "Акушерство и гинекология"
-        case "stomatology":
+        case "Стоматология":
             color = BaseColor.hex_5B67CA.uiColor()
-            text = "Стоматология"
-        case "neuro":
+        case "Нейрохирургия":
             color = BaseColor.hex_81E89E.uiColor()
-            text = "Нейрохирургия"
-        case "surgery":
+        case "Общая хирургия":
             color = BaseColor.hex_7EC3DF.uiColor()
-            text = "Общая хирургия"
-        case "ophthalmology":
+        case "Офтальмология":
             color = BaseColor.hex_EAC566.uiColor()
-            text = "Офтальмология"
-        case "lor":
+        case "Отоларингология":
             color = BaseColor.hex_E880CB.uiColor()
-            text = "Отоларингология"
-        case "urology":
+        case "Урология":
             color = BaseColor.hex_CC825F.uiColor()
-            text = "Урология"
-        case "anesthesiology":
+        case "Анестезиология":
             color = BaseColor.hex_BE7EE7.uiColor()
-            text = "Анестезиология"
         default:
-            break
+            color = BaseColor.hex_7EC3DF.uiColor()
         }
         
+        titleLabel.text = title
         titleLabel.textColor = color
         backgroundColor = color.withAlphaComponent(0.25)
-        titleLabel.text = text
     }
     
     private func addElements() {

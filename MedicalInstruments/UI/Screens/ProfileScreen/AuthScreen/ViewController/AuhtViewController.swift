@@ -53,7 +53,9 @@ final class AuthViewController<View: AuthView>: BaseViewController<View> {
         case .loginSuccsess(let response):
             dismissLoader()
             guard let token = response.user?.api_token else { return }
+            guard let name = response.user?.name else { return }
             Keychain.shared.setUserToken(token)
+            Keychain.shared.setUserName(name)
             showMainPageProfile?()
         default:
             break

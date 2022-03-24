@@ -66,7 +66,11 @@ final class ProfileView: UIView {
         return label
     }()
     
-    private var lastResultView = LastresultView()
+    lazy private var lastResultView: LastresultView = {
+        let view = LastresultView()
+        view.tryAgainClicked = { [weak self] in self?.event.send(.tryAgainClicked)}
+        return view
+    }()
     
     lazy private var firstBanner: FirsBannerView = {
         let view = FirsBannerView()
@@ -91,23 +95,23 @@ final class ProfileView: UIView {
     
     func configureBanner(data: GetResultResponse) {
         guard let levels = data.levels else {return}
+        lastResultView.hideView()
+        firstBanner.hideView()
         
         if levels.isEmpty {
-            lastResultView.hideView()
             firstBanner.showView()
         } else {
-            firstBanner.hideView()
             lastResultView.showView()
             guard let lastData = data.levels?.first else {return}
             configureLastResult(data: lastData)
         }
     }
     
-    func configureLastResult(data: GetResultData){
+    func configureLastResult(data: GetResultData) {
         lastResultView.configure(data: data)
     }
     
-    func configureProfile(data: User){
+    func configureProfile(data: User) {
         
         if data.is_subscribed == false {
             subscribesLabel.hideView()
@@ -165,7 +169,6 @@ final class ProfileView: UIView {
         lastResultView.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview().inset(16)
             make.top.equalTo(userEmailLabel.snp.bottom).offset(15)
-            make.height.equalTo(215)
         }
         
         firstBanner.snp.makeConstraints { (make) in
