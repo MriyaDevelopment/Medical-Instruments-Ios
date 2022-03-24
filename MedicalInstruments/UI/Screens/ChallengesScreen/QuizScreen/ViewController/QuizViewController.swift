@@ -22,11 +22,12 @@ final class QuizViewController<View: QuizView>: BaseViewController<View> {
     var timer = Timer()
     
     var showRootScreen: VoidClosure?
+    var showQuizScreen: BoolClosure?
     
     private var cancalables = Set<AnyCancellable>()
     private let catalogProvider: CatalogProviderProtocol
     
-    init(id: Int = 0, types: String = "", catalogProvider: CatalogProviderProtocol, isLastTest: Bool = false) {
+    init(id: Int = 1, types: String = "lor", catalogProvider: CatalogProviderProtocol, isLastTest: Bool = false) {
         self.types = types
         self.id = id
         self.catalogProvider = catalogProvider
@@ -50,7 +51,6 @@ final class QuizViewController<View: QuizView>: BaseViewController<View> {
         subscribeForUpdates()
         startTimer()
         
-        print("****\(types)")
     }
     
     private func subscribeForUpdates() {
@@ -130,6 +130,8 @@ final class QuizViewController<View: QuizView>: BaseViewController<View> {
                 for item in questions {
                     questionsString += "\(item.id ?? 0),"
                 }
+                //заглушка, необходимо достать все типы и удалить повторяющиеся
+                types = "lor"
             }
         default:
             break
@@ -143,7 +145,7 @@ final class QuizViewController<View: QuizView>: BaseViewController<View> {
                                                                    categories: types,
                                                                    number_of_correct_answers: String(rootView.correctCount),
                                                                    number_of_questions: String(numberOfQuest),
-                                                                   questions: questionsString))
+                                                                   questions: String(questionsString.dropLast())))
         }
     }
     
@@ -173,6 +175,7 @@ final class QuizViewController<View: QuizView>: BaseViewController<View> {
         controller.modalPresentationStyle = .overFullScreen
         controller.modalTransitionStyle = .crossDissolve
         controller.okClicked = { [weak self] in self?.showRootScreen?() }
+        controller.tryAgainClicked = { [weak self] in self?.showQuizScreen?(true) }
         present(controller, animated: true, completion: nil)
     }
     

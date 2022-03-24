@@ -39,6 +39,8 @@ final class ProfileViewController<View: ProfileView>: BaseViewController<View> {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         catalogProvider.getResult()
+        
+        print("****\(Keychain.shared.getUserToken())")
     }
     
     private func subscribeForUpdates() {
