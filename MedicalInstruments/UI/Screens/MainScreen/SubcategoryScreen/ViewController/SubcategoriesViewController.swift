@@ -46,7 +46,7 @@ final class SubcategoriesViewController<View: SubcategoriesView>: BaseViewContro
     private func onViewEvents(_ event: SubcategoriesViewEvents){
         switch event {
         case .cellClicked(let type):
-            showInstrumentListScreen?(type, false)
+            showInstrumentListScreen?(type, true)
         default:
             break
         }
@@ -75,7 +75,7 @@ final class SubcategoriesViewController<View: SubcategoriesView>: BaseViewContro
         for item in data {
             elements.append(MainStruct.init(id: item.id ?? 0,
                                             backgroundImage: AppIcons.getIcon(.i_surgery_back),
-                                            iconImage: AppIcons.getIcon(.i_default_image),
+                                            iconImage: AppIcons.getIcon(.i_icon_surgery),
                                             type: item.type ?? "",
                                             titleText: item.name ?? "",
                                             subtitleText: "Инструментарий: \(String(item.number_of_questions ?? 0))"))

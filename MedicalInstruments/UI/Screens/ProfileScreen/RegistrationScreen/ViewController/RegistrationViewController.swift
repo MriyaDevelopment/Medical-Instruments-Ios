@@ -51,7 +51,9 @@ final class RegistrationViewController<View: RegistrationView>: BaseViewControll
         case .registerSuccess(let response):
             dismissLoader()
             guard let token = response.register?.api_token else { return }
+            guard let name = response.register?.name else { return }
             Keychain.shared.setUserToken(token)
+            Keychain.shared.setUserName(name)
             showMainPageProfileScreen?()
         default:
             break

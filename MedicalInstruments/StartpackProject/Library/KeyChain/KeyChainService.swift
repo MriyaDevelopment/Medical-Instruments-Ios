@@ -33,4 +33,17 @@ extension KeychainSwift {
     func deleteUserToken() {
         Keychain.shared.delete("userToken")
     }
+    
+    func getUserName() -> String? {
+        return Keychain.shared.get("userName")
+    }
+    
+    func setUserName(_ name: String) {
+        Keychain.shared.set(name, forKey: "userName")
+    }
+    
+    func deleteUserName() {
+        Keychain.shared.delete("userName")
+    }
+
 }

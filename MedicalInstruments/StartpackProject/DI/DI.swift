@@ -80,7 +80,7 @@ protocol ScreenFactoryProtocol {
     
     func makeChangeCategoriesScreen(dificultId: Int) -> ChangeCategoriesViewController<ChangeCategoriesView>
     
-    func makeQuizScreen(id: Int, types: String) -> QuizViewController<QuizView>
+    func makeQuizScreen(id: Int, types: String, isLastTest: Bool) -> QuizViewController<QuizView>
     
     //MARK: Favourites
     
@@ -134,14 +134,14 @@ final class ScreenFactory: ScreenFactoryProtocol {
         ChangeCategoriesViewController<ChangeCategoriesView>(dificultId: dificultId, catalogProvider: di.catalogProvider)
     }
     
-    func makeQuizScreen(id: Int, types: String) -> QuizViewController<QuizView> {
-        QuizViewController<QuizView>(id: id, types: types, catalogProvider: di.catalogProvider)
+    func makeQuizScreen(id: Int, types: String, isLastTest: Bool = false) -> QuizViewController<QuizView> {
+        QuizViewController<QuizView>(id: id, types: types, catalogProvider: di.catalogProvider, isLastTest: isLastTest)
     }
     
     //MARK: Favourites
     
     func makeFavouritesScreen() -> FavouritesViewController<FavouritesView> {
-        FavouritesViewController<FavouritesView>()
+        FavouritesViewController<FavouritesView>(catalogProvider: di.catalogProvider)
     }
     
     //MARK: Profile

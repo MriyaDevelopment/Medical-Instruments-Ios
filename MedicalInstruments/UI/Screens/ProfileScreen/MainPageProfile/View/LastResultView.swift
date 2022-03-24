@@ -9,6 +9,8 @@ import UIKit
 
 final class LastresultView: UIView {
     
+    var tryAgainClicked: VoidClosure?
+    
     private var contentView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -52,16 +54,15 @@ final class LastresultView: UIView {
         button.setTitleColor(BaseColor.hex_5B67CA.uiColor(), for: .normal)
         button.titleLabel?.textAlignment = .left
         button.sizeToFit()
-        button.setImage(AppIcons.getIcon(.i_back_button), for: .normal)
-        button.imageEdgeInsets.left = 165
+        button.setImage(AppIcons.getIcon(.i_arrow_right), for: .normal)
+        button.semanticContentAttribute = .forceRightToLeft
         return button
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         addElements()
-        
-        circularProgressBar.setProgress(to: (0.65))
+        addTarget()
     }
     
     required init?(coder: NSCoder) {
@@ -69,6 +70,7 @@ final class LastresultView: UIView {
     }
     
     func configure(data: GetResultData) {
+        
         circularProgressBar.setProgress(to: Double(data.number_of_correct_answers ?? 1)/Double(data.number_of_questions ?? 2))
         
         switch data.level {
@@ -103,6 +105,7 @@ final class LastresultView: UIView {
         
         contentView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
+            make.height.greaterThanOrEqualToSuperview()
         }
         
         circularProgressBar.snp.makeConstraints { (make) in
@@ -130,13 +133,20 @@ final class LastresultView: UIView {
         categoriesChips.snp.makeConstraints { (make) in
             make.top.equalTo(circularProgressBar.snp.bottom).offset(10)
             make.left.right.equalToSuperview().inset(10)
-            make.bottom.lessThanOrEqualToSuperview()
         }
 
         tryAgainButton.snp.makeConstraints { (make) in
-            make.bottom.equalToSuperview().inset(16)
-            make.right.equalToSuperview().inset(32)
+            make.top.equalTo(categoriesChips.snp.bottom).offset(10)
+            make.bottom.equalToSuperview().offset(-16)
+            make.right.equalToSuperview().offset(-32)
         }
         
+    }
+    func addTarget() {
+        tryAgainButton.addTarget(self, action: #selector(tryAgainAction), for: .touchUpInside)
+    }
+    
+    @objc func tryAgainAction() {
+        tryAgainClicked?()
     }
 }

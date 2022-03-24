@@ -46,6 +46,19 @@ final class MainView: UIView {
         return label
     }()
     
+    private var authButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Войти и начать обучение", for: .normal)
+        button.titleLabel?.font = MainFont.medium(size: 18)
+        button.setTitleColor(BaseColor.hex_5B67CA.uiColor(), for: .normal)
+        button.titleLabel?.textAlignment = .left
+        button.sizeToFit()
+        button.setImage(AppIcons.getIcon(.i_arrow_right), for: .normal)
+        button.semanticContentAttribute = .forceRightToLeft
+        return button
+    }()
+   
+    
     private lazy var gridLayout: UICollectionViewFlowLayout = {
         
         let numberOfItemsInRow: CGFloat = 2
@@ -83,6 +96,7 @@ final class MainView: UIView {
         super.init(frame: frame)
         backgroundColor = BaseColor.hex_FFFFFF.uiColor()
         addElements()
+        addTarget()
     }
     
     required init?(coder: NSCoder) {
@@ -108,13 +122,13 @@ final class MainView: UIView {
         }
         
         titleLabel.snp.makeConstraints { (make) in
-            make.left.top.equalToSuperview().inset(16)
+            make.left.top.equalToSuperview().inset(21)
         }
 
-        subscribesButton.snp.makeConstraints { (make) in
-            make.centerY.equalTo(titleLabel)
-            make.right.equalToSuperview().inset(16)
-        }
+//        subscribesButton.snp.makeConstraints { (make) in
+//            make.centerY.equalTo(titleLabel)
+//            make.right.equalToSuperview().inset(16)
+//        }
 
         subTitleLabel.snp.makeConstraints { (make) in
             make.left.equalToSuperview().offset(21)
@@ -131,9 +145,30 @@ final class MainView: UIView {
     }
 
     func configure(elements: [MainStruct]) {
+        
+        if Keychain.shared.getUserName() != nil {
+            titleLabel.showView()
+            authButton.removeFromSuperview()
+            titleLabel.text = "Привет, \(Keychain.shared.getUserName() ?? "")!"
+        } else {
+            titleLabel.hideView()
+            contentView.addSubview(authButton)
+            authButton.snp.makeConstraints { (make) in
+                make.left.top.equalToSuperview().inset(21)
+            }
+        }
+        
         self.elements = elements
 
         mainCollectionView.reloadData()
+    }
+    
+    private func addTarget() {
+        authButton.addTarget(self, action: #selector(authAction), for: .touchUpInside)
+    }
+    
+    @objc func authAction() {
+        events.send(.switchToProfile)
     }
 
 }

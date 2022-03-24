@@ -10,14 +10,13 @@ import Combine
 
 final class ProfileViewController<View: ProfileView>: BaseViewController<View> {
     
-    private var items = ["gynecology","ophthalmology","stomatology"]
-    
     private var catalogProvider: CatalogProviderProtocol
     private var cancalables = Set<AnyCancellable>()
     
     var showFirstProfileScreen: VoidClosure?
     var showAlertDialogScreen: VoidClosure?
     var showChallengesScreen: VoidClosure?
+    var showQuizScreen: BoolClosure?
         
     init(catalogProvider: CatalogProviderProtocol) {
         self.catalogProvider = catalogProvider
@@ -30,14 +29,15 @@ final class ProfileViewController<View: ProfileView>: BaseViewController<View> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        showLoader(background: BaseColor.hex_FFFFFF.uiColor(), alfa: 1, presentationStyle: .fullScreen)
         hideNavBar()
-//        rootView.configureTags(items: items)
+        catalogProvider.getProfileData()
+        catalogProvider.getResult()
         subscribeForUpdates()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        catalogProvider.getProfileData()
         catalogProvider.getResult()
     }
     
@@ -72,6 +72,8 @@ final class ProfileViewController<View: ProfileView>: BaseViewController<View> {
             showAlertDialog()
         case .switchToTestClicked:
             showChallengesScreen?()
+        case .tryAgainClicked:
+            showQuizScreen?(true)
         default:
             break
         }

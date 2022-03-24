@@ -30,6 +30,7 @@ final class ProfileCoordinator: BaseCoordinator {
         let screen = screenFactory.makeProfileScreen()
         screen.showFirstProfileScreen = { [weak self] in self?.showFirstScreen() }
         screen.showChallengesScreen = { [weak self] in self?.switchToChallengesTab() }
+        screen.showQuizScreen = { [weak self] isLastTest in self?.showQuizScreen(isLast: isLastTest)}
         router.setRootModule(screen, hideBar: true)
     }
     
@@ -51,5 +52,11 @@ final class ProfileCoordinator: BaseCoordinator {
         let screen = screenFactory.makeRegisterScreen()
         screen.showMainPageProfileScreen = { [weak self] in self?.showProfileScreen() }
         router.push(screen)
+    }
+    
+    private func showQuizScreen(isLast: Bool) {
+        let screen = screenFactory.makeQuizScreen(id: 1, types: "", isLastTest: isLast)
+        screen.showRootScreen = { [weak self] in self?.switchToChallengesTab() }
+        router.push(screen, animated: true)
     }
 }
