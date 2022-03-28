@@ -22,11 +22,12 @@ final class QuizViewController<View: QuizView>: BaseViewController<View> {
     var timer = Timer()
     
     var showRootScreen: VoidClosure?
+    var showQuizScreen: BoolClosure?
     
     private var cancalables = Set<AnyCancellable>()
     private let catalogProvider: CatalogProviderProtocol
     
-    init(id: Int = 0, types: String = "", catalogProvider: CatalogProviderProtocol, isLastTest: Bool = false) {
+    init(id: Int = 1, types: String = "lor", catalogProvider: CatalogProviderProtocol, isLastTest: Bool = false) {
         self.types = types
         self.id = id
         self.catalogProvider = catalogProvider
@@ -40,7 +41,7 @@ final class QuizViewController<View: QuizView>: BaseViewController<View> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavigationBar()
+        configureNavigationBar(index: id)
         showLoader(background: .white, alfa: 1)
         if isLastTest == false {
             catalogProvider.getQuestionByTypeAndLevel(with: getQuestionByTypeAndLevelRequestParams(type: types, level: String(id)))
@@ -50,7 +51,6 @@ final class QuizViewController<View: QuizView>: BaseViewController<View> {
         subscribeForUpdates()
         startTimer()
         
-        print("****\(types)")
     }
     
     private func subscribeForUpdates() {
@@ -69,10 +69,10 @@ final class QuizViewController<View: QuizView>: BaseViewController<View> {
         super.viewWillDisappear(animated)
     }
     
-    private func configureNavigationBar() {
+    private func configureNavigationBar(index: Int) {
         navBar.backgroundColor = BaseColor.hex_5B67CA.uiColor()
         let button = UIButton()
-        let image = AppIcons.getIcon(.i_back_button).setColor(BaseColor.hex_FFFFFF.uiColor())
+        let image = AppIcons.getIcon(.i_back_button).withTintColor(.white)
         button.setImage(image, for: .normal)
         button.addTarget(self, action: #selector(backActn), for: .touchUpInside)
         button.snp.makeConstraints { (make) in
@@ -80,13 +80,26 @@ final class QuizViewController<View: QuizView>: BaseViewController<View> {
         }
         navBar.addItem(button, toPosition: .leftSide)
         
-        let titleView = NavigationBarTitle(title: "Уровень сложности: Сложный", subTitle: "")
+        let titleView = NavigationBarTitle(title: configureTitle(index: index), subTitle: "")
         titleView.titleLabel.textColor = .white
         navBar.addItem(titleView, toPosition: .title)
     }
     
     @objc private func backActn() {
         backActionClosure()
+    }
+    
+    private func configureTitle(index: Int) -> String {
+        switch index {
+        case 1:
+            return "Уровень сложности: Легкий"
+        case 2:
+            return "Уровень сложности: Средний"
+        case 3:
+            return "Уровень сложности: Сложный"
+        default:
+            return ""
+        }
     }
     
     private func onProviderEvents(_ event: CatalogProviderEvent){
@@ -130,6 +143,8 @@ final class QuizViewController<View: QuizView>: BaseViewController<View> {
                 for item in questions {
                     questionsString += "\(item.id ?? 0),"
                 }
+                #warning("заглушка, необходимо достать все типы и удалить повторяющиеся")
+                types = "lor"
             }
         default:
             break
@@ -139,11 +154,20 @@ final class QuizViewController<View: QuizView>: BaseViewController<View> {
     private func onViewEvents(_ event: QuizViewEvents) {
         switch event {
         case .finishQuiz:
+            if Keychain.shared.getUserToken() != nil {
             catalogProvider.setResult(with: SetResultRequestParams(level: String(id),
                                                                    categories: types,
                                                                    number_of_correct_answers: String(rootView.correctCount),
                                                                    number_of_questions: String(numberOfQuest),
-                                                                   questions: questionsString))
+                                                                   questions: String(questionsString.dropLast())))
+            } else {
+                let quizResult = QuizResult.init(time: ("\(minutes):\(seconds)"),
+                                                 level: String(id),
+                                                 categories: types,
+                                                 number_of_correct_answers: String(rootView.correctCount),
+                                                 number_of_questions: String(numberOfQuest))
+                showResultScreen(quizResult: quizResult)
+            }
         }
     }
     
@@ -173,7 +197,16 @@ final class QuizViewController<View: QuizView>: BaseViewController<View> {
         controller.modalPresentationStyle = .overFullScreen
         controller.modalTransitionStyle = .crossDissolve
         controller.okClicked = { [weak self] in self?.showRootScreen?() }
+        controller.tryAgainClicked = { [weak self] in self?.tryAgain() }
         present(controller, animated: true, completion: nil)
+    }
+    
+    private func tryAgain() {
+        minutes = 0
+        seconds = 0
+        startTimer()
+        rootView.reloadData()
+        catalogProvider.getLastTest()
     }
     
 }

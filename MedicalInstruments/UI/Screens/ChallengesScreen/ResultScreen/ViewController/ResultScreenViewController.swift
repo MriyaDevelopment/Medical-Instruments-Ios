@@ -12,6 +12,7 @@ final class QuizResultViewController<View: QuizResultView>: BaseViewController<V
     
     private var cancalables = Set<AnyCancellable>()
     var okClicked: VoidClosure?
+    var tryAgainClicked: VoidClosure?
 
     private var quizResult: QuizResult
     
@@ -44,6 +45,7 @@ final class QuizResultViewController<View: QuizResultView>: BaseViewController<V
         switch event {
         case .noButtonClicked:
             closeAlert()
+            tryAgainClicked?()
         case .yesButtonClicked:
             closeAlert()
             okClicked?()

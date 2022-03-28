@@ -181,6 +181,13 @@ final class QuizView: UIView {
         correctAnswer = question.true_answer ?? ""
     }
     
+    func reloadData() {
+        correctCount = 0
+        currentQuestion = 0
+        correctAnswer = ""
+        firstQuestion = true
+    }
+    
     func setTimer(min: Int, sec: Int) {
         var minuts = ""
         var seconds = ""

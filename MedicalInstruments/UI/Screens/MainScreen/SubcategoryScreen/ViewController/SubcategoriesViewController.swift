@@ -72,10 +72,12 @@ final class SubcategoriesViewController<View: SubcategoriesView>: BaseViewContro
     
     private func configureCollectionView(data: [MainCategory]){
         
-        for item in data {
+        let category: [CategorySurgery] = [ CategorySurgery.separating,  CategorySurgery.connecting, CategorySurgery.pushing, CategorySurgery.holding, CategorySurgery.stabbing]
+        
+        for (index, item) in data.enumerated() {
             elements.append(MainStruct.init(id: item.id ?? 0,
                                             backgroundImage: AppIcons.getIcon(.i_surgery_back),
-                                            iconImage: AppIcons.getIcon(.i_icon_surgery),
+                                            iconImage: category[index].getIcons(),
                                             type: item.type ?? "",
                                             titleText: item.name ?? "",
                                             subtitleText: "Инструментарий: \(String(item.number_of_questions ?? 0))"))
