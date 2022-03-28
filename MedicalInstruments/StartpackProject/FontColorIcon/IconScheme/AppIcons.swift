@@ -50,6 +50,11 @@ final class AppIcons {
         case i_syringe_back
         case i_urology_back
         case i_empty_fav
+        case i_surgery_separating
+        case i_surgery_connecting
+        case i_surgery_pushing
+        case i_surgery_holding
+        case i_sugery_stabbing
     }
     
     static func getIcon(_ type: iconsEnum) -> UIImage {
@@ -94,6 +99,11 @@ final class AppIcons {
         case .i_syringe_back: return UIImage(named: "i_syringe_back")!
         case .i_urology_back: return UIImage(named: "i_urology_back")!
         case .i_empty_fav: return UIImage(named: "i_empty_fav")!
+        case .i_surgery_separating: return UIImage(named: "i_surgery_separating")!
+        case .i_surgery_connecting: return UIImage(named: "i_surgery_connecting")!
+        case .i_surgery_pushing: return UIImage(named: "i_surgery_pushing")!
+        case .i_surgery_holding: return UIImage(named: "i_surgery_holding")!
+        case .i_sugery_stabbing: return UIImage(named: "i_sugery_stabbing")!
         }
     }
 }

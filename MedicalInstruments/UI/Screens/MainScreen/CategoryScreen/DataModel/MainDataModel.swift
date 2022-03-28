@@ -98,3 +98,26 @@ enum Category: String {
     }
     
 }
+
+enum CategorySurgery {
+    case separating
+    case connecting
+    case pushing
+    case holding
+    case stabbing
+    
+    func getIcons() -> UIImage {
+        switch self {
+        case .separating:
+            return AppIcons.getIcon(.i_surgery_separating)
+        case .connecting:
+            return AppIcons.getIcon(.i_surgery_connecting)
+        case .pushing:
+            return AppIcons.getIcon(.i_surgery_pushing)
+        case .holding:
+            return AppIcons.getIcon(.i_surgery_holding)
+        case .stabbing:
+            return AppIcons.getIcon(.i_sugery_stabbing)
+        }
+    }
+}

@@ -27,7 +27,9 @@ final class FavouritesViewController<View: FavouritesView>: BaseViewController<V
         showPreloader()
         hideNavBar()
         subscribeForUpdates()
-        catalogProvider.getFavourites()
+        if Keychain.shared.getUserToken() != nil {
+            catalogProvider.getFavourites()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,11 +42,6 @@ final class FavouritesViewController<View: FavouritesView>: BaseViewController<V
         catalogProvider.events.sink { [weak self] in self?.onProviderEvents($0) }.store(in: &cancalables)
         rootView.events.sink { [weak self] in self?.onViewEvents($0) }.store(in: &cancalables)
     }
-    
-//    private func configureNavigationBar() {
-//        let titleView = NavigationBarTitle(title: "Избранное", subTitle: "")
-//        navBar.addItem(titleView, toPosition: .title)
-//    }
     
     private func onProviderEvents(_ event: CatalogProviderEvent){
         switch event {

@@ -89,10 +89,6 @@ final class ProfileView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-//    func configureTags(items: [String]){
-//        lastResultView.configureTags(items: items)
-//    }
-    
     func configureBanner(data: GetResultResponse) {
         guard let levels = data.levels else {return}
         lastResultView.hideView()
