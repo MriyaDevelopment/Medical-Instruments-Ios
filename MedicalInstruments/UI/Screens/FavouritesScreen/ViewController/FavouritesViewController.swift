@@ -27,14 +27,16 @@ final class FavouritesViewController<View: FavouritesView>: BaseViewController<V
         showPreloader()
         hideNavBar()
         subscribeForUpdates()
-        if Keychain.shared.getUserToken() != nil {
-            catalogProvider.getFavourites()
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         showPreloader()
-        catalogProvider.getFavourites()
+        if Keychain.shared.getUserToken() != nil {
+            catalogProvider.getFavourites()
+        } else {
+            rootView.configureEmptyView()
+            rootView.configure(instruments: [])
+        }
         super.viewWillAppear(animated)
     }
     

@@ -40,6 +40,10 @@ final class FavouritesView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configureEmptyView() {
+        emptyView.configure()
+    }
+    
     func configure(instruments: [Instruments]) {
         if instruments.count > 0 {
             emptyView.hideView()

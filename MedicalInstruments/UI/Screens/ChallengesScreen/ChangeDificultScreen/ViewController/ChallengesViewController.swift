@@ -40,9 +40,7 @@ final class ChallengesViewController<View: ChallengesView>: BaseViewController<V
     private func onViewEvents(_ event: ChalengesViewEvent){
         switch event {
         case .cellClicked(let id):
-            if Keychain.shared.getUserToken() != nil {
-                showChangeCategoriesScreen?(id)
-            } else { showRegistrScreen?() }
+            showChangeCategoriesScreen?(id)
         }
         
     }

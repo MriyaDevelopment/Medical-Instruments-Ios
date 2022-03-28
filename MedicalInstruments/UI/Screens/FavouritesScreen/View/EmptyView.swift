@@ -43,6 +43,14 @@ final class EmptyView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configure() {
+        if Keychain.shared.getUserToken() == nil {
+            textLabel.text = "Здесь пока пусто!\n Чтобы добавлять инструменты в избранное\n необходимо авторизироваться."
+        } else {
+            textLabel.text = "Здесь пока пусто!\n Выбранные вами инструменты будут\n находится здесь."
+        }
+    }
+    
     private func addElements() {
         addSubview(contentView)
         contentView.addSubview(imageView)

@@ -59,6 +59,7 @@ final class QuizResultView: UIView {
     private var circularProgress: CircularProgressBar = {
         let view = CircularProgressBar()
         view.lineWidth = 9
+        view.labelSize = 24
         return view
     }()
     
@@ -83,7 +84,7 @@ final class QuizResultView: UIView {
         return button
     }()
     
-    private var noButton: UIButton = {
+    private var tryAgainButton: UIButton = {
         let button = UIButton()
         button.layer.borderWidth = 1
         button.layer.borderColor = BaseColor.hex_5B67CA.cgColor()
@@ -134,6 +135,10 @@ final class QuizResultView: UIView {
         let categories = quizResult.categories.components(separatedBy: ",")
         
         categoriesChips.configure(title: categories)
+        
+        if Keychain.shared.getUserToken() == nil {
+            tryAgainButton.removeFromSuperview()
+        }
     }
     
     private func addElements() {
@@ -146,7 +151,7 @@ final class QuizResultView: UIView {
         actionBlockBackView.addSubview(circularProgress)
         actionBlockBackView.addSubview(categoriesChips)
         actionBlockBackView.addSubview(buttonsStackView)
-        buttonsStackView.addArrangedSubview(noButton)
+        buttonsStackView.addArrangedSubview(tryAgainButton)
         buttonsStackView.addArrangedSubview(yesButton)
         
         makeConstraints()
@@ -200,7 +205,7 @@ final class QuizResultView: UIView {
     }
     
     private func addTarget() {
-        noButton.addTarget(self, action: #selector(noClickedAction), for: .touchUpInside)
+        tryAgainButton.addTarget(self, action: #selector(tryAgainAction), for: .touchUpInside)
         yesButton.addTarget(self, action: #selector(yesClickedAction), for: .touchUpInside)
     }
     
@@ -208,7 +213,7 @@ final class QuizResultView: UIView {
         events.send(.yesButtonClicked)
     }
     
-    @objc private func noClickedAction() {
+    @objc private func tryAgainAction() {
         events.send(.noButtonClicked)
     }
 }

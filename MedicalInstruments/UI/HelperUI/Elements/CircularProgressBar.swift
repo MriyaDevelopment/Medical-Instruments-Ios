@@ -83,7 +83,7 @@ class CircularProgressBar: UIView {
     private func drawBackgroundLayer(){
         let path = UIBezierPath(arcCenter: pathCenter, radius: self.radius, startAngle: 0, endAngle: 2*CGFloat.pi, clockwise: true)
         self.backgroundLayer.path = path.cgPath
-        self.backgroundLayer.strokeColor = UIColor.lightGray.cgColor
+        self.backgroundLayer.strokeColor = BaseColor.hex_5B67CA.cgColor().copy(alpha: 0.25)
         self.backgroundLayer.lineWidth = lineWidth - (lineWidth * 2/100)
         self.backgroundLayer.fillColor = UIColor.clear.cgColor
         self.layer.addSublayer(backgroundLayer)
