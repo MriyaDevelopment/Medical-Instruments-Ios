@@ -12,7 +12,7 @@ final class QuizResultView: UIView {
     
     let events = PassthroughSubject<MainPageViewEvent, Never>()
     
-    private let visibleStateAlpha: CGFloat = 0.2
+    private let visibleStateAlpha: CGFloat = 0.4
     
     private var actionBlockBackView: UIButton = {
         let view = UIButton()
@@ -44,7 +44,7 @@ final class QuizResultView: UIView {
     
     private var timerImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = AppIcons.getIcon(.i_timerImage).setColor(BaseColor.hex_5B67CA.uiColor())
+        imageView.image = AppIcons.getIcon(.i_timerImage).withTintColor(BaseColor.hex_5B67CA.uiColor())
         return imageView
     }()
     

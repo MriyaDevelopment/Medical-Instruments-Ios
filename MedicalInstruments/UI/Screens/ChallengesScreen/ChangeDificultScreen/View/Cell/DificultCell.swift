@@ -38,7 +38,7 @@ final class DuficultTableViewCell: UITableViewCell {
     private var subtitleLabel: UILabel = {
         let label = UILabel()
         label.font = MainFont.medium(size: 14)
-        label.textColor = BaseColor.hex_232324.uiColor()
+        label.textColor = UIColor(red: 0.118, green: 0.12, blue: 0.144, alpha: 1)
         label.text = "25 вопросов"
         label.numberOfLines = 0
         return label
@@ -80,7 +80,7 @@ final class DuficultTableViewCell: UITableViewCell {
         case 0:
             color = BaseColor.hex_5B67CA.uiColor()
             image = AppIcons.getIcon(.i_default_image)
-            title = "Легккий уровень"
+            title = "Легкий уровень"
         case 1:
             color = BaseColor.hex_7FC9E7.uiColor()
             image = AppIcons.getIcon(.i_midDificult)
@@ -101,6 +101,7 @@ final class DuficultTableViewCell: UITableViewCell {
         backView.backgroundColor = color.withAlphaComponent(0.25)
         instrumentImageView.image = AppIcons.getIcon(.i_default_image).setColor(color)
         nextButton.setTitleColor(color, for: .normal)
+        nextButton.setImage(AppIcons.getIcon(.i_arrow_right).withTintColor(color), for: .normal)
     }
    
     private func addElements() {

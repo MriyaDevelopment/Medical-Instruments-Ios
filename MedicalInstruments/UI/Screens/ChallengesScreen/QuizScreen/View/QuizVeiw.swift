@@ -272,13 +272,13 @@ final class QuizView: UIView {
         firstStackView.snp.makeConstraints{ (make) in
             make.top.equalTo(instrumentImageView.snp.bottom).offset(30)
             make.right.left.equalToSuperview().inset(16)
-            make.height.equalTo(51)
+            make.height.greaterThanOrEqualTo(51)
         }
         
         secondStackView.snp.makeConstraints{ (make) in
             make.top.equalTo(firstStackView.snp.bottom).offset(16)
             make.right.left.equalToSuperview().inset(16)
-            make.height.equalTo(51)
+            make.height.greaterThanOrEqualTo(51)
         }
         
         firstAnswerButton.snp.makeConstraints{ (make) in

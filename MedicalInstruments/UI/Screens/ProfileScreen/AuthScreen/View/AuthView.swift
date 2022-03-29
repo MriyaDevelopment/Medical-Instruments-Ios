@@ -36,13 +36,31 @@ final class AuthView: UIView {
         return button
     }()
     
+    private var forgotPasswordButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Забыли пароль?", for: .normal)
+        button.setTitleColor(BaseColor.hex_5B67CA.uiColor(), for: .normal)
+        button.titleLabel?.font = MainFont.medium(size: 12)
+        return button
+    }()
+    
+    private var regLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Еще нет аккаунта?"
+        label.textColor = BaseColor.hex_5B67CA.uiColor()
+        label.font = MainFont.medium(size: 15)
+        return label
+    }()
+    
     private var registrationButton: UIButton = {
         let button = UIButton()
         button.setTitle("Зарегистрироваться", for: .normal)
         button.setTitleColor(BaseColor.hex_5B67CA.uiColor(), for: .normal)
-        button.titleLabel?.font = MainFont.medium(size: 14)
+        button.titleLabel?.font = MainFont.medium(size: 15)
         return button
     }()
+    
+    let bottomView = UIView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -61,7 +79,10 @@ final class AuthView: UIView {
         contentView.addSubview(emailInputForm)
         contentView.addSubview(passwordInputForm)
         contentView.addSubview(authButton)
-        contentView.addSubview(registrationButton)
+        contentView.addSubview(bottomView)
+        contentView.addSubview(forgotPasswordButton)
+        bottomView.addSubview(registrationButton)
+        bottomView.addSubview(regLabel)
         
         makeConstraints()
     }
@@ -81,15 +102,29 @@ final class AuthView: UIView {
             make.top.equalTo(emailInputForm.snp.bottom).offset(20)
         }
         
+        forgotPasswordButton.snp.makeConstraints{ (make) in
+            make.right.equalToSuperview().inset(16)
+            make.top.equalTo(passwordInputForm.snp.bottom)
+        }
+        
         authButton.snp.makeConstraints{ (make) in
             make.left.right.equalToSuperview().inset(16)
-            make.top.equalTo(passwordInputForm.snp.bottom).offset(20)
+            make.top.equalTo(passwordInputForm.snp.bottom).offset(40)
             make.height.equalTo(50)
         }
         
-        registrationButton.snp.makeConstraints {(make) in
+        bottomView.snp.makeConstraints {(make) in
             make.bottom.equalToSuperview().inset(16)
             make.centerX.equalToSuperview()
+        }
+        
+        regLabel.snp.makeConstraints {(make) in
+            make.left.top.bottom.equalToSuperview()
+        }
+        
+        registrationButton.snp.makeConstraints {(make) in
+            make.left.equalTo(regLabel.snp.right).offset(10)
+            make.right.top.bottom.equalToSuperview()
         }
         
     }

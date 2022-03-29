@@ -30,7 +30,6 @@ final class FavouritesViewController<View: FavouritesView>: BaseViewController<V
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        showPreloader()
         if Keychain.shared.getUserToken() != nil {
             catalogProvider.getFavourites()
         } else {
