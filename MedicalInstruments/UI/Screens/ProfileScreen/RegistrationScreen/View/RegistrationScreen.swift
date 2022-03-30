@@ -19,7 +19,7 @@ final class RegistrationView: UIView {
     }()
     
     var nameInputForm: InputForm = {
-        let inputForm = InputForm(type: .text, isRequired: true, placeholder: "Ваше имя")
+        let inputForm = InputForm(type: .name, isRequired: true, placeholder: "Ваше имя")
         return inputForm
     }()
     

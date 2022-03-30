@@ -58,6 +58,7 @@ final class FavouritesViewController<View: FavouritesView>: BaseViewController<V
             guard let data = response.instruments else { return }
             rootView.configure(instruments: data)
         case .success:
+            dismissPreloader()
             catalogProvider.getFavourites()
         default:
             break
@@ -69,6 +70,7 @@ final class FavouritesViewController<View: FavouritesView>: BaseViewController<V
         case .setLike(let id, let isSurgery):
             catalogProvider.setLike(with: SetLikeRequestParams(instrument_id: String(id), is_surgery: String(isSurgery)))
         case .removeLike(let id, let isSurgery):
+            showPreloader()
             catalogProvider.removeLike(with: RemoveLikeRequestParams(instrument_id: String(id), is_surgery: String(isSurgery)))
         }
     }

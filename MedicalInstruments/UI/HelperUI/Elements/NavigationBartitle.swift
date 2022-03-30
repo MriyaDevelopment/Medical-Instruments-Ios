@@ -27,20 +27,20 @@ final class NavigationBarTitle: UIView {
     var titleLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
-        label.textColor = BaseColor.hex_232324.uiColor()
+        label.textColor = BaseColor.hex_5B67CA.uiColor()
         label.font = MainFont.regular(size: 20)
         label.sizeToFit()
-        label.textAlignment = .center
+        label.textAlignment = .left
         return label
     }()
     
     var subTitleLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
-        label.textColor = BaseColor.hex_65676B.uiColor()
+        label.textColor = BaseColor.hex_5B67CA.uiColor()
         label.font = MainFont.regular(size: 14)
         label.sizeToFit()
-        label.textAlignment = .center
+        label.textAlignment = .left
         return label
     }()
     
@@ -84,8 +84,8 @@ final class NavigationBarTitle: UIView {
         }
         
         stackView.snp.makeConstraints { (make) in
-            make.top.left.greaterThanOrEqualToSuperview()
-            make.bottom.right.lessThanOrEqualToSuperview()
+            make.top.left.equalToSuperview()
+            make.bottom.right.greaterThanOrEqualToSuperview()
             make.center.equalToSuperview()
         }
     }

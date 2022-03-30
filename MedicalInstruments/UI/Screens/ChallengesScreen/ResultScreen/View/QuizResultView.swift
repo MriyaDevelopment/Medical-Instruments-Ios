@@ -12,7 +12,7 @@ final class QuizResultView: UIView {
     
     let events = PassthroughSubject<MainPageViewEvent, Never>()
     
-    private let visibleStateAlpha: CGFloat = 0.4
+    private let visibleStateAlpha: CGFloat = 0.8
     
     private var actionBlockBackView: UIButton = {
         let view = UIButton()

@@ -61,11 +61,11 @@ extension InputForm {
         
         textField.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
-            make.centerY.equalToSuperview().offset(6)
+            make.centerY.equalToSuperview()
         }
         
         titleLabel.snp.makeConstraints { (make) in
-            make.left.equalToSuperview()
+            make.left.equalToSuperview().offset(24)
             make.right.lessThanOrEqualToSuperview()
             make.centerY.equalToSuperview()
         }
