@@ -19,6 +19,7 @@ enum BaseColor {
     static let hex_E880CB = SchemeColor(dark: Dark.hex_E880CB, light: Light.hex_E880CB)
     static let hex_CC825F = SchemeColor(dark: Dark.hex_CC825F, light: Light.hex_CC825F)
     static let hex_BE7EE7 = SchemeColor(dark: Dark.hex_BE7EE7, light: Light.hex_BE7EE7)
+    static let hex_F2F3F7 = SchemeColor(dark: Dark.hex_F2F3F7, light: Light.hex_F2F3F7)
     
     
     static let hex_3FAC3B = SchemeColor(dark: Dark.hex_3FAC3B, light: Light.hex_3FAC3B)
@@ -134,7 +135,7 @@ enum BaseColor {
         static let hex_E880CB = UIColor(red: 0.91, green: 0.502, blue: 0.796, alpha: 1)
         static let hex_CC825F = UIColor(red: 0.8, green: 0.51, blue: 0.373, alpha: 1)
         static let hex_BE7EE7 = UIColor(red: 0.745, green: 0.494, blue: 0.906, alpha: 1)
-        
+        static let hex_F2F3F7 = UIColor(red: 0.951, green: 0.952, blue: 0.97, alpha: 1)
         
         static let hex_3FAC3B = UIColor(red: 0.247, green: 0.675, blue: 0.231, alpha: 1)
         static let hex_151515 = UIColor(red: 0.083, green: 0.083, blue: 0.083, alpha: 1)
@@ -234,7 +235,7 @@ enum BaseColor {
         static let hex_E880CB = UIColor(red: 0.91, green: 0.502, blue: 0.796, alpha: 1)
         static let hex_CC825F = UIColor(red: 0.8, green: 0.51, blue: 0.373, alpha: 1)
         static let hex_BE7EE7 = UIColor(red: 0.745, green: 0.494, blue: 0.906, alpha: 1)
-        
+        static let hex_F2F3F7 = UIColor(red: 0.951, green: 0.952, blue: 0.97, alpha: 1)
         
         static let hex_3FAC3B = UIColor(red: 0.247, green: 0.675, blue: 0.231, alpha: 1)
         static let hex_151515 = UIColor(red: 0.083, green: 0.083, blue: 0.083, alpha: 1)

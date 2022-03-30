@@ -48,7 +48,7 @@ extension InputForm {
         titleLabel.transform = transform
         
         titleLabel.textColor = BaseColor.hex_747474.uiColor()
-        //self.isAlreadyAnimated = true
+//        self.isAlreadyAnimated = true
     }
     
     func setEmptyState() {

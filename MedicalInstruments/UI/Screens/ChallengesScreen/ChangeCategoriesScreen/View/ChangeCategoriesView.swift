@@ -30,6 +30,8 @@ final class ChangeCategoriesView: UIView {
         button.setTitle("Начать", for: .normal)
         button.titleLabel?.font = MainFont.medium(size: 16)
         button.setTitleColor(BaseColor.hex_5B67CA.uiColor(), for: .normal)
+        button.setImage(AppIcons.getIcon(.i_arrow_right), for: .normal)
+        button.semanticContentAttribute = .forceRightToLeft
         button.titleLabel?.textAlignment = .left
         button.isUserInteractionEnabled = true
         return button

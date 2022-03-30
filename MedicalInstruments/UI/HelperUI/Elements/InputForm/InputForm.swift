@@ -67,8 +67,8 @@ class InputForm: UIView {
                 warningBorderView.layer.borderColor = BaseColor.hex_FF5F22.cgColor()
                 warningBorderView.layer.borderWidth = 1
             case .normal:
-                warningBorderView.layer.borderWidth = 1
-                warningBorderView.layer.borderColor = BaseColor.hex_ECEDF0.cgColor()
+                warningBorderView.layer.borderWidth = 0
+//                warningBorderView.layer.borderColor = BaseColor.hex_ECEDF0.cgColor()
                 messageLabel.isHidden = true
             default:
                 break
@@ -97,7 +97,7 @@ class InputForm: UIView {
     
     let backView: UIView = {
         let view = UIView()
-        view.backgroundColor = BaseColor.hex_FFFFFF.uiColor()
+        view.backgroundColor = BaseColor.hex_F2F3F7.uiColor()
         
         return view
     }()
@@ -286,6 +286,11 @@ class InputForm: UIView {
     private func configure() {
         switch type {
         case .email:
+            let image = AppIcons.getIcon(.i_email_icon);
+            let imageView = UIImageView()
+            imageView.image = image
+            textField.leftViewMode = .always
+            textField.leftView = imageView
             textField.keyboardType = .emailAddress
             textField.textContentType = .emailAddress
             textField.autocapitalizationType = .none
@@ -308,6 +313,11 @@ class InputForm: UIView {
             predicate = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
             
         case .name:
+            let image = AppIcons.getIcon(.i_profile);
+            let imageView = UIImageView()
+            imageView.image = image
+            textField.leftViewMode = .always
+            textField.leftView = imageView
             textField.autocapitalizationType = .words
         case .postalCode:
             textField.keyboardType = .numberPad
@@ -320,6 +330,11 @@ class InputForm: UIView {
             inputMask.listener = self
         
         case .password:
+            let image = AppIcons.getIcon(.i_password_icon);
+            let imageView = UIImageView()
+            imageView.image = image
+            textField.leftViewMode = .always
+            textField.leftView = imageView
             textField.isSecureTextEntry = true
             textField.autocapitalizationType = .none
         default:

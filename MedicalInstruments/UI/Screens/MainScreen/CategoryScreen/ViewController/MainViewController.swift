@@ -36,6 +36,7 @@ final class MainViewController<View: MainView>: BaseViewController<View> {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        rootView.configureTitle()
         super.viewWillAppear(animated)
     }
     

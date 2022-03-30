@@ -18,7 +18,7 @@ final class MainCollectionViewCell: UICollectionViewCell {
     
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 12)
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textColor = BaseColor.hex_232324.uiColor()
         label.text = "Общая хирургия"
         label.numberOfLines = 2

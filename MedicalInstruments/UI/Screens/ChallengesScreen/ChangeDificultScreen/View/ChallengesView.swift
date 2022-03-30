@@ -19,9 +19,9 @@ final class ChallengesView: UIView {
     
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = MainFont.regular(size: 18)
+        label.font = UIFont(name:"HelveticaNeue-Bold", size: 18.0)
         label.textColor = BaseColor.hex_5B67CA.uiColor()
-        label.text = "Проверь свои знания"
+        label.text = "Проверь свои знания!"
         label.textAlignment = .left
         return label
     }()

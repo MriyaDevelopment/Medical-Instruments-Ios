@@ -54,9 +54,19 @@ final class FirstView: UIView {
         let button = UIButton()
         button.setTitle("Зарегистрироваться", for: .normal)
         button.setTitleColor(BaseColor.hex_5B67CA.uiColor(), for: .normal)
-        button.titleLabel?.font = MainFont.medium(size: 14)
+        button.titleLabel?.font = MainFont.medium(size: 15)
         return button
     }()
+    
+    private var regLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Еще нет аккаунта?"
+        label.textColor = BaseColor.hex_5B67CA.uiColor()
+        label.font = MainFont.medium(size: 15)
+        return label
+    }()
+    
+    let bottomView = UIView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -76,7 +86,9 @@ final class FirstView: UIView {
         contentView.addSubview(logoImageView)
         contentView.addSubview(textLabel)
         contentView.addSubview(authButton)
-        contentView.addSubview(registrationButton)
+        contentView.addSubview(bottomView)
+        bottomView.addSubview(registrationButton)
+        bottomView.addSubview(regLabel)
         
         makeConstraints()
     }
@@ -88,14 +100,14 @@ final class FirstView: UIView {
         }
         
         titleImageView.snp.makeConstraints {(make) in
-            make.left.right.top.equalToSuperview().inset(16)
+            make.left.right.top.equalToSuperview().inset(24)
             make.height.equalTo(240)
         }
         
         logoImageView.snp.makeConstraints {(make) in
             make.top.equalTo(titleImageView.snp.bottom).offset(16)
             make.centerX.equalToSuperview()
-            make.width.height.equalTo(80)
+            make.width.height.equalTo(120)
         }
         
         textLabel.snp.makeConstraints {(make) in
@@ -109,9 +121,18 @@ final class FirstView: UIView {
             make.height.equalTo(50)
         }
         
-        registrationButton.snp.makeConstraints {(make) in
+        bottomView.snp.makeConstraints {(make) in
             make.bottom.equalToSuperview().inset(16)
             make.centerX.equalToSuperview()
+        }
+        
+        regLabel.snp.makeConstraints {(make) in
+            make.left.top.bottom.equalToSuperview()
+        }
+        
+        registrationButton.snp.makeConstraints {(make) in
+            make.left.equalTo(regLabel.snp.right).offset(10)
+            make.right.top.bottom.equalToSuperview()
         }
         
     }

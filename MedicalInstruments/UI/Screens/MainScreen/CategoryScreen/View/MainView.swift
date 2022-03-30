@@ -143,9 +143,8 @@ final class MainView: UIView {
         }
 
     }
-
-    func configure(elements: [MainStruct]) {
-        
+    
+    func configureTitle() {
         if Keychain.shared.getUserName() != nil {
             titleLabel.showView()
             authButton.removeFromSuperview()
@@ -157,7 +156,9 @@ final class MainView: UIView {
                 make.left.top.equalToSuperview().inset(21)
             }
         }
-        
+    }
+
+    func configure(elements: [MainStruct]) {
         self.elements = elements
 
         mainCollectionView.reloadData()

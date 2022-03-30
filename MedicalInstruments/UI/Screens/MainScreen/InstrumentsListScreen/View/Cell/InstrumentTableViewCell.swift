@@ -122,8 +122,8 @@ final class InstrumentTableViewCell: UITableViewCell {
         }
         
         likeButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(15)
-            make.right.equalToSuperview().inset(9)
+            make.bottom.equalToSuperview().inset(15)
+            make.right.equalToSuperview().inset(5)
             make.height.width.equalTo(32)
         }
         
@@ -148,7 +148,7 @@ final class InstrumentTableViewCell: UITableViewCell {
         
         descriptionLabel.snp.makeConstraints{ (make) in
             make.left.equalTo(lineView).offset(10)
-            make.right.equalToSuperview().inset(20)
+            make.right.equalToSuperview().inset(40)
             make.top.equalTo(lineView.snp.top)
             make.bottom.equalTo(lineView.snp.bottom)
         }

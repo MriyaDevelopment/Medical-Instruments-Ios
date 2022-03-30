@@ -29,7 +29,7 @@ final class ProfileViewController<View: ProfileView>: BaseViewController<View> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        showLoader(background: BaseColor.hex_FFFFFF.uiColor(), alfa: 1, presentationStyle: .fullScreen)
+//        showLoader(background: BaseColor.hex_FFFFFF.uiColor(), alfa: 1, presentationStyle: .fullScreen)
         hideNavBar()
         catalogProvider.getProfileData()
         catalogProvider.getResult()
@@ -39,8 +39,6 @@ final class ProfileViewController<View: ProfileView>: BaseViewController<View> {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         catalogProvider.getResult()
-        
-        print("****\(Keychain.shared.getUserToken())")
     }
     
     private func subscribeForUpdates() {

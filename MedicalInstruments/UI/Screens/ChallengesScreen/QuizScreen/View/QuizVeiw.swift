@@ -272,13 +272,13 @@ final class QuizView: UIView {
         firstStackView.snp.makeConstraints{ (make) in
             make.top.equalTo(instrumentImageView.snp.bottom).offset(30)
             make.right.left.equalToSuperview().inset(16)
-            make.height.equalTo(51)
+            make.height.greaterThanOrEqualTo(60)
         }
         
         secondStackView.snp.makeConstraints{ (make) in
             make.top.equalTo(firstStackView.snp.bottom).offset(16)
             make.right.left.equalToSuperview().inset(16)
-            make.height.equalTo(51)
+            make.height.greaterThanOrEqualTo(60)
         }
         
         firstAnswerButton.snp.makeConstraints{ (make) in
@@ -353,13 +353,11 @@ final class QuizView: UIView {
         disableButton()
         if button.titleLabel?.text == correctAnswer {
             button.flash()
-            button.backgroundColor = BaseColor.hex_81E89E.uiColor().withAlphaComponent(0.25)
             button.layer.borderColor = BaseColor.hex_81E89E.cgColor()
             button.layer.borderWidth = 2
             correctCount += 1
         } else {
             button.shake()
-            button.backgroundColor = BaseColor.hex_E77D7D.uiColor().withAlphaComponent(0.25)
             button.layer.borderColor = BaseColor.hex_E77D7D.cgColor()
             button.layer.borderWidth = 2
         }

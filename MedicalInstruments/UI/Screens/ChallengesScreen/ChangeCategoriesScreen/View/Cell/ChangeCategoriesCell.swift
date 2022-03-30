@@ -48,6 +48,7 @@ final class ChangeCategoriesCell: UITableViewCell {
         let image = UIImageView()
         image.image = AppIcons.getIcon(.i_locked)
         image.clipsToBounds = true
+        image.hideView()
         return image
     }()
     
