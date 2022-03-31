@@ -25,6 +25,7 @@ protocol CatalogProviderProtocol {
     func removeLike(with params: RemoveLikeRequestParams)
     func getFavourites()
     func getLastTest()
+    func getLevels()
 }
 
 final class CatalogProviderImpl: CatalogProviderProtocol {
@@ -36,6 +37,7 @@ final class CatalogProviderImpl: CatalogProviderProtocol {
     private var userDataRequest: AnyCancellable?
     private var resultRequest: AnyCancellable?
     private var favRequest: AnyCancellable?
+    private var levelsRequest: AnyCancellable?
 
     init(catalogService: CatalogServiceProtocol) {
         self.catalogService = catalogService
@@ -385,6 +387,31 @@ final class CatalogProviderImpl: CatalogProviderProtocol {
                 }
             })
     }
+    
+    func getLevels() {
+        levelsRequest?.cancel()
+        
+        levelsRequest = catalogService.getLevels()
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { [weak self] result in
+                guard let self = self, case .failure(let error) = result else { return }
+                self.events.send(.error(error))
+                
+            }, receiveValue: { [weak self] result in
+                guard let self = self else { return }
+                
+                switch result.result {
+                case "error":
+                    self.events.send(.errorMessage(result.error))
+                case "success":
+                    self.events.send(.levelsLoaded(result))
+                default:
+                    break
+                }
+            })
+    }
+    
+
   
     
 }
@@ -405,4 +432,5 @@ enum CatalogProviderEvent {
     case getResultLoaded(_ response: GetResultResponse)
     case favouritesLoaded(_ response: GetFavouritesResponse)
     case lastTestLoaded(_ response: GetLastTestResponse)
+    case levelsLoaded(_ response: GetLevelsResponse)
 }

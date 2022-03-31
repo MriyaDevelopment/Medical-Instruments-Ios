@@ -38,7 +38,9 @@ final class ProfileViewController<View: ProfileView>: BaseViewController<View> {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        catalogProvider.getResult()
+        if Keychain.shared.getUserToken() != nil {
+            catalogProvider.getResult()
+        }
     }
     
     private func subscribeForUpdates() {
@@ -60,6 +62,7 @@ final class ProfileViewController<View: ProfileView>: BaseViewController<View> {
             guard let data = response.user?.first else { return }
             rootView.configureProfile(data: data)
         case .getResultLoaded(let response):
+            rootView.removeElements()
             rootView.configureBanner(data: response)
         default:
             break

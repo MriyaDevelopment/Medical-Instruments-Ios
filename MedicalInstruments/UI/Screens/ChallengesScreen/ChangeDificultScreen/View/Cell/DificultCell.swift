@@ -72,7 +72,7 @@ final class DuficultTableViewCell: UITableViewCell {
         super.layoutSubviews()
     }
     
-    func configure(index: Int){
+    func configure(index: Int, level: Levels){
         var color = UIColor()
         var image = UIImage()
         var title = String()
@@ -92,6 +92,7 @@ final class DuficultTableViewCell: UITableViewCell {
         default:
             break
         }
+        subtitleLabel.text = String(level.number_of_questions ?? 0) + " вопросов"
         configureColor(color: color)
         instrumentImageView.image = image
         titleLabel.text = title

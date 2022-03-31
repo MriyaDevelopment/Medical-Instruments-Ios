@@ -148,6 +148,7 @@ final class QuizView: UIView {
         button.sizeToFit()
         button.setImage(AppIcons.getIcon(.i_arrow_right), for: .normal)
         button.semanticContentAttribute = .forceRightToLeft
+        button.isUserInteractionEnabled = false
         return button
     }()
     
@@ -173,10 +174,10 @@ final class QuizView: UIView {
         progressBar.setProgress(( Float(currentQuestion + 1) / Float(questions.count)), animated: true)
         instrumentImageView.loadImage(by: question.question ?? "")
         
-        firstAnswerButton.setTitle(question.answer_one, for: .normal)
-        secondAnswerButton.setTitle(question.answer_two, for: .normal)
-        thirdAnswerButton.setTitle(question.answer_three, for: .normal)
-        fourthAnswerButton.setTitle(question.answer_four, for: .normal)
+        firstAnswerButton.setTitle(" " + (question.answer_one ?? "") + " ", for: .normal)
+        secondAnswerButton.setTitle(" " + (question.answer_two ?? "") + " ", for: .normal)
+        thirdAnswerButton.setTitle(" " + (question.answer_three ?? "") + " ", for: .normal)
+        fourthAnswerButton.setTitle(" " + (question.answer_four ?? "") + " ", for: .normal)
         
         correctAnswer = question.true_answer ?? ""
     }
@@ -361,6 +362,7 @@ final class QuizView: UIView {
             button.layer.borderColor = BaseColor.hex_E77D7D.cgColor()
             button.layer.borderWidth = 2
         }
+        nextButton.isUserInteractionEnabled = true
     }
     
     private func setDefaultButton() {
@@ -373,6 +375,7 @@ final class QuizView: UIView {
             button.backgroundColor = .white
             button.isUserInteractionEnabled = true
         }
+        nextButton.isUserInteractionEnabled = false
     }
     
     private func disableButton() {

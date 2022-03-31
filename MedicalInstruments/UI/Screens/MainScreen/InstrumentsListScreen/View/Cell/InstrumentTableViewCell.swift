@@ -85,7 +85,7 @@ final class InstrumentTableViewCell: UITableViewCell {
     }
     
     func configure(data: Instruments){
-        titleLabel.text = data.title
+        titleLabel.text = data.title?.firstCapitalized
         instrumentImageView.loadImage(by: data.image ?? "")
         descriptionLabel.text = data.full_text
         isLiked = data.is_liked ?? false
@@ -123,7 +123,7 @@ final class InstrumentTableViewCell: UITableViewCell {
         
         likeButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(15)
-            make.right.equalToSuperview().inset(5)
+            make.right.equalToSuperview().inset(9)
             make.height.width.equalTo(32)
         }
         
@@ -172,4 +172,9 @@ final class InstrumentTableViewCell: UITableViewCell {
         }
        
     }
+}
+
+extension StringProtocol {
+    var firstUppercased: String { prefix(1).uppercased() + dropFirst() }
+    var firstCapitalized: String { prefix(1).capitalized + dropFirst() }
 }
