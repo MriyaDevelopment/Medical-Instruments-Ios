@@ -143,12 +143,29 @@ final class QuizViewController<View: QuizView>: BaseViewController<View> {
                 for item in questions {
                     questionsString += "\(item.id ?? 0),"
                 }
-                #warning("заглушка, необходимо достать все типы и удалить повторяющиеся")
-                types = "lor"
+//                #warning("заглушка, необходимо достать все типы и удалить повторяющиеся")
+                types = getTypes(questions: questions)
+                print("****\(getTypes(questions: questions))")
             }
         default:
             break
         }
+    }
+    
+    private func getTypes(questions: [Questions]) -> String {
+        var string = ""
+        for question in questions {
+            string.append((question.type ?? "") + " ")
+        }
+    
+        let stringArray = string.dropLast().components(separatedBy: " ")
+        let filteredArray = Array(NSOrderedSet(array: stringArray))
+        var types = ""
+        for item in filteredArray {
+            types.append(item as! String + ",")
+        }
+        let result = types.dropLast()
+        return String(result)
     }
     
     private func onViewEvents(_ event: QuizViewEvents) {

@@ -128,15 +128,14 @@ final class InstrumentTableViewCell: UITableViewCell {
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(20)
-            make.right.equalTo(likeButton.snp.left)
+            make.left.right.equalToSuperview().inset(20)
             make.top.equalToSuperview().offset(15)
         }
         
         instrumentImageView.snp.makeConstraints{ (make) in
             make.centerX.equalToSuperview()
             make.top.equalTo(titleLabel.snp.bottom).offset(15)
-            make.height.width.equalTo(125)
+            make.height.width.equalTo(155)
         }
         
         lineView.snp.makeConstraints{ (make) in

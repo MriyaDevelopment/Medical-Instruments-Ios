@@ -61,7 +61,7 @@ final class InstrumentListView: UIView {
         
         instrumentTableView.snp.makeConstraints{ (make) in
             make.left.right.equalToSuperview()
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().offset(5)
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
         }
         

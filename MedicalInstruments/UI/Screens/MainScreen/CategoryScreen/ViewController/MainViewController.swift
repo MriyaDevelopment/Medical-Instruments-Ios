@@ -78,9 +78,6 @@ final class MainViewController<View: MainView>: BaseViewController<View> {
     
     private func configureCollectionView(data: [MainCategory]){
         
-//        let backImages = [AppIcons.getIcon(.i_surgery_back), AppIcons.getIcon(.i_dentistry), AppIcons.getIcon(.i_AiG),  AppIcons.getIcon(.i_neurosurgery), AppIcons.getIcon(.i_ophthalmology),AppIcons.getIcon(.i_otorhinolaryngology),AppIcons.getIcon(.i_syringe_back),AppIcons.getIcon(.i_urology_back)]
-//        let icons = [AppIcons.getIcon(.i_icon_surgery), AppIcons.getIcon(.i_icon_dentisty), AppIcons.getIcon(.i_icon_aig), AppIcons.getIcon(.i_icon_neuro), AppIcons.getIcon(.i_icon_oftalm), AppIcons.getIcon(.i_icon_otorin), AppIcons.getIcon(.i_icon_syringe), AppIcons.getIcon(.i_icon_urology)]
-        
         let category: [Category] = [ Category.surgery, Category.stomatology, Category.gynecology, Category.neuro, Category.lor, Category.urology, Category.ophthalmology, Category.anesthesiology]
         
         elements.removeAll()

@@ -100,7 +100,8 @@ final class MainCollectionViewCell: UICollectionViewCell {
         
         subtitleLabel.snp.makeConstraints { (make) in
             make.left.equalToSuperview().inset(12)
-            make.right.bottom.equalToSuperview().inset(14)
+            make.top.greaterThanOrEqualTo(titleLabel.snp.bottom).offset(3)
+            make.right.bottom.equalToSuperview().offset(-10)
         }
         
     }
