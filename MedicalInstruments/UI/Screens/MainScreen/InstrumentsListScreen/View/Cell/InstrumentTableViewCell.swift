@@ -85,7 +85,7 @@ final class InstrumentTableViewCell: UITableViewCell {
     }
     
     func configure(data: Instruments){
-        titleLabel.text = data.title
+        titleLabel.text = data.title?.firstCapitalized
         instrumentImageView.loadImage(by: data.image ?? "")
         descriptionLabel.text = data.full_text
         isLiked = data.is_liked ?? false
@@ -172,4 +172,9 @@ final class InstrumentTableViewCell: UITableViewCell {
         }
        
     }
+}
+
+extension StringProtocol {
+    var firstUppercased: String { prefix(1).uppercased() + dropFirst() }
+    var firstCapitalized: String { prefix(1).capitalized + dropFirst() }
 }
