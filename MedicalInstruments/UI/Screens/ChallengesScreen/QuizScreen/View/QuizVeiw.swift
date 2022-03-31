@@ -174,10 +174,10 @@ final class QuizView: UIView {
         progressBar.setProgress(( Float(currentQuestion + 1) / Float(questions.count)), animated: true)
         instrumentImageView.loadImage(by: question.question ?? "")
         
-        firstAnswerButton.setTitle(question.answer_one, for: .normal)
-        secondAnswerButton.setTitle(question.answer_two, for: .normal)
-        thirdAnswerButton.setTitle(question.answer_three, for: .normal)
-        fourthAnswerButton.setTitle(question.answer_four, for: .normal)
+        firstAnswerButton.setTitle(" " + (question.answer_one ?? "") + " ", for: .normal)
+        secondAnswerButton.setTitle(" " + (question.answer_two ?? "") + " ", for: .normal)
+        thirdAnswerButton.setTitle(" " + (question.answer_three ?? "") + " ", for: .normal)
+        fourthAnswerButton.setTitle(" " + (question.answer_four ?? "") + " ", for: .normal)
         
         correctAnswer = question.true_answer ?? ""
     }
