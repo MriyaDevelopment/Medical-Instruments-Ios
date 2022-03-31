@@ -148,6 +148,7 @@ final class QuizView: UIView {
         button.sizeToFit()
         button.setImage(AppIcons.getIcon(.i_arrow_right), for: .normal)
         button.semanticContentAttribute = .forceRightToLeft
+        button.isUserInteractionEnabled = false
         return button
     }()
     
@@ -361,6 +362,7 @@ final class QuizView: UIView {
             button.layer.borderColor = BaseColor.hex_E77D7D.cgColor()
             button.layer.borderWidth = 2
         }
+        nextButton.isUserInteractionEnabled = true
     }
     
     private func setDefaultButton() {
@@ -373,6 +375,7 @@ final class QuizView: UIView {
             button.backgroundColor = .white
             button.isUserInteractionEnabled = true
         }
+        nextButton.isUserInteractionEnabled = false
     }
     
     private func disableButton() {

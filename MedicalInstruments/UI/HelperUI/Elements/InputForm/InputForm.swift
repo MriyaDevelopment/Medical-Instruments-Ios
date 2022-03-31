@@ -176,6 +176,11 @@ class InputForm: UIView {
         return label
     }()
     
+    var leftImageView: UIImageView = {
+        let imageView = UIImageView()
+        return imageView
+    }()
+    
     init(type: InputFormType, isRequired: Bool, placeholder: String) {
         self.type = type
         self.isRequired = isRequired
@@ -286,11 +291,7 @@ class InputForm: UIView {
     private func configure() {
         switch type {
         case .email:
-            let image = AppIcons.getIcon(.i_email_icon);
-            let imageView = UIImageView()
-            imageView.image = image
-            textField.leftViewMode = .always
-            textField.leftView = imageView
+            leftImageView.image = AppIcons.getIcon(.i_email_icon)
             textField.keyboardType = .emailAddress
             textField.textContentType = .emailAddress
             textField.autocapitalizationType = .none
@@ -313,11 +314,7 @@ class InputForm: UIView {
             predicate = NSPredicate(format: "SELF MATCHES %@", phoneRegex)
             
         case .name:
-            let image = AppIcons.getIcon(.i_profile);
-            let imageView = UIImageView()
-            imageView.image = image
-            textField.leftViewMode = .always
-            textField.leftView = imageView
+            leftImageView.image = AppIcons.getIcon(.i_profile)
             textField.autocapitalizationType = .words
         case .postalCode:
             textField.keyboardType = .numberPad
@@ -330,11 +327,7 @@ class InputForm: UIView {
             inputMask.listener = self
         
         case .password:
-            let image = AppIcons.getIcon(.i_password_icon);
-            let imageView = UIImageView()
-            imageView.image = image
-            textField.leftViewMode = .always
-            textField.leftView = imageView
+            leftImageView.image = AppIcons.getIcon(.i_password_icon)
             textField.isSecureTextEntry = true
             textField.autocapitalizationType = .none
         default:

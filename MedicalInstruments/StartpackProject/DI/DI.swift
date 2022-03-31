@@ -127,7 +127,7 @@ final class ScreenFactory: ScreenFactoryProtocol {
     //MARK: Challenges
     
     func makeChallengesScreen() -> ChallengesViewController<ChallengesView> {
-        ChallengesViewController<ChallengesView>()
+        ChallengesViewController<ChallengesView>(catalogProvider: di.catalogProvider)
     }
     
     func makeChangeCategoriesScreen(dificultId: Int) -> ChangeCategoriesViewController<ChangeCategoriesView> {

@@ -150,3 +150,15 @@ struct GetLastTestResponse: Codable {
     let error: String?
     let questions: [Questions]?
 }
+
+struct GetLevelsResponse: Codable {
+    let result: String?
+    let error: String?
+    let levels: [Levels]?
+}
+
+struct Levels: Codable {
+    let id: Int?
+    let name: String?
+    let number_of_questions: Int?
+}

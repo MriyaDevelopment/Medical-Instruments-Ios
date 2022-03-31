@@ -58,6 +58,12 @@ final class FirstView: UIView {
         return button
     }()
     
+    private var lineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = BaseColor.hex_5B67CA.uiColor()
+        return view
+    }()
+    
     private var regLabel: UILabel = {
         let label = UILabel()
         label.text = "Еще нет аккаунта?"
@@ -89,6 +95,7 @@ final class FirstView: UIView {
         contentView.addSubview(bottomView)
         bottomView.addSubview(registrationButton)
         bottomView.addSubview(regLabel)
+        bottomView.addSubview(lineView)
         
         makeConstraints()
     }
@@ -107,11 +114,11 @@ final class FirstView: UIView {
         logoImageView.snp.makeConstraints {(make) in
             make.top.equalTo(titleImageView.snp.bottom).offset(16)
             make.centerX.equalToSuperview()
-            make.width.height.equalTo(120)
+            make.width.height.equalTo(200)
         }
         
         textLabel.snp.makeConstraints {(make) in
-            make.top.equalTo(logoImageView.snp.bottom).offset(20)
+            make.top.equalTo(logoImageView.snp.bottom).offset(-20)
             make.left.right.equalToSuperview().inset(20)
         }
         
@@ -133,6 +140,13 @@ final class FirstView: UIView {
         registrationButton.snp.makeConstraints {(make) in
             make.left.equalTo(regLabel.snp.right).offset(10)
             make.right.top.bottom.equalToSuperview()
+        }
+        
+        lineView.snp.makeConstraints {(make) in
+            make.left.equalTo(registrationButton.snp.left)
+            make.top.equalTo(registrationButton.snp.bottom).offset(-6)
+            make.right.equalTo(registrationButton.snp.right)
+            make.height.equalTo(1)
         }
         
     }

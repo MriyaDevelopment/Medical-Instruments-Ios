@@ -123,7 +123,7 @@ final class InstrumentTableViewCell: UITableViewCell {
         
         likeButton.snp.makeConstraints { make in
             make.bottom.equalToSuperview().inset(15)
-            make.right.equalToSuperview().inset(5)
+            make.right.equalToSuperview().inset(9)
             make.height.width.equalTo(32)
         }
         

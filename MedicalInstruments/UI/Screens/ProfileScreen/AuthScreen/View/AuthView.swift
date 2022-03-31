@@ -41,6 +41,7 @@ final class AuthView: UIView {
         button.setTitle("Забыли пароль?", for: .normal)
         button.setTitleColor(BaseColor.hex_5B67CA.uiColor(), for: .normal)
         button.titleLabel?.font = MainFont.medium(size: 12)
+        button.hideView()
         return button
     }()
     
@@ -60,6 +61,12 @@ final class AuthView: UIView {
         return button
     }()
     
+    private var lineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = BaseColor.hex_5B67CA.uiColor()
+        return view
+    }()
+
     let bottomView = UIView()
     
     override init(frame: CGRect) {
@@ -83,6 +90,7 @@ final class AuthView: UIView {
         contentView.addSubview(forgotPasswordButton)
         bottomView.addSubview(registrationButton)
         bottomView.addSubview(regLabel)
+        bottomView.addSubview(lineView)
         
         makeConstraints()
     }
@@ -126,6 +134,14 @@ final class AuthView: UIView {
             make.left.equalTo(regLabel.snp.right).offset(10)
             make.right.top.bottom.equalToSuperview()
         }
+        
+        lineView.snp.makeConstraints {(make) in
+            make.left.equalTo(registrationButton.snp.left)
+            make.top.equalTo(registrationButton.snp.bottom).offset(-6)
+            make.right.equalTo(registrationButton.snp.right)
+            make.height.equalTo(1)
+        }
+        
         
     }
     

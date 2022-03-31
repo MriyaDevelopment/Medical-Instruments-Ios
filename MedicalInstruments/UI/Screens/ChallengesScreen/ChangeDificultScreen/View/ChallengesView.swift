@@ -12,6 +12,7 @@ final class ChallengesView: UIView {
     
     var events = PassthroughSubject<ChalengesViewEvent, Never>()
     
+    private var levels: [Levels] = []
     private var contentView: UIView = {
         let view = UIView()
         return view
@@ -56,6 +57,12 @@ final class ChallengesView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configure(levels: [Levels]) {
+        self.levels = levels
+        
+        tableView.reloadData()
+    }
+    
     private func addElements() {
         
         addSubview(contentView)
@@ -91,13 +98,13 @@ final class ChallengesView: UIView {
 
 extension ChallengesView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return levels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withType: DuficultTableViewCell.self, for: indexPath)
-        cell.configure(index: indexPath.row)
+        cell.configure(index: indexPath.row, level: levels[indexPath.row])
        return cell
     }
     

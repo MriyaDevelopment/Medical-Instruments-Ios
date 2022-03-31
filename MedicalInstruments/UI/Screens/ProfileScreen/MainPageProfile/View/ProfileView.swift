@@ -19,7 +19,7 @@ final class ProfileView: UIView {
     
     private var exitButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Exit", for: .normal)
+        button.setTitle("Выйти", for: .normal)
         button.titleLabel?.font = MainFont.medium(size: 14)
         button.setTitleColor(BaseColor.hex_232324.uiColor(), for: .normal)
         button.titleLabel?.textAlignment = .center
@@ -43,9 +43,9 @@ final class ProfileView: UIView {
         imageView.layer.shadowOpacity = 0.5
         imageView.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
         imageView.layer.cornerRadius = 60
-        imageView.image = AppIcons.getIcon(.i_default_image)
+        imageView.image = AppIcons.getIcon(.i_user_avatar)
         imageView.contentMode = .center
-        imageView.backgroundColor = .yellow
+        imageView.backgroundColor = .white
         imageView.clipsToBounds = false
         return imageView
     }()
@@ -115,6 +115,19 @@ final class ProfileView: UIView {
         
         userNameLabel.text = data.name
         userEmailLabel.text = data.email
+    }
+    
+    func removeElements() {
+        contentView.removeFromSuperview()
+        exitButton.removeFromSuperview()
+        subscribesLabel.removeFromSuperview()
+        userImageView.removeFromSuperview()
+        userNameLabel.removeFromSuperview()
+        userEmailLabel.removeFromSuperview()
+        lastResultView.removeFromSuperview()
+        firstBanner.removeFromSuperview()
+        
+        addElements()
     }
     
     private func addElements() {

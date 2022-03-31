@@ -24,6 +24,7 @@ protocol CatalogServiceProtocol {
     func removeLike(with params: RemoveLikeRequestParams) -> AnyPublisher<SetRemoveLikeResponse, ApiError>
     func getFavourites() -> AnyPublisher<GetFavouritesResponse, ApiError>
     func getLastTest() -> AnyPublisher<GetLastTestResponse, ApiError>
+    func getLevels() -> AnyPublisher<GetLevelsResponse, ApiError>
 }
 
 class CatalogService: CatalogServiceProtocol {
@@ -33,6 +34,7 @@ class CatalogService: CatalogServiceProtocol {
     private var userDataRequest: AnyCancellable?
     private var resultRequest: AnyCancellable?
     private var favRequest: AnyCancellable?
+    private var levelsRequest: AnyCancellable?
     
     init(apiClient: CatalogApiClientProtocol) {
         self.apiClient = apiClient
@@ -233,4 +235,18 @@ class CatalogService: CatalogServiceProtocol {
             }
             .eraseToAnyPublisher()
     }
+    
+    func getLevels() -> AnyPublisher<GetLevelsResponse, ApiError> {
+        levelsRequest?.cancel()
+        
+        return apiClient.getLevels()
+            .mapError { error in
+                if let error = error as? ApiError {
+                    return error
+                }
+                return ApiError.unknown
+            }
+            .eraseToAnyPublisher()
+    }
+    
 }

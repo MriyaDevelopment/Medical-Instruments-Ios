@@ -21,6 +21,7 @@ extension InputForm {
         
         containerView.addSubview(textField)
         containerView.addSubview(titleLabel)
+        containerView.addSubview(leftImageView)
 
         inputStackView.addArrangedSubview(containerView)
 //        inputStackView.addArrangedSubview(clearIconImageView)
@@ -59,13 +60,20 @@ extension InputForm {
             make.bottom.lessThanOrEqualToSuperview()
         }
         
+        leftImageView.snp.makeConstraints { (make) in
+            make.left.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.height.width.equalTo(24)
+        }
+        
         textField.snp.makeConstraints { (make) in
-            make.left.right.equalToSuperview()
+            make.left.equalTo(leftImageView.snp.right).offset(5)
+            make.right.equalToSuperview()
             make.centerY.equalToSuperview()
         }
         
         titleLabel.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(24)
+            make.left.equalTo(leftImageView.snp.right).offset(5)
             make.right.lessThanOrEqualToSuperview()
             make.centerY.equalToSuperview()
         }

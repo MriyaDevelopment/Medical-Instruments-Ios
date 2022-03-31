@@ -24,6 +24,7 @@ protocol CatalogApiClientProtocol {
     func removeLike(with params: RemoveLikeRequestParams) -> AnyPublisher<SetRemoveLikeResponse, Error>
     func getFavourites() -> AnyPublisher<GetFavouritesResponse, Error>
     func getLastTest() -> AnyPublisher<GetLastTestResponse, Error>
+    func getLevels() -> AnyPublisher<GetLevelsResponse, Error>
 }
 
 private func getPath(for method: String) -> String {
@@ -174,6 +175,13 @@ extension ApiClient: CatalogApiClientProtocol {
             urlParametrs: [
                 "user_token": Keychain.shared.getUserToken() ?? ""
             ])
+        return performRequest(request)
+    }
+    
+    func getLevels() -> AnyPublisher<GetLevelsResponse, Error> {
+        let request = requestBuilder.postBuild(
+            path: getPath(for: "getLevels"),
+            urlParametrs: [:])
         return performRequest(request)
     }
 
