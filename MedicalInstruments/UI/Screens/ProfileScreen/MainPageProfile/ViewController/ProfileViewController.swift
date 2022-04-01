@@ -32,7 +32,6 @@ final class ProfileViewController<View: ProfileView>: BaseViewController<View> {
 //        showLoader(background: BaseColor.hex_FFFFFF.uiColor(), alfa: 1, presentationStyle: .fullScreen)
         hideNavBar()
         catalogProvider.getProfileData()
-        catalogProvider.getResult()
         subscribeForUpdates()
     }
     

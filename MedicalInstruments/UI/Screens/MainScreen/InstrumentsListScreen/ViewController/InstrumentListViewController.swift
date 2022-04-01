@@ -40,42 +40,10 @@ final class InstrumentListViewController<View: InstrumentListView>: BaseViewCont
     }
     
     private func configureNavigationBar(type: String) {
-        var title = ""
-        var subTitle = ""
-        switch type {
-        case "separating":
-            title = "Общая хирургия"
-            subTitle = "Разъединяющие"
-        case "connecting":
-            title = "Общая хирургия"
-            subTitle = "Соединяющие"
-        case "pushing":
-            title = "Общая хирургия"
-            subTitle = "Оттесняющие"
-        case "holding":
-            title = "Общая хирургия"
-            subTitle = "Удерживающие"
-        case "stabbing":
-            title = "Общая хирургия"
-            subTitle = "Колющие"
-        case "stomatology":
-            title = Category.stomatology.getTitle()
-        case "gynecology":
-            title = Category.gynecology.getTitle()
-        case "neuro":
-            title = Category.neuro.getTitle()
-        case "lor":
-            title = Category.lor.getTitle()
-        case "urology":
-            title = Category.urology.getTitle()
-        case "ophthalmology":
-            title = Category.ophthalmology.getTitle()
-        case "anesthesiology":
-            title = Category.anesthesiology.getTitle()
-        default:
-            title = "Инструменты"
-        }
-        let titleView = NavigationBarTitle(title: "Тема: " + title, subTitle: "Раздел: " + subTitle)
+        
+        let title = Titles.title.getTitle(type: type).0
+        let subTitle = Titles.title.getTitle(type: type).1
+        let titleView = NavigationBarTitle(title: "Тема: " + title, subTitle: subTitle)
         navBar.addItem(titleView, toPosition: .title)
     }
     

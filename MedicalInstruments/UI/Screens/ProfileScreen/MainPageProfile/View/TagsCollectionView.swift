@@ -57,16 +57,6 @@ final class TagsCollectionView: UIView {
         tagsCollectionView.reloadData()
     }
     
-    func getHeight(height: CGFloat) -> CGFloat {
-        return 19 + 14 + height + 20 + 18
-    }
-    
-    private func makeCollectionViewHieght(_ value: CGFloat) {
-        tagsCollectionView.snp.makeConstraints { (make) in
-            make.height.equalTo(value)
-        }
-    }
-    
     private func addElements() {
 
         addSubview(stackView)

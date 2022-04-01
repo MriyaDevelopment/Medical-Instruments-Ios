@@ -109,6 +109,6 @@ final class MainCollectionViewCell: UICollectionViewCell {
 
 //Click Animation
 
-//extension MainCollectionViewCell: AnimationCollectionViewCellProtocol {
-//
-//}
+extension MainCollectionViewCell: AnimationCollectionViewCellProtocol {
+
+}

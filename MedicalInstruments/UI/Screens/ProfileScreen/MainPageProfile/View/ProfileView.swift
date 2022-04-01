@@ -118,16 +118,17 @@ final class ProfileView: UIView {
     }
     
     func removeElements() {
-        contentView.removeFromSuperview()
-        exitButton.removeFromSuperview()
-        subscribesLabel.removeFromSuperview()
-        userImageView.removeFromSuperview()
-        userNameLabel.removeFromSuperview()
-        userEmailLabel.removeFromSuperview()
         lastResultView.removeFromSuperview()
-        firstBanner.removeFromSuperview()
         
         addElements()
+        
+        contentView.addSubview(lastResultView)
+        
+        lastResultView.snp.remakeConstraints { (make) in
+            make.left.right.equalToSuperview().inset(16)
+            make.top.equalTo(userEmailLabel.snp.bottom).offset(15)
+        }
+
     }
     
     private func addElements() {
