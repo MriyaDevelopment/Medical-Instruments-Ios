@@ -28,6 +28,7 @@ final class FirstView: UIView {
         let imageView = UIImageView()
         imageView.image = AppIcons.getIcon(.i_logo)
         imageView.contentMode = .scaleToFill
+        imageView.backgroundColor = .clear
         return imageView
     }()
     
@@ -112,13 +113,13 @@ final class FirstView: UIView {
         }
         
         logoImageView.snp.makeConstraints {(make) in
-            make.top.equalTo(titleImageView.snp.bottom).offset(16)
+            make.top.equalTo(titleImageView.snp.bottom)
             make.centerX.equalToSuperview()
             make.width.height.equalTo(200)
         }
         
         textLabel.snp.makeConstraints {(make) in
-            make.top.equalTo(logoImageView.snp.bottom).offset(-20)
+            make.top.equalTo(logoImageView.snp.bottom).offset(-40)
             make.left.right.equalToSuperview().inset(20)
         }
         

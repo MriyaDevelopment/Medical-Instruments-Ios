@@ -84,9 +84,9 @@ final class NavigationBarTitle: UIView {
         }
         
         stackView.snp.makeConstraints { (make) in
-            make.top.left.equalToSuperview()
-            make.bottom.right.greaterThanOrEqualToSuperview()
-            make.center.equalToSuperview()
+            make.top.greaterThanOrEqualToSuperview()
+            make.bottom.right.lessThanOrEqualToSuperview()
+            make.centerY.left.equalToSuperview()
         }
     }
     

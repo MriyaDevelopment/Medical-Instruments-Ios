@@ -143,10 +143,10 @@ final class QuizView: UIView {
         let button = UIButton()
         button.setTitle("Следующий вопрос", for: .normal)
         button.titleLabel?.font = MainFont.medium(size: 16)
-        button.setTitleColor(BaseColor.hex_5B67CA.uiColor(), for: .normal)
         button.titleLabel?.textAlignment = .left
         button.sizeToFit()
-        button.setImage(AppIcons.getIcon(.i_arrow_right), for: .normal)
+        button.setTitleColor(BaseColor.hex_ECEDF0.uiColor(), for: .normal)
+        button.setImage(AppIcons.getIcon(.i_arrow_right).withTintColor(BaseColor.hex_ECEDF0.uiColor()), for: .normal)
         button.semanticContentAttribute = .forceRightToLeft
         button.isUserInteractionEnabled = false
         return button
@@ -156,7 +156,6 @@ final class QuizView: UIView {
         super.init(frame: frame)
         backgroundColor = .white
         addElements()
-        addTarget()
     }
     
     required init?(coder: NSCoder) {
@@ -166,6 +165,7 @@ final class QuizView: UIView {
     func configure(questions: [Questions]) {
         self.questions = questions
         configureQuestion(question: questions[currentQuestion])
+        addTarget()
     }
     
     func configureQuestion(question: Questions) {
@@ -174,10 +174,10 @@ final class QuizView: UIView {
         progressBar.setProgress(( Float(currentQuestion + 1) / Float(questions.count)), animated: true)
         instrumentImageView.loadImage(by: question.question ?? "")
         
-        firstAnswerButton.setTitle(" " + (question.answer_one ?? "") + " ", for: .normal)
-        secondAnswerButton.setTitle(" " + (question.answer_two ?? "") + " ", for: .normal)
-        thirdAnswerButton.setTitle(" " + (question.answer_three ?? "") + " ", for: .normal)
-        fourthAnswerButton.setTitle(" " + (question.answer_four ?? "") + " ", for: .normal)
+        firstAnswerButton.setTitle(question.answer_one, for: .normal)
+        secondAnswerButton.setTitle(question.answer_two, for: .normal)
+        thirdAnswerButton.setTitle(question.answer_three, for: .normal)
+        fourthAnswerButton.setTitle(question.answer_four, for: .normal)
         
         correctAnswer = question.true_answer ?? ""
     }
@@ -255,13 +255,13 @@ final class QuizView: UIView {
         }
         
         progressBar.snp.makeConstraints{ (make) in
-            make.top.equalTo(countChalengesLabel.snp.bottom).offset(10)
+            make.top.equalTo(countChalengesLabel.snp.bottom).offset(8)
             make.height.equalTo(8)
             make.right.left.equalToSuperview().inset(16)
         }
         
         imageContainer.snp.makeConstraints{ (make) in
-            make.top.equalTo(progressBar.snp.bottom).offset(20)
+            make.top.equalTo(progressBar.snp.bottom).offset(15)
             make.height.equalTo(300)
             make.right.left.equalToSuperview().inset(16)
         }
@@ -271,7 +271,7 @@ final class QuizView: UIView {
         }
         
         firstStackView.snp.makeConstraints{ (make) in
-            make.top.equalTo(instrumentImageView.snp.bottom).offset(30)
+            make.top.equalTo(instrumentImageView.snp.bottom).offset(25)
             make.right.left.equalToSuperview().inset(16)
             make.height.greaterThanOrEqualTo(60)
         }
@@ -309,7 +309,16 @@ final class QuizView: UIView {
         thirdAnswerButton.addTarget(self, action: #selector(thirdClicked), for: .touchUpInside)
         fourthAnswerButton.addTarget(self, action: #selector(fourthClicked), for: .touchUpInside)
         
+        if questions.count > 1 {
         nextButton.addTarget(self, action: #selector(nextAction), for: .touchUpInside)
+        } else {
+            nextButton.addTarget(self, action: #selector(finishAction), for: .touchUpInside)
+            nextButton.setTitle("Завершить тестирование", for: .normal)
+        }
+    }
+    
+    @objc func finishAction() {
+        events.send(.finishQuiz)
     }
     
     @objc func nextAction() {
@@ -363,6 +372,8 @@ final class QuizView: UIView {
             button.layer.borderWidth = 2
         }
         nextButton.isUserInteractionEnabled = true
+        nextButton.setTitleColor(BaseColor.hex_5B67CA.uiColor(), for: .normal)
+        nextButton.setImage(AppIcons.getIcon(.i_arrow_right), for: .normal)
     }
     
     private func setDefaultButton() {
@@ -376,6 +387,8 @@ final class QuizView: UIView {
             button.isUserInteractionEnabled = true
         }
         nextButton.isUserInteractionEnabled = false
+        nextButton.setTitleColor(BaseColor.hex_ECEDF0.uiColor(), for: .normal)
+        nextButton.setImage(AppIcons.getIcon(.i_arrow_right).withTintColor(BaseColor.hex_ECEDF0.uiColor()), for: .normal)
     }
     
     private func disableButton() {

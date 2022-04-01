@@ -28,7 +28,7 @@ final class InstrumentListViewController<View: InstrumentListView>: BaseViewCont
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavigationBar()
+        configureNavigationBar(type: self.type)
         subscribeForUpdates()
         
         if isSurgery == true {
@@ -39,8 +39,43 @@ final class InstrumentListViewController<View: InstrumentListView>: BaseViewCont
         showLoader()
     }
     
-    private func configureNavigationBar() {
-        let titleView = NavigationBarTitle(title: "Тема: Общая хирургия", subTitle: "Раздел: Соединяющие")
+    private func configureNavigationBar(type: String) {
+        var title = ""
+        var subTitle = ""
+        switch type {
+        case "separating":
+            title = "Общая хирургия"
+            subTitle = "Разъединяющие"
+        case "connecting":
+            title = "Общая хирургия"
+            subTitle = "Соединяющие"
+        case "pushing":
+            title = "Общая хирургия"
+            subTitle = "Оттесняющие"
+        case "holding":
+            title = "Общая хирургия"
+            subTitle = "Удерживающие"
+        case "stabbing":
+            title = "Общая хирургия"
+            subTitle = "Колющие"
+        case "stomatology":
+            title = Category.stomatology.getTitle()
+        case "gynecology":
+            title = Category.gynecology.getTitle()
+        case "neuro":
+            title = Category.neuro.getTitle()
+        case "lor":
+            title = Category.lor.getTitle()
+        case "urology":
+            title = Category.urology.getTitle()
+        case "ophthalmology":
+            title = Category.ophthalmology.getTitle()
+        case "anesthesiology":
+            title = Category.anesthesiology.getTitle()
+        default:
+            title = "Инструменты"
+        }
+        let titleView = NavigationBarTitle(title: "Тема: " + title, subTitle: "Раздел: " + subTitle)
         navBar.addItem(titleView, toPosition: .title)
     }
     

@@ -156,7 +156,7 @@ final class ProfileView: UIView {
         
         userImageView.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().inset(150)
+            make.top.equalToSuperview().inset(130)
             make.width.height.equalTo(120)
         }
         
