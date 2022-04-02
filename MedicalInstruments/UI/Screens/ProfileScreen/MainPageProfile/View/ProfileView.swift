@@ -122,20 +122,6 @@ final class ProfileView: UIView {
         userEmailLabel.text = data.email
     }
     
-    func removeElements() {
-        lastResultView.removeFromSuperview()
-        
-        addElements()
-        
-        contentView.addSubview(lastResultView)
-        
-        lastResultView.snp.remakeConstraints { (make) in
-            make.left.right.equalToSuperview().inset(16)
-            make.top.equalTo(userEmailLabel.snp.bottom).offset(15)
-        }
-
-    }
-    
     private func addElements() {
         
         addSubview(scrollView)
