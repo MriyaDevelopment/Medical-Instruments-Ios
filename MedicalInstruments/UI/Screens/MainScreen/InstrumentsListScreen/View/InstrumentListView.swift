@@ -77,6 +77,7 @@ extension InstrumentListView: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withType: InstrumentTableViewCell.self, for: indexPath)
         cell.configure(data: instruments[indexPath.row])
+        cell.contentView.isUserInteractionEnabled = false
         cell.likeDisableClicked = { [weak self] in self?.events.send(.removeLike(self?.instruments[indexPath.row].id ?? 0))}
         cell.likeEnableClicked = { [weak self] in self?.events.send(.setLike(self?.instruments[indexPath.row].id ?? 0))}
        return cell

@@ -12,6 +12,11 @@ final class ProfileView: UIView {
     
     var event = PassthroughSubject<MainPageViewEvent, Never>()
     
+    private var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        return scrollView
+    }()
+    
     private var contentView: UIView = {
         let view = UIView()
         return view
@@ -133,7 +138,8 @@ final class ProfileView: UIView {
     
     private func addElements() {
         
-        addSubview(contentView)
+        addSubview(scrollView)
+        scrollView.addSubview(contentView)
         contentView.addSubview(exitButton)
         contentView.addSubview(subscribesLabel)
         contentView.addSubview(userImageView)
@@ -146,6 +152,11 @@ final class ProfileView: UIView {
     }
     
     private func makeConstraints() {
+        
+        scrollView.snp.makeConstraints { (make) in
+            make.edges.equalTo(safeAreaLayoutGuide)
+            make.width.equalToSuperview()
+        }
         
         contentView.snp.makeConstraints { (make) in
             make.edges.equalTo(safeAreaLayoutGuide)

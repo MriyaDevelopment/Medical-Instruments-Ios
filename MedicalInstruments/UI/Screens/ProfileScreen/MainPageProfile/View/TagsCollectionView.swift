@@ -49,6 +49,10 @@ final class TagsCollectionView: UIView {
     }
     
     func configure(title: [String]) {
+//        let layout = TagsLayout()
+//        layout.sectionInset = .zero
+//        layout.delegate = self
+//        tagsCollectionView.setCollectionViewLayout(layout, animated: true)
         items.removeAll()
         
         for item in title {
