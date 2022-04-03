@@ -26,17 +26,11 @@ final class FavouritesViewController<View: FavouritesView>: BaseViewController<V
         super.viewDidLoad()
         hideNavBar()
         subscribeForUpdates()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         if Keychain.shared.getUserToken() != nil {
             catalogProvider.getFavourites()
-            showPreloader()
         } else {
-            rootView.configure(instruments: [])
+            rootView.configureEmptyView()
         }
-        rootView.configureEmptyView()
-        super.viewWillAppear(animated)
     }
     
     private func subscribeForUpdates() {
@@ -47,18 +41,16 @@ final class FavouritesViewController<View: FavouritesView>: BaseViewController<V
     private func onProviderEvents(_ event: CatalogProviderEvent){
         switch event {
         case .error(let error):
-            dismissPreloader()
             showErrorWithMessage?(error.errorDescription)
         case .errorMessage(let errorMessage):
-            dismissPreloader()
             guard let message = errorMessage else { return }
             showErrorWithMessage?(message)
         case .favouritesLoaded(let response):
-            dismissPreloader()
             guard let data = response.instruments else { return }
             rootView.configure(instruments: data)
         case .success:
-            dismissPreloader()
+            catalogProvider.getFavourites()
+        case .likeRemoved:
             catalogProvider.getFavourites()
         default:
             break
@@ -67,11 +59,10 @@ final class FavouritesViewController<View: FavouritesView>: BaseViewController<V
     
     private func onViewEvents(_ Event: FavouritesViewEvent) {
         switch Event {
-        case .setLike(let id, let isSurgery):
-            catalogProvider.setLike(with: SetLikeRequestParams(instrument_id: String(id), is_surgery: String(isSurgery)))
         case .removeLike(let id, let isSurgery):
-            showPreloader()
             catalogProvider.removeLike(with: RemoveLikeRequestParams(instrument_id: String(id), is_surgery: String(isSurgery)))
+        case .isInstrumentsEmpty:
+            rootView.configureEmptyView()
         }
     }
 }

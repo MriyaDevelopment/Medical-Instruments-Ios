@@ -24,7 +24,7 @@ final class PrettyAlertView: UIView {
     
     private var iconImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = AppIcons.getIcon(.i_default_image)
+        imageView.image = AppIcons.getIcon(.i_alert)
         return imageView
     }()
     
@@ -89,10 +89,10 @@ final class PrettyAlertView: UIView {
             switch buttonInfo.type {
             case .standart:
                 button.titleLabel?.font = MainFont.regular(size: 16)
-                button.setTitleColor(BaseColor.hex_151515.uiColor(), for: .normal)
+                button.setTitleColor(BaseColor.hex_5B67CA.uiColor(), for: .normal)
             case .action:
                 button.titleLabel?.font = MainFont.medium(size: 16)
-                button.setTitleColor(BaseColor.hex_3FAC3B.uiColor(), for: .normal)
+                button.setTitleColor(BaseColor.hex_5B67CA.uiColor(), for: .normal)
             }
             
             button.snp.makeConstraints { (make) in

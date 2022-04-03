@@ -213,7 +213,9 @@ final class QuizViewController<View: QuizView>: BaseViewController<View> {
         let controller = QuizResultViewController(quizResult: quizResult)
         controller.modalPresentationStyle = .overFullScreen
         controller.modalTransitionStyle = .crossDissolve
-        controller.okClicked = { [weak self] in self?.showRootScreen?() }
+        controller.okClicked = { [weak self] in
+            self?.showRootScreen?()
+        }
         controller.tryAgainClicked = { [weak self] in self?.tryAgain() }
         present(controller, animated: true, completion: nil)
     }

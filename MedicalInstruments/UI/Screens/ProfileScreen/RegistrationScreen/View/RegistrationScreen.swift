@@ -29,7 +29,7 @@ final class RegistrationView: UIView {
     }()
     
     var passwordInputForm: InputForm = {
-        let inputForm = InputForm(type: .password, isRequired: true, placeholder: "Пароль")
+        let inputForm = InputForm(type: .password, isRequired: true, placeholder: "Пароль (не менее 6 символов)")
         return inputForm
     }()
     
@@ -125,17 +125,6 @@ final class RegistrationView: UIView {
             make.height.equalTo(50)
         }
         
-//        lineView.snp.makeConstraints { (make) in
-//            make.top.equalTo(regButton.snp.bottom).offset(60)
-//            make.height.equalTo(1)
-//            make.left.right.equalToSuperview().inset(16)
-//        }
-//
-//        orLabel.snp.makeConstraints { (make) in
-//            make.center.equalToSuperview()
-//            make.width.equalTo(100)
-//        }
-        
     }
     
     func addTarget() {
@@ -143,8 +132,10 @@ final class RegistrationView: UIView {
     }
     
     @objc func regAction() {
-        if nameInputForm.getValue() != "" && emailInputForm.getValue() != "" && passwordInputForm.getValue() != ""
-                                                                            && passwordRepeatInputForm.getValue() != "" {
+        if nameInputForm.getValue() != "" &&
+            emailInputForm.getValue() != "" &&
+            passwordInputForm.getValue() != "" &&
+            passwordRepeatInputForm.getValue() != "" {
             events.send(.registrationButtonClicked)
         }
     }

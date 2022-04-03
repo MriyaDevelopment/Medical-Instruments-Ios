@@ -20,7 +20,7 @@ final class ChallengesView: UIView {
     
     private var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name:"HelveticaNeue-Bold", size: 18.0)
+        label.font = MainFont.bold(size: 18)
         label.textColor = BaseColor.hex_5B67CA.uiColor()
         label.text = "Проверь свои знания!"
         label.textAlignment = .left
@@ -29,7 +29,7 @@ final class ChallengesView: UIView {
     
     private var changeDificultLabel: UILabel = {
         let label = UILabel()
-        label.font = MainFont.regular(size: 14)
+        label.font = MainFont.bold(size: 14)
         label.textColor = BaseColor.hex_232324.uiColor()
         label.text = "Выбери подходящий уровень сложности"
         label.textAlignment = .left
@@ -80,12 +80,13 @@ final class ChallengesView: UIView {
         }
         
         titleLabel.snp.makeConstraints { (make) in
-            make.left.top.right.equalToSuperview().inset(16)
+            make.left.right.equalToSuperview().inset(21)
+            make.top.equalToSuperview().offset(21)
         }
         
         changeDificultLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLabel.snp.bottom).offset(30)
-            make.left.right.equalToSuperview().inset(16)
+            make.top.equalTo(titleLabel.snp.bottom).offset(28)
+            make.left.right.equalToSuperview().inset(21)
         }
         
         tableView.snp.makeConstraints { (make) in

@@ -48,11 +48,11 @@ final class InstrumentListViewController<View: InstrumentListView>: BaseViewCont
     }
     
     private func subscribeForUpdates() {
-        catalopProvider.events.sink { [weak self] in self?.onViewEvents($0) }.store(in: &cancalables)
+        catalopProvider.events.sink { [weak self] in self?.onProviderEvents($0) }.store(in: &cancalables)
         rootView.events.sink { [weak self] in self?.onViewEvents($0) }.store(in: &cancalables)
     }
     
-    private func onViewEvents(_ event: CatalogProviderEvent){
+    private func onProviderEvents(_ event: CatalogProviderEvent){
         switch event {
         case .error(let error):
             dismissLoader()
@@ -65,8 +65,18 @@ final class InstrumentListViewController<View: InstrumentListView>: BaseViewCont
             dismissLoader()
             guard let data = response.instruments else { return }
             rootView.configure(instruments: data)
+        case .likeRemoved:
+            if isSurgery == true {
+                catalopProvider.getSurgeryInstrumentsByType(param: getInstrumentsByTypeRequestParams(type: type))
+            } else {
+                catalopProvider.getInstrumentsByType(param: getInstrumentsByTypeRequestParams(type: type))
+            }
         case .success:
-            print("****LikeLoaded")
+            if isSurgery == true {
+                catalopProvider.getSurgeryInstrumentsByType(param: getInstrumentsByTypeRequestParams(type: type))
+            } else {
+                catalopProvider.getInstrumentsByType(param: getInstrumentsByTypeRequestParams(type: type))
+            }
         default:
             break
         }

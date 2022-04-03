@@ -958,29 +958,29 @@
 		8E10F68F27DB926000EBF12E /* ApiProviders */ = {
 			isa = PBXGroup;
 			children = (
-				8E10F69027DB926A00EBF12E /* CatalogProvider */,
+				8E10F69027DB926A00EBF12E /* InstrumentsProvider */,
 			);
 			path = ApiProviders;
 			sourceTree = "<group>";
 		};
-		8E10F69027DB926A00EBF12E /* CatalogProvider */ = {
+		8E10F69027DB926A00EBF12E /* InstrumentsProvider */ = {
 			isa = PBXGroup;
 			children = (
-				8E10F69C27DB955600EBF12E /* Povider */,
+				8E10F69C27DB955600EBF12E /* Provider */,
 				8E10F69927DB94C400EBF12E /* Service */,
 				8E10F69627DB938400EBF12E /* ApiClient */,
-				8E10F69127DB927800EBF12E /* Entitty */,
+				8E10F69127DB927800EBF12E /* Entity */,
 			);
-			path = CatalogProvider;
+			path = InstrumentsProvider;
 			sourceTree = "<group>";
 		};
-		8E10F69127DB927800EBF12E /* Entitty */ = {
+		8E10F69127DB927800EBF12E /* Entity */ = {
 			isa = PBXGroup;
 			children = (
 				8E10F69227DB929600EBF12E /* CatalogProviderRequestParam.swift */,
 				8E10F69427DB92F300EBF12E /* getInstrumentsByTypeResponse.swift */,
 			);
-			path = Entitty;
+			path = Entity;
 			sourceTree = "<group>";
 		};
 		8E10F69627DB938400EBF12E /* ApiClient */ = {
@@ -999,12 +999,12 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
-		8E10F69C27DB955600EBF12E /* Povider */ = {
+		8E10F69C27DB955600EBF12E /* Provider */ = {
 			isa = PBXGroup;
 			children = (
 				8E10F69D27DB959500EBF12E /* CatalogProvider.swift */,
 			);
-			path = Povider;
+			path = Provider;
 			sourceTree = "<group>";
 		};
 		8E10F69F27DE1EB300EBF12E /* QuizScreen */ = {
@@ -1653,6 +1653,7 @@
 				DEVELOPMENT_TEAM = T65934Q4J6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MedicalInstruments/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Медицинские инструменты";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1683,6 +1684,7 @@
 				DEVELOPMENT_TEAM = T65934Q4J6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MedicalInstruments/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Медицинские инструменты";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

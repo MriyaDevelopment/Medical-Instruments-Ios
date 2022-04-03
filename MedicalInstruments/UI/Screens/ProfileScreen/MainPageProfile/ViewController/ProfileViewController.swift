@@ -29,14 +29,9 @@ final class ProfileViewController<View: ProfileView>: BaseViewController<View> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        showLoader(background: BaseColor.hex_FFFFFF.uiColor(), alfa: 1, presentationStyle: .fullScreen)
         hideNavBar()
-        catalogProvider.getProfileData()
         subscribeForUpdates()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        catalogProvider.getProfileData()
         if Keychain.shared.getUserToken() != nil {
             catalogProvider.getResult()
         }
@@ -62,6 +57,10 @@ final class ProfileViewController<View: ProfileView>: BaseViewController<View> {
             rootView.configureProfile(data: data)
         case .getResultLoaded(let response):
             rootView.configureBanner(data: response)
+        case .setResultDone(_):
+            if Keychain.shared.getUserToken() != nil {
+                catalogProvider.getResult()
+            }
         default:
             break
         }

@@ -330,6 +330,7 @@ class InputForm: UIView {
             leftImageView.image = AppIcons.getIcon(.i_password_icon)
             textField.isSecureTextEntry = true
             textField.autocapitalizationType = .none
+            
         default:
             break
         }

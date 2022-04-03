@@ -74,13 +74,12 @@ final class FavouritesView: UIView {
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview().offset(-100)
         }
-        
+                
         instrumentTableView.snp.makeConstraints{ (make) in
             make.left.right.equalToSuperview()
             make.top.equalToSuperview()
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
         }
-        
     }
 }
 
@@ -90,11 +89,17 @@ extension FavouritesView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withType: InstrumentTableViewCell.self, for: indexPath)
         cell.configure(data: instruments[indexPath.row])
-        cell.likeDisableClicked = { [weak self] in self?.events.send(.removeLike(self?.instruments[indexPath.row].id ?? 0,  self?.instruments[indexPath.row].is_surgery ?? false))}
-        cell.likeEnableClicked = { [weak self] in self?.events.send(.setLike(self?.instruments[indexPath.row].id ?? 0, self?.instruments[indexPath.row].is_surgery ?? false))}
+        cell.contentView.isUserInteractionEnabled = false
+        cell.likeDisableClicked = { [weak self] in
+            self?.events.send(.removeLike(self?.instruments[indexPath.row].id ?? 0,  self?.instruments[indexPath.row].is_surgery ?? false))
+            self?.instruments.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            if self?.instruments.count == 0 {
+                self?.events.send(.isInstrumentsEmpty)
+            }
+        }
        return cell
     }
     

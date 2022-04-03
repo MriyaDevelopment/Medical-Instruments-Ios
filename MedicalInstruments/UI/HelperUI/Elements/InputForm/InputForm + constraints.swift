@@ -62,7 +62,7 @@ extension InputForm {
         
         leftImageView.snp.makeConstraints { (make) in
             make.left.equalToSuperview()
-            make.centerY.equalToSuperview()
+            make.centerY.equalTo(titleLabel)
             make.height.width.equalTo(24)
         }
         

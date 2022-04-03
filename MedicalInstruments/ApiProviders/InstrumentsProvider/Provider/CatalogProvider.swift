@@ -335,7 +335,7 @@ final class CatalogProviderImpl: CatalogProviderProtocol {
                 case "error":
                     self.events.send(.errorMessage(result.error))
                 case "success":
-                    self.events.send(.success)
+                    self.events.send(.likeRemoved)
                 default:
                     break
                 }
@@ -433,4 +433,5 @@ enum CatalogProviderEvent {
     case favouritesLoaded(_ response: GetFavouritesResponse)
     case lastTestLoaded(_ response: GetLastTestResponse)
     case levelsLoaded(_ response: GetLevelsResponse)
+    case likeRemoved
 }

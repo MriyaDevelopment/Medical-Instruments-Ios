@@ -22,7 +22,7 @@ final class MainView: UIView {
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Привет, Ксения!"
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = MainFont.bold(size: 18)
         label.textColor = BaseColor.hex_5B67CA.uiColor()
         return label
     }()
@@ -39,7 +39,7 @@ final class MainView: UIView {
 
     private var subTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.font = MainFont.bold(size: 14)
         label.textColor = BaseColor.hex_232324.uiColor()
         label.text = "Что будем изучать сегодня?"
         label.textAlignment = .left

@@ -28,14 +28,14 @@ final class ChallengesViewController<View: ChallengesView>: BaseViewController<V
         super.viewDidLoad()
         hideNavBar()
         subscribeForUpdates()
+        catalogProvider.getLevels()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.showView()
-        showPreloader()
-        catalogProvider.getLevels()
     }
+    
     
     private func subscribeForUpdates() {
         rootView.events.sink { [weak self] in self?.onViewEvents($0) }.store(in: &cancalables)
@@ -53,14 +53,11 @@ final class ChallengesViewController<View: ChallengesView>: BaseViewController<V
     private func onProviderEvents(_ event: CatalogProviderEvent){
         switch event {
         case .error(let error):
-            dismissPreloader()
             showErrorWithMessage?(error.errorDescription)
         case .errorMessage(let errorMessage):
-            dismissPreloader()
             guard let message = errorMessage else { return }
             showErrorWithMessage?(message)
         case .levelsLoaded(let response):
-            dismissPreloader()
             guard let levels = response.levels else {return}
             rootView.configure(levels: levels)
         default:

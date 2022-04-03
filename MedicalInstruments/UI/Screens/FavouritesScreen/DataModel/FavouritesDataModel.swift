@@ -8,6 +8,6 @@
 import Foundation
 
 enum FavouritesViewEvent {
-    case setLike(Int, Bool)
     case removeLike(Int, Bool)
+    case isInstrumentsEmpty
 }
