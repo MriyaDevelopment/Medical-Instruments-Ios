@@ -40,16 +40,15 @@ class CircularProgressBar: UIView {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.fromValue = 0
         animation.toValue = progress
-        animation.duration = 2
+        animation.duration = 0.8
         foregroundLayer.add(animation, forKey: "foregroundAnimation")
             
         var currentTime:Double = 0
         let timer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { (timer) in
-            if currentTime >= 2{
+            if currentTime >= 0.8{
                 timer.invalidate()
             } else {
                 currentTime += 0.05
-                let percent = currentTime/2 * 100
                 self.setForegroundLayerColorForSafePercent()
                 self.configLabel()
             }

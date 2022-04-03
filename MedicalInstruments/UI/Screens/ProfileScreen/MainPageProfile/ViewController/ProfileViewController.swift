@@ -32,7 +32,6 @@ final class ProfileViewController<View: ProfileView>: BaseViewController<View> {
 //        showLoader(background: BaseColor.hex_FFFFFF.uiColor(), alfa: 1, presentationStyle: .fullScreen)
         hideNavBar()
         catalogProvider.getProfileData()
-        catalogProvider.getResult()
         subscribeForUpdates()
     }
     
@@ -62,7 +61,6 @@ final class ProfileViewController<View: ProfileView>: BaseViewController<View> {
             guard let data = response.user?.first else { return }
             rootView.configureProfile(data: data)
         case .getResultLoaded(let response):
-            rootView.removeElements()
             rootView.configureBanner(data: response)
         default:
             break

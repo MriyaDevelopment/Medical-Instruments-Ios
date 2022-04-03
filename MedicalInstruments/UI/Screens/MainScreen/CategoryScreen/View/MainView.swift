@@ -67,7 +67,7 @@ final class MainView: UIView {
         let minimumInteritemSpacing: CGFloat = 10
         
         let cellWidth: CGFloat = (UIScreen.main.bounds.width - sidesOffset*2 - minimumInteritemSpacing*(numberOfItemsInRow-1)) / numberOfItemsInRow
-        let cellHeight: CGFloat = 120 //UIScreen.main.bounds.height == 568 ? 332 : cellWidth * 332 / 168
+        let cellHeight: CGFloat = 125 //UIScreen.main.bounds.height == 568 ? 332 : cellWidth * 332 / 168
         
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 10, left: sidesOffset, bottom: 10, right: sidesOffset)
@@ -188,12 +188,12 @@ extension MainView: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     }
 
     //Анимация нажатия
-//    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-//       collectionView.didHighlightRowAt(at: indexPath)
-//    }
-//    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-//       collectionView.didUnhighlightRowAt(at: indexPath)
-//    }
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+       collectionView.didHighlightRowAt(at: indexPath)
+    }
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+       collectionView.didUnhighlightRowAt(at: indexPath)
+    }
 
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

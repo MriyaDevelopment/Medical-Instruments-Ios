@@ -15,11 +15,12 @@ final class TagsCollectionView: UIView {
         let stackView = UIStackView()
         stackView.spacing = 20
         stackView.axis = .vertical
+        stackView.clipsToBounds = false
         return stackView
     }()
     
-    lazy private var layout: TagsLayout = {
-        let layout = TagsLayout()
+    lazy private var layout: TagFlowLayout = {
+        let layout = TagFlowLayout()
         return layout
     }()
     
@@ -40,8 +41,8 @@ final class TagsCollectionView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
-        addElements()
-        layout.delegate = self
+//        addElements()
+//        layout.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -49,22 +50,17 @@ final class TagsCollectionView: UIView {
     }
     
     func configure(title: [String]) {
+//        let layout = TagsLayout()
+//        layout.sectionInset = .zero
+//        layout.delegate = self
+//        tagsCollectionView.setCollectionViewLayout(layout, animated: true)
         items.removeAll()
         
         for item in title {
             items.append(getTitle(title: item))
         }
         tagsCollectionView.reloadData()
-    }
-    
-    func getHeight(height: CGFloat) -> CGFloat {
-        return 19 + 14 + height + 20 + 18
-    }
-    
-    private func makeCollectionViewHieght(_ value: CGFloat) {
-        tagsCollectionView.snp.makeConstraints { (make) in
-            make.height.equalTo(value)
-        }
+        addElements()
     }
     
     private func addElements() {
@@ -85,7 +81,7 @@ final class TagsCollectionView: UIView {
         }
         
         tagsCollectionView.snp.makeConstraints { (make) in
-            make.height.equalTo(100)
+            make.height.equalTo(110)
         }
     }
     
@@ -150,19 +146,30 @@ protocol FilterTagLayoutDelegate: AnyObject {
 }
 
 
-class TagsLayout: UICollectionViewFlowLayout {
+class Row {
+    var attributes = [UICollectionViewLayoutAttributes]()
+    var spacing: CGFloat = 0
+
+    init(spacing: CGFloat) {
+        self.spacing = spacing
+    }
+
+    func add(attribute: UICollectionViewLayoutAttributes) {
+        attributes.append(attribute)
+    }
+
+    func tagLayout(collectionViewWidth: CGFloat) {
+        let padding = 10
+        var offset = padding
+        for attribute in attributes {
+            attribute.frame.origin.x = CGFloat(offset)
+            offset += Int(attribute.frame.width + spacing)
+        }
+    }
+}
+
+class TagFlowLayout: UICollectionViewFlowLayout {
     
-    weak var delegate: UICollectionViewDelegateFlowLayout?
-    
-    // 2
-    private let numberOfColumns = 2
-    private let cellPadding: CGFloat = 10
-    private var lineSpacing: CGFloat = 10
-    
-    // 3
-    private var cache: [UICollectionViewLayoutAttributes] = []
-    
-    // 4
     private var contentHeight: CGFloat = 0
     
     private var contentWidth: CGFloat {
@@ -173,66 +180,35 @@ class TagsLayout: UICollectionViewFlowLayout {
         return collectionView.bounds.width - (insets.left + insets.right)
     }
     
-    override func prepare() {
-        
-        guard
-            cache.isEmpty,
-            let collectionView = collectionView
-        else {
-            return
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        guard let attributes = super.layoutAttributesForElements(in: rect) else {
+            return nil
         }
-        
-        var x: CGFloat = sectionInset.left
-        var y: CGFloat = sectionInset.top
-        
-        for item in 0..<collectionView.numberOfItems(inSection: 0) {
-            let indexPath = IndexPath(item: item, section: 0)
+
+        var rows = [Row]()
+        var currentRowY: CGFloat = -1
             
-            guard let itemSize = delegate?.collectionView?(collectionView, layout: self, sizeForItemAt: indexPath) else { return }
-            
-            if x + itemSize.width > contentWidth {
-                x = sectionInset.left
-                y = y + itemSize.height + lineSpacing
+        for attribute in attributes {
+            if currentRowY != attribute.frame.origin.y {
+                currentRowY = attribute.frame.origin.y
+                rows.append(Row(spacing: 10))
+                
+                contentHeight += 35
             }
-            
-            let frame = CGRect(x: x,
-                               y: y,
-                               width: itemSize.width,
-                               height: itemSize.height)
-            
-            x = x + itemSize.width + cellPadding
-            
-            let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
-            attributes.frame = frame
-            cache.append(attributes)
-            
-            contentHeight = max(contentHeight, frame.maxY)
+            rows.last?.add(attribute: attribute)
         }
+        
+        rows.forEach {
+            $0.tagLayout(collectionViewWidth: collectionView?.frame.width ?? 0)
+        }
+        return rows.flatMap { $0.attributes }
     }
     
-    // 5
     override var collectionViewContentSize: CGSize {
         collectionView?.snp.updateConstraints({ (make) in
             make.height.equalTo(contentHeight)
         })
         
         return CGSize(width: contentWidth, height: contentHeight)
-    }
-    
-    override func layoutAttributesForItem(at indexPath: IndexPath)
-        -> UICollectionViewLayoutAttributes? {
-      return cache[indexPath.item]
-    }
-    
-    override func layoutAttributesForElements(in rect: CGRect)
-        -> [UICollectionViewLayoutAttributes]? {
-      var visibleLayoutAttributes: [UICollectionViewLayoutAttributes] = []
-      // Loop through the cache and look for items in the rect
-      for attributes in cache {
-        if attributes.frame.intersects(rect) {
-          visibleLayoutAttributes.append(attributes)
-        }
-      }
-      return visibleLayoutAttributes
     }
 }

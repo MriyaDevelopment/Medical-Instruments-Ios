@@ -155,8 +155,8 @@ final class InstrumentTableViewCell: UITableViewCell {
     }
     
     func addTarget() {
-//        likeButton.addTarget(self, action: #selector(likeAction), for: .touchUpInside)
-        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(likeAction)))
+        likeButton.addTarget(self, action: #selector(likeAction), for: .touchUpInside)
+//        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(likeAction)))
     }
     
     @objc private func likeAction() {

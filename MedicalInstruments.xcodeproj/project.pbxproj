@@ -120,6 +120,9 @@
 		8EC5691927E152640065E845 /* RegistrationDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC5691827E152640065E845 /* RegistrationDataModel.swift */; };
 		8ED8156627ECBDD000226B3E /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ED8156527ECBDD000226B3E /* EmptyView.swift */; };
 		8EFA64E327ECCB9600DB1310 /* FavouritesDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFA64E227ECCB9600DB1310 /* FavouritesDataModel.swift */; };
+		8EFC9EE027F70D3200F098C8 /* UICollectionView + SelectItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFC9EDF27F70D3200F098C8 /* UICollectionView + SelectItem.swift */; };
+		8EFC9EE227F70D8500F098C8 /* AnimationCollectionViewCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFC9EE127F70D8500F098C8 /* AnimationCollectionViewCellProtocol.swift */; };
+		8EFC9EE427F70DC000F098C8 /* AnimatorInitCollectionViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EFC9EE327F70DC000F098C8 /* AnimatorInitCollectionViewFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -239,6 +242,9 @@
 		8EC5691827E152640065E845 /* RegistrationDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationDataModel.swift; sourceTree = "<group>"; };
 		8ED8156527ECBDD000226B3E /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		8EFA64E227ECCB9600DB1310 /* FavouritesDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesDataModel.swift; sourceTree = "<group>"; };
+		8EFC9EDF27F70D3200F098C8 /* UICollectionView + SelectItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView + SelectItem.swift"; sourceTree = "<group>"; };
+		8EFC9EE127F70D8500F098C8 /* AnimationCollectionViewCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationCollectionViewCellProtocol.swift; sourceTree = "<group>"; };
+		8EFC9EE327F70DC000F098C8 /* AnimatorInitCollectionViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatorInitCollectionViewFactory.swift; sourceTree = "<group>"; };
 		F03B5FB9619743394A737D10 /* Pods_MedicalInstruments.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MedicalInstruments.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -274,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				639C7D5527D61BBD00A40FC2 /* UICollectionViewDequeue.swift */,
+				8EFC9EDF27F70D3200F098C8 /* UICollectionView + SelectItem.swift */,
 			);
 			path = UICollectionView;
 			sourceTree = "<group>";
@@ -760,6 +767,8 @@
 			isa = PBXGroup;
 			children = (
 				63BA0C3127D619FC0025F0A5 /* TabBarTransitions.swift */,
+				8EFC9EE127F70D8500F098C8 /* AnimationCollectionViewCellProtocol.swift */,
+				8EFC9EE327F70DC000F098C8 /* AnimatorInitCollectionViewFactory.swift */,
 			);
 			path = UIViewAnimation;
 			sourceTree = "<group>";
@@ -1400,6 +1409,7 @@
 				8EC568FF27E0C9FC0065E845 /* FirstViewDataModel.swift in Sources */,
 				639C7D6A27D61DB200A40FC2 /* UIView.swift in Sources */,
 				639C7DD427D6543300A40FC2 /* FloatingPanel.swift in Sources */,
+				8EFC9EE427F70DC000F098C8 /* AnimatorInitCollectionViewFactory.swift in Sources */,
 				639C7D5627D61BBD00A40FC2 /* UICollectionViewDequeue.swift in Sources */,
 				639C7D8D27D620F500A40FC2 /* RouterProtocol.swift in Sources */,
 				8E10F68027DA53AA00EBF12E /* DificultCell.swift in Sources */,
@@ -1436,6 +1446,7 @@
 				639C7DCE27D6536F00A40FC2 /* PrettyAlertDataModel.swift in Sources */,
 				639C7DD227D6541600A40FC2 /* ImagePreloaderView.swift in Sources */,
 				8EC08FC727E5B10400F544B2 /* QuizResultView.swift in Sources */,
+				8EFC9EE227F70D8500F098C8 /* AnimationCollectionViewCellProtocol.swift in Sources */,
 				8E10F68B27DB6F8E00EBF12E /* ChangeCategoriesCell.swift in Sources */,
 				8EC568E527E09C310065E845 /* FirstView.swift in Sources */,
 				639C7D6727D61D9100A40FC2 /* UILabel.swift in Sources */,
@@ -1477,6 +1488,7 @@
 				63BA0C3227D619FC0025F0A5 /* TabBarTransitions.swift in Sources */,
 				8E10F67A27D9C5FF00EBF12E /* InstrumentTableViewCell.swift in Sources */,
 				8E10F69527DB92F300EBF12E /* getInstrumentsByTypeResponse.swift in Sources */,
+				8EFC9EE027F70D3200F098C8 /* UICollectionView + SelectItem.swift in Sources */,
 				639C7D8B27D620EA00A40FC2 /* Coordinator.swift in Sources */,
 				639C7DB827D6443900A40FC2 /* ChallengesView.swift in Sources */,
 				8EC5691527E152090065E845 /* RegistrationScreen.swift in Sources */,

@@ -12,6 +12,11 @@ final class ProfileView: UIView {
     
     var event = PassthroughSubject<MainPageViewEvent, Never>()
     
+    private var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        return scrollView
+    }()
+    
     private var contentView: UIView = {
         let view = UIView()
         return view
@@ -117,22 +122,10 @@ final class ProfileView: UIView {
         userEmailLabel.text = data.email
     }
     
-    func removeElements() {
-        contentView.removeFromSuperview()
-        exitButton.removeFromSuperview()
-        subscribesLabel.removeFromSuperview()
-        userImageView.removeFromSuperview()
-        userNameLabel.removeFromSuperview()
-        userEmailLabel.removeFromSuperview()
-        lastResultView.removeFromSuperview()
-        firstBanner.removeFromSuperview()
-        
-        addElements()
-    }
-    
     private func addElements() {
         
-        addSubview(contentView)
+        addSubview(scrollView)
+        scrollView.addSubview(contentView)
         contentView.addSubview(exitButton)
         contentView.addSubview(subscribesLabel)
         contentView.addSubview(userImageView)
@@ -145,6 +138,11 @@ final class ProfileView: UIView {
     }
     
     private func makeConstraints() {
+        
+        scrollView.snp.makeConstraints { (make) in
+            make.edges.equalTo(safeAreaLayoutGuide)
+            make.width.equalToSuperview()
+        }
         
         contentView.snp.makeConstraints { (make) in
             make.edges.equalTo(safeAreaLayoutGuide)

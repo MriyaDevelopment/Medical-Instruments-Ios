@@ -33,9 +33,9 @@ final class FavouritesViewController<View: FavouritesView>: BaseViewController<V
             catalogProvider.getFavourites()
             showPreloader()
         } else {
-            rootView.configureEmptyView()
             rootView.configure(instruments: [])
         }
+        rootView.configureEmptyView()
         super.viewWillAppear(animated)
     }
     
