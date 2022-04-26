@@ -331,6 +331,9 @@ class InputForm: UIView {
             textField.isSecureTextEntry = true
             textField.autocapitalizationType = .none
             
+            let postalCodeRegex = "[A-Z0-9a-z_%+-]{6,30}"
+            predicate = NSPredicate(format: "SELF MATCHES %@", postalCodeRegex)
+            
         default:
             break
         }

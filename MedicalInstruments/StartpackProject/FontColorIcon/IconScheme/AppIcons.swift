@@ -59,6 +59,7 @@ final class AppIcons {
         case i_password_icon
         case i_user_avatar
         case i_alert
+        case i_easyDificult
     }
     
     static func getIcon(_ type: iconsEnum) -> UIImage {
@@ -112,6 +113,7 @@ final class AppIcons {
         case .i_password_icon: return UIImage(named: "i_password_icon")!
         case .i_user_avatar: return UIImage(named: "i_user_avatar")!
         case .i_alert: return UIImage(named: "i_alert")!
+        case .i_easyDificult: return UIImage(named: "i_easyDificult")!
         }
     }
 }

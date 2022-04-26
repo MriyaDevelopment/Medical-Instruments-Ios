@@ -45,7 +45,7 @@ extension InputForm {
         }
         
         backView.snp.makeConstraints { (make) in
-            make.height.equalTo(45)
+            make.height.equalTo(50)
         }
         
         warningBorderView.snp.makeConstraints { (make) in

@@ -132,11 +132,17 @@ final class RegistrationView: UIView {
     }
     
     @objc func regAction() {
-        if nameInputForm.getValue() != "" &&
-            emailInputForm.getValue() != "" &&
-            passwordInputForm.getValue() != "" &&
-            passwordRepeatInputForm.getValue() != "" {
+        if nameInputForm.isValid &&
+            emailInputForm.isValid &&
+            passwordInputForm.getValue().count > 6 &&
+            passwordRepeatInputForm.getValue().count > 6 {
             events.send(.registrationButtonClicked)
+        } else {
+            regButton.shake()
+            emailInputForm.checkIsValid()
+            nameInputForm.checkIsValid()
+            passwordInputForm.checkIsValid()
+            passwordRepeatInputForm.checkIsValid()
         }
     }
 

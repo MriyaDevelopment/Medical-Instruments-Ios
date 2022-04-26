@@ -16,7 +16,7 @@ extension InputForm {
             guard let self = self else { return }
             let coef = CGFloat(12)/CGFloat(16)
             let scale = CGAffineTransform.init(scaleX: coef, y: coef)
-            let transition = CGAffineTransform(translationX: -0.167*self.initialTitleLabelWidth, y: -20) //
+            let transition = CGAffineTransform(translationX: -0.167*self.initialTitleLabelWidth, y: -19) //
             let transform = transition.concatenating(scale)
             self.titleLabel.transform = transform
         }, completion: { _ in
@@ -45,7 +45,7 @@ extension InputForm {
         }
         let coef = CGFloat(12)/CGFloat(16)
         let scale = CGAffineTransform.init(scaleX: coef, y: coef)
-        let transition = CGAffineTransform(translationX: -0.167*self.initialTitleLabelWidth, y: -20)
+        let transition = CGAffineTransform(translationX: -0.167*self.initialTitleLabelWidth, y: -19)
         let transform = transition.concatenating(scale)
         titleLabel.transform = transform
 
