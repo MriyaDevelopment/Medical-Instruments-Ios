@@ -16,7 +16,7 @@ extension InputForm {
             guard let self = self else { return }
             let coef = CGFloat(12)/CGFloat(16)
             let scale = CGAffineTransform.init(scaleX: coef, y: coef)
-            let transition = CGAffineTransform(translationX: -0.167*self.initialTitleLabelWidth, y: -16) //
+            let transition = CGAffineTransform(translationX: -0.167*self.initialTitleLabelWidth, y: -20) //
             let transform = transition.concatenating(scale)
             self.titleLabel.transform = transform
         }, completion: { _ in
@@ -24,7 +24,7 @@ extension InputForm {
             UIView.transition(with: self.titleLabel, duration: 0.2, options: .transitionCrossDissolve, animations: nil, completion: nil)
             //self.isAlreadyAnimated = true
         })
-        titleLabel.hideView()
+       // titleLabel.hideView()
     }
     
     func animateEmptyState() {
@@ -36,7 +36,7 @@ extension InputForm {
             }, completion: nil)
             //self.isAlreadyAnimated = false
         })
-        titleLabel.showView()
+//        titleLabel.showView()
     }
     
     func setFilledState() {
@@ -45,7 +45,7 @@ extension InputForm {
         }
         let coef = CGFloat(12)/CGFloat(16)
         let scale = CGAffineTransform.init(scaleX: coef, y: coef)
-        let transition = CGAffineTransform(translationX: -0.167*self.initialTitleLabelWidth, y: -12)
+        let transition = CGAffineTransform(translationX: -0.167*self.initialTitleLabelWidth, y: -20)
         let transform = transition.concatenating(scale)
         titleLabel.transform = transform
 

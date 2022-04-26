@@ -32,6 +32,10 @@ final class ProfileViewController<View: ProfileView>: BaseViewController<View> {
         hideNavBar()
         subscribeForUpdates()
         catalogProvider.getProfileData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         if Keychain.shared.getUserToken() != nil {
             catalogProvider.getResult()
         }
