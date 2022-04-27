@@ -28,9 +28,12 @@ final class FavouritesViewController<View: FavouritesView>: BaseViewController<V
         subscribeForUpdates()
         if Keychain.shared.getUserToken() != nil {
             catalogProvider.getFavourites()
-        } else {
-            rootView.configureEmptyView()
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        rootView.configureEmptyView()
     }
     
     private func subscribeForUpdates() {

@@ -32,7 +32,7 @@ extension InputForm: UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let text = textField.text else { return }
-        if text.isEmpty && type != .password && type != .phoneNumber {
+        if text.isEmpty {
             animateEmptyState()
         }
         listView.isHidden = true

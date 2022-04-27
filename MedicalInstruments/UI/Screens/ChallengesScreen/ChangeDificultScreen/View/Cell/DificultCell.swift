@@ -79,7 +79,7 @@ final class DuficultTableViewCell: UITableViewCell {
         switch index {
         case 0:
             color = BaseColor.hex_5B67CA.uiColor()
-            image = AppIcons.getIcon(.i_default_image)
+            image = AppIcons.getIcon(.i_easyDificult)
             title = "Легкий уровень"
         case 1:
             color = BaseColor.hex_7FC9E7.uiColor()
