@@ -29,7 +29,7 @@ final class ChallengesView: UIView {
     
     private var changeDificultLabel: UILabel = {
         let label = UILabel()
-        label.font = MainFont.bold(size: 14)
+        label.font = MainFont.bold(size: 16)
         label.textColor = BaseColor.hex_232324.uiColor()
         label.text = "Выбери подходящий уровень сложности"
         label.textAlignment = .left
