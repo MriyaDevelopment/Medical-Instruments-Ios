@@ -45,7 +45,7 @@ final class ProfileView: UIView {
     private var userImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.shadowRadius = 10
-        imageView.layer.shadowOpacity = 0.5
+        imageView.layer.shadowOpacity = 0.3
         imageView.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
         imageView.layer.cornerRadius = 60
         imageView.image = AppIcons.getIcon(.i_user_avatar)
@@ -88,6 +88,8 @@ final class ProfileView: UIView {
         backgroundColor = .white
         addElements()
         addTarget()
+        lastResultView.hideView()
+        firstBanner.hideView()
     }
     
     required init?(coder: NSCoder) {
@@ -96,8 +98,6 @@ final class ProfileView: UIView {
     
     func configureBanner(data: GetResultResponse) {
         guard let levels = data.levels else {return}
-        lastResultView.hideView()
-        firstBanner.hideView()
         
         if levels.isEmpty {
             firstBanner.showView()

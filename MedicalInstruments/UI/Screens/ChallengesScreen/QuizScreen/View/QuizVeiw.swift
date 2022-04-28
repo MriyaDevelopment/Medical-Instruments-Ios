@@ -23,6 +23,13 @@ final class QuizView: UIView {
         return view
     }()
     
+    private var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.bounces = false
+        return scrollView
+    }()
+    
     private var backgroundImage: UIImageView = {
         let imageView = UIImageView()
         imageView.image = AppIcons.getIcon(.i_backgroundImage)
@@ -80,14 +87,7 @@ final class QuizView: UIView {
     private var firstStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.spacing = 16
-        stackView.axis = .horizontal
-        return stackView
-    }()
-    
-    private var secondStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.spacing = 16
-        stackView.axis = .horizontal
+        stackView.axis = .vertical
         return stackView
     }()
     
@@ -210,7 +210,8 @@ final class QuizView: UIView {
     
     private func addElements() {
         
-        addSubview(contentView)
+        addSubview(scrollView)
+        scrollView.addSubview(contentView)
         contentView.addSubview(backgroundImage)
         contentView.addSubview(countChalengesLabel)
         contentView.addSubview(timerImage)
@@ -221,9 +222,8 @@ final class QuizView: UIView {
         contentView.addSubview(firstStackView)
         firstStackView.addArrangedSubview(firstAnswerButton)
         firstStackView.addArrangedSubview(secondAnswerButton)
-        contentView.addSubview(secondStackView)
-        secondStackView.addArrangedSubview(thirdAnswerButton)
-        secondStackView.addArrangedSubview(fourthAnswerButton)
+        firstStackView.addArrangedSubview(thirdAnswerButton)
+        firstStackView.addArrangedSubview(fourthAnswerButton)
         
         contentView.addSubview(nextButton)
         
@@ -232,8 +232,13 @@ final class QuizView: UIView {
     
     private func makeConstraints() {
         
+        scrollView.snp.makeConstraints{ (make) in
+            make.edges.equalToSuperview()
+        }
+        
         contentView.snp.makeConstraints{ (make) in
-            make.edges.equalTo(safeAreaLayoutGuide)
+            make.edges.equalToSuperview()
+            make.width.equalToSuperview()
         }
         
         backgroundImage.snp.makeConstraints{ (make) in
@@ -273,33 +278,28 @@ final class QuizView: UIView {
         firstStackView.snp.makeConstraints{ (make) in
             make.top.equalTo(instrumentImageView.snp.bottom).offset(25)
             make.right.left.equalToSuperview().inset(16)
-            make.height.greaterThanOrEqualTo(60)
-        }
-        
-        secondStackView.snp.makeConstraints{ (make) in
-            make.top.equalTo(firstStackView.snp.bottom).offset(16)
-            make.right.left.equalToSuperview().inset(16)
-            make.height.greaterThanOrEqualTo(60)
         }
         
         firstAnswerButton.snp.makeConstraints{ (make) in
-            make.width.equalToSuperview().multipliedBy(0.48)
+            make.height.equalTo(45)
         }
         
         secondAnswerButton.snp.makeConstraints{ (make) in
-            make.width.equalToSuperview().multipliedBy(0.48)
+            make.height.equalTo(45)
         }
         
         thirdAnswerButton.snp.makeConstraints{ (make) in
-            make.width.equalToSuperview().multipliedBy(0.48)
+            make.height.equalTo(45)
         }
         
         fourthAnswerButton.snp.makeConstraints{ (make) in
-            make.width.equalToSuperview().multipliedBy(0.48)
+            make.height.equalTo(45)
         }
         
         nextButton.snp.makeConstraints{ (make) in
-            make.right.bottom.equalToSuperview().inset(16)
+            make.top.equalTo(firstStackView.snp.bottom).offset(16)
+            make.right.equalToSuperview().inset(16)
+            make.bottom.equalToSuperview().inset(20)
         }
     }
     
